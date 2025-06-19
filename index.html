@@ -197,19 +197,19 @@
                         <p class="text-gray-600 mb-6">This allocation is heavily tilted towards private markets (currently 70%) to capture higher expected returns, while maintaining a prudent allocation to public assets for liquidity and diversification.</p>
                         <div class="space-y-4">
                             <div class="allocation-input-group p-4 rounded-lg bg-gray-50 border-l-4 border-[#004AAD]">
-                                <input type="number" id="peVcInput" value="35" min="0" max="100" class="allocation-input">
+                                <input type="number" id="peVcInput" value="40" min="0" max="100" class="allocation-input">
                                 <label for="peVcInput" class="allocation-label font-bold">Private Equity & Venture Capital (%)</label>
                             </div>
                             <div class="allocation-input-group p-4 rounded-lg bg-gray-50 border-l-4 border-[#40A5E9]">
-                                <input type="number" id="realAssetsInput" value="20" min="0" max="100" class="allocation-input">
+                                <input type="number" id="realAssetsInput" value="10" min="0" max="100" class="allocation-input">
                                 <label for="realAssetsInput" class="allocation-label font-bold">Real Assets (Direct & Private) (%)</label>
                             </div>
                             <div class="allocation-input-group p-4 rounded-lg bg-gray-50 border-l-4 border-[#F2C43D]">
-                                <input type="number" id="privateCreditInput" value="15" min="0" max="100" class="allocation-input">
+                                <input type="number" id="privateCreditInput" value="20" min="0" max="100" class="allocation-input">
                                 <label for="privateCreditInput" class="allocation-label font-bold">Private Credit (%)</label>
                             </div>
                              <div class="allocation-input-group p-4 rounded-lg bg-gray-50 border-l-4 border-[#E56B4C]">
-                                <input type="number" id="publicEquitiesInput" value="15" min="0" max="100" class="allocation-input">
+                                <input type="number" id="publicEquitiesInput" value="20" min="0" max="100" class="allocation-input">
                                 <label for="publicEquitiesInput" class="allocation-label font-bold">Public Equities (%)</label>
                             </div>
                              <div class="allocation-input-group p-4 rounded-lg bg-gray-50 border-l-4 border-[#9B5DE5]">
@@ -401,7 +401,7 @@
                     labels: [['Private Equity', '& Venture Capital'], ['Real Assets', '(Direct)'], 'Private Credit', 'Public Equities', ['Hedge Funds &', 'Fixed Income']],
                     datasets: [{
                         label: 'Allocation',
-                        data: [35, 20, 15, 15, 10],
+                        data: [40, 10, 20, 20, 10], /* Updated default data */
                         backgroundColor: [palette.deepBlue, palette.brightBlue, palette.gold, palette.terracotta, palette.purple],
                         borderColor: '#FFFFFF',
                         borderWidth: 4,
