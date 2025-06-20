@@ -3,523 +3,496 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Strategic Investment Outlook 2025-2035 | Endowment Alpha</title>
+    <title>Asset Allocation Analyzer</title>
+    <!-- Tailwind CSS CDN for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome for lock icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
+        /* Custom styles for the webpage */
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #F3F4F6;
+            font-family: 'Inter', sans-serif; /* Use Inter font as per instructions */
+            background-color: #f0f2f5; /* Light gray background */
         }
-        .chart-container {
-            position: relative;
+        /* Custom styling for range input (slider thumb and track) */
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #4F46E5; /* Indigo-500 for the thumb */
+            cursor: grab;
+            border-radius: 50%; /* Rounded thumb */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+            margin-top: -8px; /* Vertically center the thumb on the track */
+        }
+        input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background: #4F46E5;
+            cursor: grab;
+            border-radius: 50%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        input[type="range"]::-webkit-slider-runnable-track {
             width: 100%;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 320px;
+            height: 4px;
+            background: #D1D5DB; /* Gray-300 for the track */
+            border-radius: 2px; /* Rounded track */
         }
-        @media (min-width: 768px) {
-            .chart-container {
-                height: 400px;
-            }
-        }
-        .kpi-value { color: #004AAD; }
-        .section-title { color: #004AAD; }
-        .accent-bg { background-color: #004AAD; }
-        .accent-text { color: #40A5E9; }
-        .flow-arrow {
-            font-size: 2rem;
-            line-height: 1;
-            color: #40A5E9;
-        }
-        .flow-box {
-            border: 2px solid #40A5E9;
-            background-color: #FFFFFF;
-            color: #111827;
-        }
-        .nav-item {
-            transition: all 0.3s ease;
-        }
-        .nav-item.active {
-            color: #004AAD;
-            transform: scale(1.1);
-        }
-        .allocation-input-group {
-            display: flex;
-            align-items: center;
-            margin-bottom: 0.5rem;
-        }
-        .allocation-input {
-            width: 80px;
-            padding: 0.5rem;
-            border: 1px solid #D1D5DB;
-            border-radius: 0.375rem;
-            text-align: right;
-            margin-right: 0.5rem;
-        }
-        .allocation-label {
-            flex-grow: 1;
-            font-weight: 500;
+        input[type="range"]::-moz-range-track {
+            width: 100%;
+            height: 4px;
+            background: #D1D5DB;
+            border-radius: 2px;
         }
     </style>
 </head>
-<body class="text-gray-800">
+<body>
+    <div id="app" class="min-h-screen flex flex-col items-center justify-center py-8 px-4 bg-gray-50 text-gray-800">
+        <h1 class="text-4xl font-extrabold text-indigo-700 mb-8 text-center">Asset Allocation Analyzer</h1>
 
-    <header class="bg-white/80 backdrop-blur-sm sticky top-0 z-50 shadow-md">
-        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                 <h1 class="text-xl md:text-2xl font-bold section-title">Strategic Outlook 2025-2035</h1>
-                <div class="hidden sm:flex items-center space-x-6 text-gray-600 font-semibold">
-                    <a href="#foundations" class="nav-item">Foundations</a>
-                    <a href="#forecasts" class="nav-item">Forecasts</a>
-                    <a href="#blueprint" class="nav-item">Blueprint</a>
-                    <a href="#allocation" class="nav-item">Allocation</a>
-                    <a href="#sources" class="nav-item">Sources</a>
-                </div>
-            </div>
-        </nav>
-    </header>
-
-    <main class="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
-
-        <section id="foundations" class="mb-16 scroll-mt-20">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold section-title">The Foundations Have Shifted</h2>
-                <p class="mt-4 max-w-3xl mx-auto text-lg text-gray-600">Unprecedented fiscal and monetary expansion has created a new reality for investors. Traditional "safe" assets face structural headwinds, compelling a strategic search for alternative sources of return.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-                <div class="bg-white rounded-xl shadow-lg p-8 text-center flex flex-col justify-center">
-                    <h3 class="text-2xl font-semibold text-gray-700">US Federal Debt-to-GDP</h3>
-                    <p class="text-6xl md:text-7xl font-black kpi-value my-4">120.8%</p>
-                    <p class="text-gray-600">High debt levels historically suppress long-term interest rates to manage servicing costs, reducing the appeal of government bonds.</p>
-                </div>
-                <div class="bg-white rounded-xl shadow-lg p-8 text-center flex flex-col justify-center">
-                    <h3 class="text-2xl font-semibold text-gray-700">M2 Money Supply Growth from Feb 2020 - Feb 2025</h3>
-                    <p class="text-6xl md:text-7xl font-black kpi-value my-4">39.74%</p>
-                    <p class="text-gray-600">A substantial increase since 2020 erodes the real value of cash and fixed-income assets through inflationary pressure over the long term.</p>
-                </div>
+        <!-- Section for selecting and adding assets -->
+        <div class="bg-white p-6 rounded-xl shadow-lg w-full max-w-4xl mb-8">
+            <div class="flex flex-col sm:flex-row items-center justify-between mb-4 gap-4">
+                <h2 class="text-2xl font-semibold text-gray-700">Select Assets</h2>
+                <!-- Button to lock/unlock all assets -->
+                <button id="lock-all-btn" class="px-4 py-2 bg-indigo-500 text-white rounded-lg hover:bg-indigo-600 transition duration-300 shadow-md w-full sm:w-auto">
+                    <i class="fas fa-unlock"></i> Unlock All
+                </button>
             </div>
             
-            <div class="bg-white rounded-xl shadow-lg p-8">
-                 <h3 class="text-2xl font-bold section-title text-center mb-6">The Decade's Core Economic Drivers</h3>
-                 <p class="text-center text-gray-600 max-w-4xl mx-auto mb-8">Three powerful themes will reshape the global economy, creating distinct risks and opportunities that will define market leadership for the next ten years.</p>
-                 <div class="flex flex-col md:flex-row items-center justify-around space-y-6 md:space-y-0 md:space-x-6">
-                    <div class="text-center p-4 rounded-lg flow-box w-full md:w-1/4">
-                        <div class="text-4xl mb-2">🧠</div>
-                        <h4 class="text-lg font-bold">AI-Enabled Productivity</h4>
-                        <p class="text-sm text-gray-600">A primary engine of economic growth, countering demographic headwinds.</p>
-                    </div>
-                     <div class="flow-arrow hidden md:block">&rarr;</div>
-                     <div class="flow-arrow block md:hidden">&darr;</div>
-                    <div class="text-center p-4 rounded-lg flow-box w-full md:w-1/4">
-                         <div class="text-4xl mb-2">⚡️</div>
-                        <h4 class="text-lg font-bold">The Energy Transition</h4>
-                        <p class="text-sm text-gray-600">Massive capital investment required to meet rising demand and achieve independence.</p>
-                    </div>
-                    <div class="flow-arrow hidden md:block">&rarr;</div>
-                    <div class="flow-arrow block md:hidden">&darr;</div>
-                    <div class="text-center p-4 rounded-lg flow-box w-full md:w-1/4">
-                        <div class="text-4xl mb-2">🌍</div>
-                        <h4 class="text-lg font-bold">Realigned Globalization</h4>
-                        <p class="text-sm text-gray-600">Reshaped supply chains and trade pacts create new regional winners and losers.</p>
-                    </div>
-                </div>
+            <!-- Categorized checkboxes for asset selection -->
+            <div id="asset-selection-container" class="space-y-6">
+                <!-- Categories and assets will be populated here by JavaScript -->
             </div>
-        </section>
+        </div>
 
-        <section id="forecasts" class="mb-16 scroll-mt-20">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold section-title">A Tale of Two Markets: Public vs. Private</h2>
-                <p class="mt-4 max-w-3xl mx-auto text-lg text-gray-600">Decade-long forecasts reveal a stark divergence. Public markets are expected to deliver modest, single-digit returns, while private markets are poised to capture a significant illiquidity premium.</p>
+        <!-- Section for displaying asset allocation sliders -->
+        <div class="bg-white p-6 rounded-xl shadow-lg w-full max-w-4xl mb-8">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">Your Portfolio Allocation</h2>
+            <div id="sliders-container" class="space-y-4">
+                <!-- Sliders will be dynamically added here by JavaScript -->
+                <p class="text-gray-500 italic text-center">Select assets above to start building your portfolio.</p>
             </div>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <div class="bg-white rounded-xl shadow-lg p-6">
-                    <h3 class="text-2xl font-bold text-center mb-4 text-gray-700">Public Market Forecasts (Annualized)</h3>
-                    <div class="chart-container">
-                        <canvas id="publicMarketsChart"></canvas>
-                    </div>
-                    <p class="text-center text-sm text-gray-500 mt-4">Public equities and bonds are projected to offer limited growth, making it challenging to meet high return targets through traditional allocations alone.</p>
-                </div>
-                <div class="bg-white rounded-xl shadow-lg p-6">
-                    <h3 class="text-2xl font-bold text-center mb-4 text-gray-700">Private Market Forecasts (Annualized)</h3>
-                    <div class="chart-container">
-                        <canvas id="privateMarketsChart"></canvas>
-                    </div>
-                    <p class="text-center text-sm text-gray-500 mt-4">Alternatives are expected to significantly outperform, driven by structural advantages, the AI tailwind, and less efficient markets.</p>
-                </div>
-            </div>
-        </section>
+        </div>
 
-        <section id="blueprint" class="mb-16 scroll-mt-20">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold section-title">The Endowment Model: A Blueprint for Success</h2>
-                <p class="mt-4 max-w-3xl mx-auto text-lg text-gray-600">Top university endowments have consistently generated ~9%+ returns by embracing a long-term, equity-biased strategy with a heavy concentration in illiquid alternative assets.</p>
+        <!-- Section for displaying total expected return -->
+        <div class="bg-white p-6 rounded-xl shadow-lg w-full max-w-4xl">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4 text-center">
+                Total Expected Return: <span id="total-return" class="text-indigo-600 text-3xl font-extrabold">0.00%</span>
+            </h2>
+            <div class="text-center text-gray-600">
+                <p>Current Total Allocation: <span id="total-allocation-display" class="font-semibold">0.00%</span></p>
+                <p class="text-sm italic mt-2">Adjust sliders to see real-time impact on your portfolio's expected return. Total allocation can be less than 100%, but will automatically rebalance if it exceeds 100%.</p>
             </div>
-             <div class="bg-white rounded-xl shadow-lg p-8">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-                    <div>
-                        <h3 class="text-2xl font-bold mb-4 text-gray-700">Typical Ivy League Allocation</h3>
-                        <p class="text-gray-600 mb-4">A typical allocation for a leading endowment like Harvard demonstrates a radical departure from the traditional 60/40 portfolio. Over two-thirds of the portfolio is committed to private equity and hedge funds, aggressively pursuing higher returns by harvesting the illiquidity premium.</p>
-                        <ul class="space-y-2">
-                           <li class="flex items-center"><span class="h-4 w-4 rounded-full accent-bg mr-3"></span><strong>Private Equity & Venture Capital:</strong> The primary growth engine.</li>
-                           <li class="flex items-center"><span class="h-4 w-4 rounded-full accent-text mr-3"></span><strong>Hedge Funds:</strong> For diversification and absolute returns.</li>
-                           <li class="flex items-center"><span class="h-4 w-4 rounded-full bg-yellow-400 mr-3"></span><strong>Public Equities & Real Assets:</strong> For liquidity and inflation hedging.</li>
-                           <li class="flex items-center"><span class="h-4 w-4 rounded-full bg-red-400 mr-3"></span><strong>Bonds & Cash:</strong> Primarily for liquidity management.</li>
-                        </ul>
-                    </div>
-                    <div class="chart-container">
-                        <canvas id="endowmentModelChart"></canvas>
-                    </div>
-                </div>
-             </div>
-        </section>
-
-        <section id="allocation" class="scroll-mt-20 mb-16">
-             <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold section-title">Achieving 9%: A Recommended Allocation for Endowments</h2>
-                <p class="mt-4 max-w-3xl mx-auto text-lg text-gray-600">To target a 9% annualized return, an endowment must strategically mirror the principles of the Ivy League model, focusing allocations where long-term growth forecasts are strongest. Adjust the percentages below to see the projected return change.</p>
-            </div>
-             <div class="bg-white rounded-xl shadow-lg p-8">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-                     <div class="chart-container order-last lg:order-first">
-                        <canvas id="recommendedAllocationChart"></canvas>
-                        <div class="mt-4 text-center">
-                            <h4 class="text-xl font-bold text-gray-700">Projected Portfolio Return: <span id="projectedReturn" class="text-green-600">--%</span></h4>
-                            <p id="allocationSumWarning" class="text-red-500 text-sm mt-2 hidden">Allocation sum is not 100%. Adjusting Hedge Funds & Fixed Income.</p>
-                        </div>
-                    </div>
-                    <div>
-                        <h3 class="text-2xl font-bold mb-4 text-gray-700">Strategic Allocation Breakdown</h3>
-                        <p class="text-gray-600 mb-6">This allocation is heavily tilted towards private markets (currently 70%) to capture higher expected returns, while maintaining a prudent allocation to public assets for liquidity and diversification.</p>
-                        <div class="space-y-4">
-                            <div class="allocation-input-group p-4 rounded-lg bg-gray-50 border-l-4 border-[#004AAD]">
-                                <input type="number" id="peVcInput" value="40" min="0" max="100" class="allocation-input">
-                                <label for="peVcInput" class="allocation-label font-bold">Private Equity & Venture Capital (%)</label>
-                            </div>
-                            <div class="allocation-input-group p-4 rounded-lg bg-gray-50 border-l-4 border-[#40A5E9]">
-                                <input type="number" id="realAssetsInput" value="10" min="0" max="100" class="allocation-input">
-                                <label for="realAssetsInput" class="allocation-label font-bold">Real Assets (Direct & Private) (%)</label>
-                            </div>
-                            <div class="allocation-input-group p-4 rounded-lg bg-gray-50 border-l-4 border-[#F2C43D]">
-                                <input type="number" id="privateCreditInput" value="20" min="0" max="100" class="allocation-input">
-                                <label for="privateCreditInput" class="allocation-label font-bold">Private Credit (%)</label>
-                            </div>
-                             <div class="allocation-input-group p-4 rounded-lg bg-gray-50 border-l-4 border-[#E56B4C]">
-                                <input type="number" id="publicEquitiesInput" value="20" min="0" max="100" class="allocation-input">
-                                <label for="publicEquitiesInput" class="allocation-label font-bold">Public Equities (%)</label>
-                            </div>
-                             <div class="allocation-input-group p-4 rounded-lg bg-gray-50 border-l-4 border-[#9B5DE5]">
-                                <input type="number" id="hfFiInput" value="10" min="0" max="100" class="allocation-input">
-                                <label for="hfFiInput" class="allocation-label font-bold">Hedge Funds & Fixed Income (%)</label>
-                            </div>
-                            <button id="applyAllocation" class="mt-4 px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition-colors w-full">Apply Allocation</button>
-                        </div>
-                    </div>
-                </div>
-             </div>
-        </section>
-
-        <section id="sources" class="scroll-mt-20">
-            <div class="text-center mb-8">
-                <h2 class="text-3xl md:text-4xl font-bold section-title">Research Sources</h2>
-                <p class="mt-4 max-w-3xl mx-auto text-lg text-gray-600">The insights and data presented in this infographic are derived from the following institutional research and public reports:</p>
-            </div>
-            <div class="bg-white rounded-xl shadow-lg p-8">
-                <ul class="list-disc pl-5 space-y-3 text-gray-700">
-                    <li><strong class="accent-text">Northern Trust:</strong> "Capital Market Assumptions 10-Year Outlook: 2025 Edition." Released January 2025.</li>
-                    <li><strong class="accent-text">State Street Global Advisors:</strong> "Multi-Asset Solutions Q1 2025: Long-Term Asset Class Forecasts."</li>
-                    <li><strong class="accent-text">Invesco:</strong> "2025 Midyear Global Policy Outlook."</li>
-                    <li><strong class="accent-text">Princeton University Investment Company (PRINCO):</strong> Annual Report on Endowment Performance. (Referenced for 9% return target)</li>
-                    <li><strong class="accent-text">National Association of College and University Business Officers (NACUBO):</strong> Annual Study of Endowments (for broader endowment performance context).</li>
-                </ul>
-            </div>
-        </section>
-
-    </main>
+        </div>
+    </div>
 
     <script>
-        let recommendedAllocationChartInstance = null;
+        // Data containing expected returns for various asset classes, parsed from the provided text.
+        // This acts as the knowledge base for the calculator.
+        const ASSET_DATA = {
+            "US Cash / Short-term Treasuries / Money Market Funds": 3.275, "Canada Cash": 2.75, "Europe Cash / EMU Cash": 2.0, "UK Cash": 3.2, "Japan Cash": 0.8, "Australia Cash": 3.3, "New Zealand Cash": 3.1, "US Inflation Linked / TIPS": 4.175, "Canada Inflation Linked": 2.2, "Europe Inflation Linked": 3.0, "UK Inflation Linked": 2.7, "Japan Inflation Linked": 1.5, "Australia Inflation Linked": 3.25, "Global Inflation Linked": 3.3, "US Investment Grade Bonds": 4.91, "US Government Bonds (incl. Long Treasury STRIPS)": 4.55, "Canada Investment Grade Bonds": 3.6, "Canada Government Bonds": 3.0, "Canada Universe Bonds": 3.2, "Europe Investment Grade Bonds": 3.1, "Euro Government Bonds": 2.8, "UK Investment Grade Bonds": 5.05, "UK Government Bonds": 5.1, "Japan Investment Grade Bonds": 1.4, "Japanese Government Bonds": 1.3, "Japanese Corporate Bonds": 1.1, "Australia Investment Grade Bonds": 4.5, "Australian Government Bonds": 4.3, "Australian Corporate Bonds": 4.7, "New Zealand Government Bonds": 4.0, "Non-US Government Bonds": 2.5, "Non-US Corporate Bonds": 3.3, "Non-US Debt - Developed (Janney Survey)": 3.6, "Global Investment Grade Bonds": 3.65, "Global Corporate Bonds": 4.2, "Global Government Bonds": 3.1, "Global Ex-US Fixed Income (Hedged) (Vanguard)": 3.8, "Non-US Fixed Income (Vanguard)": 3.8, "US High Yield Bonds": 5.83, "Canada High Yield Bonds": 5.6, "Europe High Yield Bonds": 4.2, "Global High Yield Bonds": 5.9, "Emerging Markets Bonds (Fixed Income)": 7.7, "Non-US Debt - Emerging (Janney Survey)": 6.3, "US Large Cap Equities": 6.38, "US Small Cap Equities": 7.73, "US Mid Cap Equities": 6.3, "US Equities (Vanguard Broad)": 5.3, "Canada Equities": 5.9, "Europe Equities": 6.25, "Euro Equities": 7.1, "UK Equities": 4.75, "Japan Equities": 6.0, "Australia Equities": 7.8, "New Zealand Equities": 4.6, "Developed Pacific Equities": 5.5, "Developed International Stocks (Janney)": 8.0, "International developed large-cap stocks (Schwab)": 7.1, "International developed small-cap stocks (Schwab)": 8.1, "Non-US Developed Equities (Vanguard)": 6.4, "Global Developed (World) Equities": 6.65, "Global Developed ex US Equities": 6.6, "Global Developed ex US Small Cap Equities": 7.4, "Global Value Tilted Equities": 6.0, "Global Quality Tilted Equities": 6.4, "Global Momentum Tilted Equities": 7.3, "Global Minimum Variance Equities": 6.6, "Emerging Market Equities": 6.98, "EM Asia Equities": 6.7, "EM EMEA Equities": 8.9, "EM Latin America Equities": 13.5, "Global Equities": 7.1, "Global Equities (ACWI) ex US": 6.8, "Commodities": 5.0, "Global Natural Resources": 6.2, "REITs / Listed Real Estate / US Real Estate Investment Trusts": 6.4, "Direct Real Estate — US": 8.3, "Infrastructure / Listed Infrastructure": 6.6, "Private Equity": 9.0, "Venture Capital": 11.6, "Buyout (Private Equity)": 9.5, "Growth (Private Equity)": 11.0, "Private Credit / Debt": 7.58, "Core Private Credit": 6.9, "Opportunistic Private Credit": 12.2, "Private Natural Resources": 8.3, "Private Real Estate": 7.3, "Private Infrastructure": 8.4, "Hedge Funds": 5.1, "HF-Equity Hedge": 5.4, "HF-Relative Value": 5.6, "HF-Macro": 6.0, "HF-Event Driven": 5.1
+        };
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const wrapLabel = (label) => {
-                const maxLength = 16;
-                if (typeof label !== 'string' || label.length <= maxLength) {
-                    return label;
+        // Categorization of assets to group them in the UI
+        const ASSET_CATEGORIES = {
+            "Cash": [
+                "US Cash / Short-term Treasuries / Money Market Funds", "Canada Cash", "Europe Cash / EMU Cash",
+                "UK Cash", "Japan Cash", "Australia Cash", "New Zealand Cash"
+            ],
+            "Fixed Income - Inflation-Linked": [
+                "US Inflation Linked / TIPS", "Canada Inflation Linked", "Europe Inflation Linked",
+                "UK Inflation Linked", "Japan Inflation Linked", "Australia Inflation Linked",
+                "Global Inflation Linked"
+            ],
+            "Fixed Income - Investment Grade": [
+                "US Investment Grade Bonds", "US Government Bonds (incl. Long Treasury STRIPS)", "Canada Investment Grade Bonds",
+                "Canada Government Bonds", "Canada Universe Bonds", "Europe Investment Grade Bonds",
+                "Euro Government Bonds", "UK Investment Grade Bonds", "UK Government Bonds",
+                "Japan Investment Grade Bonds", "Japanese Government Bonds", "Japanese Corporate Bonds",
+                "Australia Investment Grade Bonds", "Australian Government Bonds", "Australian Corporate Bonds",
+                "New Zealand Government Bonds", "Non-US Government Bonds", "Non-US Corporate Bonds",
+                "Non-US Debt - Developed (Janney Survey)", "Global Investment Grade Bonds", "Global Corporate Bonds",
+                "Global Government Bonds", "Global Ex-US Fixed Income (Hedged) (Vanguard)", "Non-US Fixed Income (Vanguard)"
+            ],
+            "Fixed Income - High Yield": [
+                "US High Yield Bonds", "Canada High Yield Bonds", "Europe High Yield Bonds",
+                "Global High Yield Bonds", "Emerging Markets Bonds (Fixed Income)", "Non-US Debt - Emerging (Janney Survey)"
+            ],
+            "Equities - US": [
+                "US Large Cap Equities", "US Small Cap Equities", "US Mid Cap Equities", "US Equities (Vanguard Broad)"
+            ],
+            "Equities - Developed Ex-US": [
+                "Canada Equities", "Europe Equities", "Euro Equities", "UK Equities", "Japan Equities",
+                "Australia Equities", "New Zealand Equities", "Developed Pacific Equities",
+                "Developed International Stocks (Janney)", "International developed large-cap stocks (Schwab)",
+                "International developed small-cap stocks (Schwab)", "Non-US Developed Equities (Vanguard)",
+                "Global Developed (World) Equities", "Global Developed ex US Equities",
+                "Global Developed ex US Small Cap Equities", "Global Value Tilted Equities",
+                "Global Quality Tilted Equities", "Global Momentum Tilted Equities", "Global Minimum Variance Equities"
+            ],
+            "Equities - Emerging Markets": [
+                "Emerging Market Equities", "EM Asia Equities", "EM EMEA Equities", "EM Latin America Equities"
+            ],
+            "Equities - Global": [
+                "Global Equities", "Global Equities (ACWI) ex US"
+            ],
+            "Real Assets & Commodities": [
+                "Commodities", "Global Natural Resources", "REITs / Listed Real Estate / US Real Estate Investment Trusts",
+                "Direct Real Estate — US", "Infrastructure / Listed Infrastructure"
+            ],
+            "Alternatives": [
+                "Private Equity", "Venture Capital", "Buyout (Private Equity)", "Growth (Private Equity)",
+                "Private Credit / Debt", "Core Private Credit", "Opportunistic Private Credit",
+                "Private Natural Resources", "Private Real Estate", "Private Infrastructure",
+                "Hedge Funds", "HF-Equity Hedge", "HF-Relative Value", "HF-Macro", "HF-Event Driven"
+            ]
+        };
+
+        // State variables for the application
+        let allocations = {}; // Stores the percentage allocation for each selected asset {assetName: percentage}
+        let lockedAssets = new Set(); // Stores asset names that are individually locked (cannot be changed by slider or normalization)
+        let allLocked = false; // Global lock state: if true, all sliders and individual lock buttons are disabled
+
+        // DOM elements references
+        const slidersContainer = document.getElementById('sliders-container');
+        const totalReturnDisplay = document.getElementById('total-return');
+        const totalAllocationDisplay = document.getElementById('total-allocation-display');
+        const lockAllBtn = document.getElementById('lock-all-btn');
+        const assetSelectionContainer = document.getElementById('asset-selection-container'); // Renamed from initial-assets-checkboxes
+
+        // Pre-sort categorized asset data by expected return (greatest to least)
+        const SORTED_CATEGORIZED_ASSETS = {};
+        for (const category in ASSET_CATEGORIES) {
+            SORTED_CATEGORIZED_ASSETS[category] = ASSET_CATEGORIES[category]
+                .map(assetName => ({
+                    name: assetName,
+                    return: ASSET_DATA[assetName] !== undefined ? ASSET_DATA[assetName] : 0 // Handle missing data gracefully
+                }))
+                .sort((a, b) => b.return - a.return); // Sort by return, greatest to least
+        }
+
+        /**
+         * Generates a safe HTML ID from an asset name by replacing invalid characters.
+         * @param {string} assetName - The original asset name.
+         * @returns {string} A sanitized string suitable for use as an HTML ID.
+         */
+        function getSanitizedId(assetName) {
+            // Replace any character that is not a letter (a-z, A-Z), number (0-9), or underscore (_) with an underscore.
+            // Then replace any sequence of multiple underscores with a single underscore.
+            // Finally, remove any leading or trailing underscores.
+            return assetName.replace(/[^a-zA-Z0-9_]/g, '_').replace(/__+/g, '_').replace(/^_|_$/g, '');
+        }
+
+        // --- Core Application Logic Functions ---
+
+        /**
+         * Calculates the total expected return of the portfolio based on current allocations.
+         * @returns {number} The aggregated expected return as a percentage.
+         */
+        function calculateTotalReturn() {
+            let totalReturn = 0;
+            for (const assetName in allocations) {
+                // Ensure the asset exists in the ASSET_DATA and add its weighted return
+                if (ASSET_DATA[assetName] !== undefined) {
+                    totalReturn += (allocations[assetName] / 100) * ASSET_DATA[assetName];
                 }
-                const words = label.split(' ');
-                const lines = [];
-                let currentLine = '';
-                for (const word of words) {
-                    if ((currentLine + ' ' + word).length > maxLength && currentLine.length > 0) {
-                        lines.push(currentLine);
-                        currentLine = word;
-                    } else {
-                        currentLine = currentLine ? currentLine + ' ' + word : word;
-                    }
-                }
-                lines.push(currentLine);
-                return lines;
-            };
-            
-            const tooltipTitleCallback = (tooltipItems) => {
-                const item = tooltipItems[0];
-                let label = item.chart.data.labels[item.dataIndex];
-                if (Array.isArray(label)) {
-                  return label.join(' ');
+            }
+            return totalReturn;
+        }
+
+        /**
+         * Updates the allocation for a specific asset based on slider input.
+         * If the total allocation exceeds 100%, it redistributes the excess among other unlocked assets.
+         * If no other unlocked assets are available for compensation, it caps the current asset's value.
+         * @param {string} assetName - The name of the asset being updated.
+         * @param {number} newInputValue - The new percentage value from the slider.
+         */
+        function updateAllocationFromSlider(assetName, newInputValue) {
+            newInputValue = Math.max(0, Math.min(100, newInputValue)); // Clamp value between 0 and 100
+
+            // If globally locked or individually locked, prevent changes
+            if (allLocked || lockedAssets.has(assetName)) {
+                renderSliders(); // Re-render to visually reset the slider thumb if it moved when disabled
+                return;
+            }
+
+            // Temporarily update the allocation for the current asset
+            allocations[assetName] = newInputValue;
+
+            let currentTotalAllocation = 0;
+            for (const key in allocations) {
+                currentTotalAllocation += allocations[key];
+            }
+
+            // Check if the current action causes the total to exceed 100%
+            if (currentTotalAllocation > 100.001) { // Use a small epsilon for floating point comparison
+                const excess = currentTotalAllocation - 100;
+
+                // Identify other assets that are currently in the portfolio, are not the asset being moved,
+                // and are not locked (individually or globally). These are the candidates for reduction.
+                const unlockedOthers = Object.keys(allocations).filter(key =>
+                    key !== assetName && !lockedAssets.has(key) && !allLocked
+                );
+
+                let sumOfUnlockedOthers = 0;
+                unlockedOthers.forEach(key => sumOfUnlockedOthers += allocations[key]);
+
+                if (unlockedOthers.length > 0 && sumOfUnlockedOthers > 0) {
+                    // Reduce other unlocked assets proportionally to absorb the 'excess'
+                    unlockedOthers.forEach(key => {
+                        const reduction = (allocations[key] / sumOfUnlockedOthers) * excess;
+                        allocations[key] = Math.max(0, parseFloat((allocations[key] - reduction).toFixed(2)));
+                    });
                 } else {
-                  return label;
+                    // If there are no other unlocked assets to compensate from,
+                    // cap the current asset's allocation to ensure total does not exceed 100%.
+                    allocations[assetName] = parseFloat((newInputValue - excess).toFixed(2));
+                    allocations[assetName] = Math.max(0, allocations[assetName]);
                 }
-            };
+            }
+
+            // Final pass to correct any tiny floating point inaccuracies to ensure sum is exactly 100% if it should be
+            let finalSumCheck = 0;
+            for (const key in allocations) {
+                finalSumCheck += allocations[key];
+            }
+            if (finalSumCheck > 100 && finalSumCheck < 100.05) { // If slightly over 100
+                const difference = finalSumCheck - 100;
+                allocations[assetName] = parseFloat((allocations[assetName] - difference).toFixed(2));
+                allocations[assetName] = Math.max(0, allocations[assetName]);
+            }
+
+            updateDisplay(); // Update the displayed total return and allocation
+        }
+
+        /**
+         * Toggles the individual lock state for a specific asset.
+         * Locked assets will not have their allocations changed by sliders or automatic normalization.
+         * @param {string} assetName - The name of the asset to lock/unlock.
+         */
+        function toggleIndividualLock(assetName) {
+            if (lockedAssets.has(assetName)) {
+                lockedAssets.delete(assetName); // Unlock the asset
+            } else {
+                lockedAssets.add(assetName); // Lock the asset
+            }
+            updateDisplay(); // Update display and re-render to update lock icon and slider's disabled state
+        }
+
+        /**
+         * Toggles the global lock state. If allLocked is true, all sliders are disabled.
+         * If locking, it also ensures the total allocation doesn't exceed 100% by
+         * proportionally reducing all assets if necessary.
+         */
+        function toggleLockAll() {
+            allLocked = !allLocked; // Toggle the global lock state
             
-            const palette = {
-                deepBlue: '#004AAD',
-                brightBlue: '#40A5E9',
-                gold: '#F2C43D',
-                terracotta: '#E56B4C',
-                purple: '#9B5DE5',
-                lightGray: '#E5E7EB'
-            };
+            if (allLocked) {
+                // If locking all, check if current total allocation exceeds 100%
+                let currentTotalAllocation = 0;
+                for (const assetName in allocations) {
+                    currentTotalAllocation += allocations[assetName];
+                }
 
-            const defaultChartOptions = {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        position: 'bottom',
-                        labels: {
-                            font: { size: 12 }
-                        }
-                    },
-                    tooltip: {
-                        callbacks: {
-                            title: tooltipTitleCallback
-                        },
-                        backgroundColor: '#111827',
-                        titleFont: { size: 14, weight: 'bold' },
-                        bodyFont: { size: 12 },
-                        padding: 10,
-                        cornerRadius: 4
+                if (currentTotalAllocation > 100.01) {
+                    const excess = currentTotalAllocation - 100;
+                    let sumOfAllAssets = 0; // Sum of all assets (locked and unlocked)
+                    for (const assetName in allocations) {
+                        sumOfAllAssets += allocations[assetName];
                     }
-                },
-                scales: {
-                    x: {
-                        ticks: {
-                            font: { size: 11 },
-                            color: '#4B5563'
-                        },
-                        grid: { display: false }
-                    },
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                           font: { size: 11 },
-                           color: '#4B5563',
-                           callback: function(value) { return value + '%' }
-                        },
-                        grid: {
-                            color: '#E5E7EB'
+
+                    if (sumOfAllAssets > 0) {
+                        // Reduce all assets proportionally to bring total to 100%
+                        for (const assetName in allocations) {
+                            const reduction = (allocations[assetName] / sumOfAllAssets) * excess;
+                            allocations[assetName] = Math.max(0, parseFloat((allocations[assetName] - reduction).toFixed(2)));
                         }
                     }
                 }
-            };
+                lockAllBtn.innerHTML = '<i class="fas fa-lock"></i> Lock All'; // Icon for locked state
+                lockAllBtn.classList.remove('bg-indigo-500', 'hover:bg-indigo-600');
+                lockAllBtn.classList.add('bg-gray-500', 'hover:bg-gray-600');
+            } else {
+                lockAllBtn.innerHTML = '<i class="fas fa-unlock"></i> Unlock All'; // Icon for unlocked state
+                lockAllBtn.classList.remove('bg-gray-500', 'hover:bg-gray-600');
+                lockAllBtn.classList.add('bg-indigo-500', 'hover:bg-indigo-600');
+            }
+            updateDisplay(); // Update display and re-render sliders to reflect their new disabled state
+        }
 
-            const publicMarketsCtx = document.getElementById('publicMarketsChart').getContext('2d');
-            new Chart(publicMarketsCtx, {
-                type: 'bar',
-                data: {
-                    labels: ['Global Inv Grade Bonds', 'US High Yield', 'Global Dev Equities', 'US Large Cap Equities', 'Emerging Market Equities'].map(wrapLabel),
-                    datasets: [{
-                        label: '10-Year Annualized Return Forecast (%)',
-                        data: [3.6, 5.6, 6.2, 7.5, 6.4],
-                        backgroundColor: [palette.lightGray, palette.lightGray, palette.brightBlue, palette.brightBlue, palette.brightBlue],
-                        borderColor: '#FFFFFF',
-                        borderWidth: 2
-                    }]
-                },
-                options: { ...defaultChartOptions }
-            });
-            
-            const privateMarketsCtx = document.getElementById('privateMarketsChart').getContext('2d');
-            new Chart(privateMarketsCtx, {
-                type: 'bar',
-                data: {
-                    labels: ['Hedge Funds', ['Direct', 'Real Estate'], 'Private Credit', 'Private Equity', ['Venture', 'Capital']].map(wrapLabel),
-                    datasets: [{
-                        label: '10-Year Annualized Return Forecast (%)',
-                        data: [5.5, 8.3, 8.4, 10.1, 11.6],
-                        backgroundColor: [palette.deepBlue, palette.deepBlue, palette.deepBlue, palette.deepBlue, palette.deepBlue],
-                         borderColor: '#FFFFFF',
-                        borderWidth: 2
-                    }]
-                },
-                options: { ...defaultChartOptions }
-            });
+        /**
+         * Renders or re-renders the asset allocation sliders in the UI.
+         * This function is called whenever allocations or lock states change.
+         */
+        function renderSliders() {
+            slidersContainer.innerHTML = ''; // Clear existing sliders
+            // Display a message if no assets are selected
+            if (Object.keys(allocations).length === 0) {
+                slidersContainer.innerHTML = '<p class="text-gray-500 italic text-center">Select assets above to start building your portfolio.</p>';
+                return;
+            }
 
-            const defaultDonutOptions = {
-                responsive: true,
-                maintainAspectRatio: false,
-                cutout: '60%',
-                plugins: {
-                    legend: {
-                        position: 'bottom',
-                        labels: {
-                            font: { size: 12 },
-                            padding: 20
-                        }
-                    },
-                    tooltip: {
-                        callbacks: {
-                           title: tooltipTitleCallback,
-                           label: function(context) {
-                                let label = context.dataset.label || '';
-                                if (label) {
-                                    label += ': ';
-                                }
-                                if (context.parsed !== null) {
-                                    label += context.parsed + '%';
-                                }
-                                return label;
-                            }
-                        },
-                         backgroundColor: '#111827',
-                        titleFont: { size: 14, weight: 'bold' },
-                        bodyFont: { size: 12 },
-                        padding: 10,
-                        cornerRadius: 4
-                    }
-                }
-            };
-            
-            const endowmentModelCtx = document.getElementById('endowmentModelChart').getContext('2d');
-            new Chart(endowmentModelCtx, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Private Equity', 'Hedge Funds', 'Public Equity & Real Assets', 'Bonds & Cash'],
-                    datasets: [{
-                        label: 'Allocation',
-                        data: [39, 32, 22, 7],
-                        backgroundColor: [palette.deepBlue, palette.brightBlue, palette.gold, palette.terracotta],
-                        borderColor: '#FFFFFF',
-                        borderWidth: 4,
-                    }]
-                },
-                options: { ...defaultDonutOptions }
-            });
+            // Iterate over selected assets and create a slider for each
+            // Sort keys to maintain a consistent order in the display
+            Object.keys(allocations).sort().forEach(assetName => {
+                const isLocked = lockedAssets.has(assetName) || allLocked; // Check if asset is locked (individually or globally)
+                const sanitizedId = getSanitizedId(assetName); // Get sanitized ID
+                const sliderDiv = document.createElement('div');
+                sliderDiv.className = 'flex flex-col md:flex-row items-center gap-2 bg-gray-50 p-4 rounded-lg shadow-sm border border-gray-200';
 
-            const recommendedAllocationCtx = document.getElementById('recommendedAllocationChart').getContext('2d');
-            recommendedAllocationChartInstance = new Chart(recommendedAllocationCtx, {
-                type: 'doughnut',
-                data: {
-                    labels: [['Private Equity', '& Venture Capital'], ['Real Assets', '(Direct)'], 'Private Credit', 'Public Equities', ['Hedge Funds &', 'Fixed Income']],
-                    datasets: [{
-                        label: 'Allocation',
-                        data: [40, 10, 20, 20, 10], /* Updated default data */
-                        backgroundColor: [palette.deepBlue, palette.brightBlue, palette.gold, palette.terracotta, palette.purple],
-                        borderColor: '#FFFFFF',
-                        borderWidth: 4,
-                    }]
-                },
-                options: { ...defaultDonutOptions }
-            });
+                // Populate slider HTML with asset name, expected return, slider, value display, and lock button
+                sliderDiv.innerHTML = `
+                    <div class="flex-1 w-full md:w-auto">
+                        <label for="slider-${sanitizedId}" class="block text-sm font-medium text-gray-700">${assetName}</label>
+                        <span class="text-xs text-gray-500">Expected Return: ${ASSET_DATA[assetName].toFixed(2)}%</span>
+                    </div>
+                    <div class="flex items-center gap-3 w-full md:w-3/5">
+                        <input type="range" id="slider-${sanitizedId}"
+                            min="0" max="100" step="0.01" value="${allocations[assetName]}"
+                            class="flex-1 w-full h-2 rounded-lg appearance-none cursor-pointer bg-blue-100"
+                            ${isLocked ? 'disabled' : ''}> <!-- Disable slider if locked -->
+                        <span id="value-${sanitizedId}" class="font-bold text-gray-800 w-16 text-right">${allocations[assetName].toFixed(2)}%</span>
+                        <button class="lock-individual-btn px-3 py-1 rounded-full text-white text-xs transition duration-300 shadow-sm
+                            ${isLocked ? 'bg-red-500 hover:bg-red-600' : 'bg-gray-500 hover:bg-gray-600'}"
+                            data-asset="${assetName}"
+                            ${allLocked ? 'disabled' : ''} title="${isLocked ? 'Unlock Asset' : 'Lock Asset'}"> <!-- Disable individual lock if global lock is on -->
+                            <i class="fas ${isLocked ? 'fa-lock' : 'fa-unlock'}"></i> <!-- Icon reflects current lock state -->
+                        </button>
+                    </div>
+                `;
+                slidersContainer.appendChild(sliderDiv);
 
-            const assetReturns = {
-                peVc: 10.85,
-                realAssets: 8.3,
-                privateCredit: 10.3,
-                publicEquities: 6.7,
-                hfFi: 4.55
-            };
+                const slider = sliderDiv.querySelector(`#slider-${sanitizedId}`);
+                const valueSpan = sliderDiv.querySelector(`#value-${sanitizedId}`);
+                const lockBtn = sliderDiv.querySelector(`.lock-individual-btn`);
 
-            const peVcInput = document.getElementById('peVcInput');
-            const realAssetsInput = document.getElementById('realAssetsInput');
-            const privateCreditInput = document.getElementById('privateCreditInput');
-            const publicEquitiesInput = document.getElementById('publicEquitiesInput');
-            const hfFiInput = document.getElementById('hfFiInput');
-            const applyAllocationButton = document.getElementById('applyAllocation');
-            const projectedReturnDisplay = document.getElementById('projectedReturn');
-            const allocationSumWarning = document.getElementById('allocationSumWarning');
-
-            const updateAllocationChart = () => {
-                let peVc = parseFloat(peVcInput.value) || 0;
-                let realAssets = parseFloat(realAssetsInput.value) || 0;
-                let privateCredit = parseFloat(privateCreditInput.value) || 0;
-                let publicEquities = parseFloat(publicEquitiesInput.value) || 0;
-                let hfFi = parseFloat(hfFiInput.value) || 0;
-
-                let totalAllocation = peVc + realAssets + privateCredit + publicEquities + hfFi;
-
-                if (totalAllocation !== 100) {
-                    allocationSumWarning.classList.remove('hidden');
-                    let difference = 100 - totalAllocation;
-                    hfFi += difference;
-                    hfFiInput.value = hfFi.toFixed(0); 
-                } else {
-                    allocationSumWarning.classList.add('hidden');
-                }
-
-                recommendedAllocationChartInstance.data.datasets[0].data = [
-                    peVc,
-                    realAssets,
-                    privateCredit,
-                    publicEquities,
-                    hfFi
-                ];
-                recommendedAllocationChartInstance.update();
-
-                let projectedReturn = (
-                    (peVc * assetReturns.peVc) +
-                    (realAssets * assetReturns.realAssets) +
-                    (privateCredit * assetReturns.privateCredit) +
-                    (publicEquities * assetReturns.publicEquities) +
-                    (hfFi * assetReturns.hfFi)
-                ) / 100;
-
-                projectedReturnDisplay.textContent = `${projectedReturn.toFixed(2)}%`;
-            };
-
-            applyAllocationButton.addEventListener('click', updateAllocationChart);
-
-            updateAllocationChart();
-
-            const navLinks = document.querySelectorAll('.nav-item');
-            const sections = document.querySelectorAll('section');
-
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.4
-            };
-
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if(entry.isIntersecting){
-                        navLinks.forEach(link => {
-                            link.classList.remove('active');
-                            if(link.getAttribute('href').substring(1) === entry.target.id){
-                                link.classList.add('active');
-                            }
-                        });
-                    }
+                // Event listener for real-time slider input (updates percentage display as user drags)
+                slider.addEventListener('input', (e) => {
+                    valueSpan.textContent = `${parseFloat(e.target.value).toFixed(2)}%`;
                 });
-            }, observerOptions);
 
-            sections.forEach(section => {
-                observer.observe(section);
+                // Event listener for slider change (when user releases the thumb, triggers allocation update)
+                slider.addEventListener('change', (e) => {
+                    updateAllocationFromSlider(assetName, parseFloat(e.target.value));
+                });
+
+                // Event listener for individual lock button
+                lockBtn.addEventListener('click', () => {
+                    toggleIndividualLock(assetName);
+                });
             });
+        }
 
-            navLinks.forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
+        /**
+         * Updates the displayed total expected return and total allocation percentage.
+         * Also highlights the total allocation if it's not exactly 100%.
+         */
+        function updateDisplay() {
+            const totalReturn = calculateTotalReturn();
+            let currentTotalAllocation = 0;
+            for (const assetName in allocations) {
+                currentTotalAllocation += allocations[assetName];
+            }
+
+            totalReturnDisplay.textContent = `${totalReturn.toFixed(2)}%`;
+            totalAllocationDisplay.textContent = `${currentTotalAllocation.toFixed(2)}%`;
+
+            // Add/remove styling to highlight if total allocation is not 100%
+            if (Math.abs(currentTotalAllocation - 100) > 0.01 && Object.keys(allocations).length > 0) { // Only highlight if assets are selected
+                totalAllocationDisplay.classList.add('text-red-500');
+                totalAllocationDisplay.classList.remove('text-gray-800');
+            } else {
+                totalAllocationDisplay.classList.remove('text-red-500');
+                totalAllocationDisplay.classList.add('text-gray-800');
+            }
+            renderSliders(); // Re-render sliders to ensure their values reflect current allocations
+        }
+
+        /**
+         * Adds a new asset to the portfolio.
+         * It initializes its allocation to 0 and updates the display.
+         * @param {string} assetName - The name of the asset to add.
+         */
+        function addAsset(assetName) {
+            if (ASSET_DATA[assetName] === undefined) {
+                console.warn(`Asset "${assetName}" not found in data.`);
+                return;
+            }
+            if (allocations[assetName] === undefined) {
+                allocations[assetName] = 0; // Initialize new asset with 0 allocation
+            }
+            // No auto-normalization here; the user explicitly wants to control total sum when below 100%
+            updateDisplay(); // Update UI
+        }
+
+        /**
+         * Removes an asset from the portfolio.
+         * @param {string} assetName - The name of the asset to remove.
+         */
+        function removeAsset(assetName) {
+            if (allocations[assetName] !== undefined) {
+                delete allocations[assetName];
+                lockedAssets.delete(assetName); // Also ensure it's not in locked state if removed
+                updateDisplay(); // Update UI
+            }
+        }
+
+        /**
+         * Renders the asset selection checkboxes, categorized and sorted by expected return.
+         */
+        function renderAssetSelection() {
+            assetSelectionContainer.innerHTML = ''; // Clear previous content
+
+            for (const category in SORTED_CATEGORIZED_ASSETS) {
+                const categoryDiv = document.createElement('div');
+                categoryDiv.className = 'mb-4';
+                categoryDiv.innerHTML = `<h3 class="text-xl font-semibold text-gray-700 mb-3 border-b pb-2">${category}</h3>`;
+                
+                const assetsGrid = document.createElement('div');
+                assetsGrid.className = 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3';
+
+                SORTED_CATEGORIZED_ASSETS[category].forEach(asset => {
+                    const assetName = asset.name;
+                    const sanitizedId = getSanitizedId(assetName); // Get sanitized ID
+                    const div = document.createElement('div');
+                    div.className = 'flex items-center space-x-2';
+                    div.innerHTML = `
+                        <input type="checkbox" id="checkbox-${sanitizedId}"
+                               class="form-checkbox h-4 w-4 text-indigo-600 rounded focus:ring-indigo-500"
+                               value="${assetName}" ${allocations[assetName] !== undefined ? 'checked' : ''}>
+                        <label for="checkbox-${sanitizedId}" class="text-sm text-gray-700 cursor-pointer">
+                            ${assetName} <span class="text-gray-500 text-xs">(${asset.return.toFixed(2)}%)</span>
+                        </label>
+                    `;
+                    assetsGrid.appendChild(div);
+
+                    div.querySelector('input').addEventListener('change', (e) => {
+                        if (e.target.checked) {
+                            addAsset(assetName);
+                        } else {
+                            removeAsset(assetName);
+                        }
                     });
                 });
-            });
+                categoryDiv.appendChild(assetsGrid);
+                assetSelectionContainer.appendChild(categoryDiv);
+            }
+        }
+
+        // --- Event listener for DOM content loaded ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initial render of asset selection checkboxes (none checked by default, so allocations starts empty)
+            renderAssetSelection(); 
+            
+            // Attach event listener for the global lock/unlock button
+            lockAllBtn.addEventListener('click', toggleLockAll);
+
+            // Initial render of sliders (will show "Select assets above..." message) and update display
+            renderSliders();
+            updateDisplay();
         });
     </script>
 </body>
