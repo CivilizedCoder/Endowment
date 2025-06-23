@@ -154,7 +154,7 @@
             <p class="text-center text-gray-700 max-w-4xl mx-auto mb-10">While the demographic cliff is a national issue, its impact is felt most acutely at the regional level. Ohio and its neighboring states face a significant decline in the number of high school graduates through 2041, intensifying competition for enrollment and amplifying the need for robust financial planning and endowment growth.</p>
             <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-center">
                 <div class="card p-6 md:p-8 lg:col-span-3">
-                    <h3 class="text-2xl font-bold section-title mb-4 text-center">Projected Decline in HS Graduates (2023-2041)</h3>
+                    <h3 class="text-2xl font-bold section-title mb-4 text-center">Projected Decline in HS Graduates (2023-2041)</h3> <!-- https://www.highereddive.com/news/decline-high-school-graduates-demographic-cliff-wiche-charts/738281/-->
                     <p class="text-center text-gray-700 mb-6">The decline varies significantly across the region. States like West Virginia and Michigan face the steepest drops, putting immense pressure on all higher education institutions, particularly small, tuition-dependent private colleges.</p>
                     <div class="chart-container h-96 max-h-[500px]">
                         <canvas id="regionalDeclineChart"></canvas>
@@ -188,7 +188,19 @@
                 </div>
             </div>
         </section>
-     
+   
+        <section class="max-w-7xl mx-auto mb-12">
+            <h2 class="text-3xl font-bold text-center section-title mb-8">Outpacing Inflation: A Growing Concern for Institutional Investors</h2>
+            <p class="text-center text-gray-700 max-w-4xl mx-auto mb-6">While some investors may prioritize avoiding the inherent risks of stock market volatility, potentially overlooking equities' historical capacity for substantial long-term returns, the landscape for institutional portfolios is becoming increasingly nuanced. Merely participating in the public stock market may no longer suffice to meaningfully outpace inflation. As the accompanying FRED graph illustrates, the significant expansion of the M2 money supply has closely correlated with market indices like the NASDAQ, indicating how increased liquidity influences nominal asset price gains. However, this same monetary expansion contributes to systemic inflationary pressures that diminish real returns.</p>
+            <p class="text-center text-gray-700 max-w-4xl mx-auto mb-10">This insidious erosion of purchasing power critically challenges the fundamental notion that value is being added at all, pushing endowments to move beyond generating mere nominal returns towards actively constructing portfolios designed to overcome inflation's persistent impact, even from seemingly strong market performance. For institutional investors with long-term liabilities and spending rules tied to real purchasing power, this dynamic necessitates a strategic shift. They must seek diversified sources of alpha and consider allocations to assets that offer better inflation protection or higher potential for real growth, rather than assuming standard market returns will automatically clear the inflation hurdle. This underscores the need for active management and broader diversification, as highlighted in subsequent sections of this infographic.</p>
+            <div class="card p-6 md:p-8 col-span-1 lg:col-span-2">
+                <h3 class="text-2xl font-bold text-center section-title mb-4">NASDAQ vs. M2 Money Stock</h3>
+                <div class="flex justify-center items-center">
+                    <iframe src="https://fred.stlouisfed.org/graph/fredgraph.png?g=1JLoG&width=800&height=400" width="800" height="400" style="border:0;" loading="lazy"></iframe>
+                </div>
+            </div>
+        </section>
+
         <section id="endowment-landscape" class="max-w-7xl mx-auto bg-white rounded-lg shadow-md p-6 md:p-8 mb-12">
             <h2 class="text-3xl font-bold text-center section-title mb-2">The Investment Landscape: New Realities for Future Returns</h2>
             <p class="text-center text-lg text-gray-700 mb-8">Long-term forecasts from Northern Trust's 2025 Capital Market Assumptions indicate a significant shift in market dynamics, driven by AI-enabled productivity, navigating the energy transition, and evolving globalization. Elevated valuations in U.S. equities are expected to moderate future gains, while private markets show greater potential. This new reality demands a strategic, globally diversified approach to endowment management to achieve the growth needed to offset demographic pressures.</p>
@@ -253,7 +265,7 @@
                 </div>
             </div>
         </section>
-     
+   
         <section id="endowment-implementation" class="max-w-7xl mx-auto bg-white rounded-lg shadow-md p-6 md:p-8 mb-12">
             <h2 class="text-3xl font-bold text-center section-title mb-8">Actionable Strategy: Implementing Endowment Changes</h2>
             <p class="text-center text-gray-700 max-w-4xl mx-auto mb-10">Effectively combating the demographic cliff and adapting to new market realities requires a clear implementation path. Proactive steps in governance, expertise, and pacing are key to unlocking higher returns amidst the evolving landscape of AI-enabled productivity, energy transition, and globalization shifts, as well as evolving policy and regulatory paradigms.</p>
@@ -445,7 +457,7 @@
             },
             options: { ...defaultChartOptions, scales: { x: { stacked: true }, y: { stacked: true, title: { display: true, text: 'Allocation (%)' } } } }
         });
-     
+   
         const ntExpectedReturnsChartData = {
             labels: [
                 wrapLabel('U.S. Inflation Linked (TIPS)'),
@@ -482,125 +494,126 @@
             },
             options: { ...defaultChartOptions, indexAxis: 'y', scales: { x: { title: { display: true, text: 'Annualized Nominal Return (%)' } } } }
         });
-     
+   
         // Embedded Python generated JSON data directly as JavaScript objects
         const allAssetReturns = {
             "Northern Trust": {
                 "US Large Cap Equities":    7.5,
-                "US Small Cap Equities":	9.6,
-                "Developed International Equities (General)":	7.1,
-                "Emerging Market Equities":	6.4,
+                "US Small Cap Equities":    9.6,
+                "Developed International Equities (General)":   7.1,
+                "Emerging Market Equities": 6.4,
                 "Global Equities (ACWI)":7.1,
-                "Global Developed Equities":	7.1,
-                "US Investment Grade Bonds":	4.7,
-                "US High Yield Bonds":	5.6,
-                "US TIPS":	4.0,
-                "Cash Equivalents / US Cash":	3.3,
-                "Real Estate (REITs)":	6.3,
-                "Commodities":	6.2,
-                "Private Equity":	10.1,
-                "Private Debt / Private Credit":	8.4,
-                "Hedge Funds":	5.5,
-                "Global Investment Grade Bonds":	3.6,
-                "Global High Yield Bonds":	5.9,
-                "Global Natural Resources":	6.2,
-                "Global Listed Infrastructure":	6.6,
-                "Australian Equities":	8.2,
-                "Canadian Equities":	5.3,
-                "Europe Equities":	5.2,
-                "UK Equities":	4.4,
-                "Japan Equities":	6.0,
-                "Canadian Bonds (Aggregate/Universe)":	3.6,
-                "Euro Government Bonds":	3.1,
-                "Euro Corporate Bonds":	3.1,
-                "Australian Government Bonds":	4.5,
-                "Japanese Government Bonds":	1.4,
-                "UK Government Bonds":	4.9,
-                "Venture Capital":	11.6,
-                "Buyout":	9.5,
-                "Growth (Private Equity)":	11.0,
-                "Inflation Linked (Canada)":	2.5,
-                "Inflation Linked (Euro)":	3.0,
-                "Inflation Linked (UK)":	3.2,
-                "Inflation Linked (Japan)":	1.5,
-                "Inflation Linked (Australia)":	4.2,
-                "Inflation Linked (Global)":	3.3,
-                "Municipal Bonds":	4.0,
-                "HF-Equity Hedge":	5.4,
-                "HF-Relative Value":	5.6,
-                "HF-Macro":	6.0,
-                "HF-Event Driven":	5.1
+                "Global Developed Equities":    7.1,
+                "US Investment Grade Bonds":    4.7,
+                "US High Yield Bonds":  5.6,
+                "US TIPS":  4.0,
+                "Cash Equivalents / US Cash":   3.3,
+                "Real Estate (REITs)":  6.3,
+                "Commodities":  6.2,
+                "Private Equity":   10.1,
+                "Private Debt / Private Credit":    8.4,
+                "Hedge Funds":  5.5,
+                "Global Investment Grade Bonds":    3.6,
+                "Global High Yield Bonds":  5.9,
+                "Global Natural Resources": 6.2,
+                "Global Listed Infrastructure": 6.6,
+                "Australian Equities":  8.2,
+                "Canadian Equities":    5.3,
+                "Europe Equities":  5.2,
+                "UK Equities":  4.4,
+                "Japan Equities":   6.0,
+                "Canadian Bonds (Aggregate/Universe)":  3.6,
+                "Euro Government Bonds":    3.1,
+                "Euro Corporate Bonds": 3.1,
+                "Australian Government Bonds":  4.5,
+                "Japanese Government Bonds":    1.4,
+                "Japanese Corporate Bonds": 1.9,
+                "UK Government Bonds":  4.9,
+                "Venture Capital":  11.6,
+                "Buyout":   9.5,
+                "Growth (Private Equity)":  11.0,
+                "Inflation Linked (Canada)":    2.5,
+                "Inflation Linked (Euro)":  3.0,
+                "Inflation Linked (UK)":    3.2,
+                "Inflation Linked (Japan)": 1.5,
+                "Inflation Linked (Australia)": 4.2,
+                "Inflation Linked (Global)":    3.3,
+                "Municipal Bonds":  4.0,
+                "HF-Equity Hedge":  5.4,
+                "HF-Relative Value":    5.6,
+                "HF-Macro": 6.0,
+                "HF-Event Driven":  5.1
             },
             "Janney Montgomery Scott": {
-                "US Large Cap Equities":	7.0,
-                "US Small Cap Equities":	8.5,
-                "Developed International Equities (General)":	8.0,
-                "Emerging Market Equities":	8.5,
-                "US Investment Grade Bonds":	5.25,
-                "US High Yield Bonds":	6.5,
-                "Cash Equivalents / US Cash":	3.2,
-                "Real Estate (REITs)":	7.0,
-                "Commodities":	5.0,
-                "Private Equity":	9.0,
-                "Private Debt / Private Credit":	6.75
+                "US Large Cap Equities":    7.0,
+                "US Small Cap Equities":    8.5,
+                "Developed International Equities (General)":   8.0,
+                "Emerging Market Equities": 8.5,
+                "US Investment Grade Bonds":    5.25,
+                "US High Yield Bonds":  6.5,
+                "Cash Equivalents / US Cash":   3.2,
+                "Real Estate (REITs)":  7.0,
+                "Commodities":  5.0,
+                "Private Equity":   9.0,
+                "Private Debt / Private Credit":    6.75
 
             },
             "State Street Global Advisors": {
-                "US Large Cap Equities":	6.1,
+                "US Large Cap Equities":    6.1,
                 "US Small Cap Equities":6.6,
-                "US Mid Cap Equities":	6.3,
-                "Developed International Equities (General)":	6.6,
-                "Developed International Small Cap Equities":	7.4,
-                "Emerging Market Equities":	7.3,
-                "Global Equities (ACWI)":	6.3,
-                "Global Developed Equities":	6.2,
-                "US Investment Grade Bonds":	4.8,
-                "US High Yield Bonds":	5.4,
-                "US TIPS":	4.2,
-                "US Government Bonds":	4.5,
-                "US Long Treasury STRIPS Bond":	6.0,
-                "Cash Equivalents / US Cash	":3.1,
-                "Real Estate (REITs)":	5.7,
-                "Commodities":	5.0,
+                "US Mid Cap Equities":  6.3,
+                "Developed International Equities (General)":   6.6,
+                "Developed International Small Cap Equities":   7.4,
+                "Emerging Market Equities": 7.3,
+                "Global Equities (ACWI)":   6.3,
+                "Global Developed Equities":    6.2,
+                "US Investment Grade Bonds":    4.8,
+                "US High Yield Bonds":  5.4,
+                "US TIPS":  4.2,
+                "US Government Bonds":  4.5,
+                "US Long Treasury STRIPS Bond": 6.0,
+                "Cash Equivalents / US Cash ":3.1,
+                "Real Estate (REITs)":  5.7,
+                "Commodities":  5.0,
                 "Private Equity":7.9,
                 "Hedge Funds":4.8,
-                "Global Investment Grade Bonds":	4.2,
-                "Developed Pacific Equities":	5.5,
-                "Australian Equities":	7.4,
-                "New Zealand Equities":	4.6,
-                "Canadian Equities":	6.5,
-                "Europe Equities":	7.3,
-                "Euro Equities":	7.1,
-                "Canadian Bonds (Aggregate/Universe)":	3.2,
-                "Canadian Government Bonds":	3.0,
+                "Global Investment Grade Bonds":    4.2,
+                "Developed Pacific Equities":   5.5,
+                "Australian Equities":  7.4,
+                "New Zealand Equities": 4.6,
+                "Canadian Equities":    6.5,
+                "Europe Equities":  7.3,
+                "Euro Equities":    7.1,
+                "Canadian Bonds (Aggregate/Universe)":  3.2,
+                "Canadian Government Bonds":    3.0,
                 "Canadian Corporate Bonds":3.6,
-                "Non-US Government Bonds":	2.5,
-                "Non-US Corporate Bonds":	3.3,
-                "Euro Government Bonds":	2.8,
-                "Euro Corporate Bonds":	2.8,
-                "Australian Government Bonds":	4.3,
-                "Australian Corporate Bonds":	4.7,
-                "New Zealand Government Bonds":	4.0,
-                "Japanese Government Bonds":	1.3,
-                "Japanese Corporate Bonds":	1.,
-                "UK Government Bonds":	5.1,
-                "UK Corporate Bonds":	5.2,
-                "Emerging Markets Bonds":	7.7,
-                "Core Private Credit":	6.9,
-                "Opportunistic Private Credit":	12.2,
-                "Direct Real Estate - US":	8.3,
-                "UK Cash":	2.9,
-                "EMU Cash":	1.9,
-                "Canada Cash":	2.5,
-                "Australia Cash":	2.6,
-                "New Zealand Cash":	3.1,
-                "Global Value Tilted Equities":	6.0,
-                "Global Quality Tilted Equities":	6.4,
-                "Global Momentum Tilted Equities":	7.3,
-                "Global Minimum Variance Equities":	6.6,
-                "EM Asia Equities":	6.7,
-                "EM EMEA Equities":	8.9,
-                "EM Latin America Equities":	13.5
+                "Non-US Government Bonds":  2.5,
+                "Non-US Corporate Bonds":   3.3,
+                "Euro Government Bonds":    2.8,
+                "Euro Corporate Bonds": 2.8,
+                "Australian Government Bonds":  4.3,
+                "Australian Corporate Bonds":   4.7,
+                "New Zealand Government Bonds": 4.0,
+                "Japanese Government Bonds":    1.3,
+                "Japanese Corporate Bonds": 1.,
+                "UK Government Bonds":  5.1,
+                "UK Corporate Bonds":   5.2,
+                "Emerging Markets Bonds":   7.7,
+                "Core Private Credit":  6.9,
+                "Opportunistic Private Credit": 12.2,
+                "Direct Real Estate - US":  8.3,
+                "UK Cash":  2.9,
+                "EMU Cash": 1.9,
+                "Canada Cash":  2.5,
+                "Australia Cash":   2.6,
+                "New Zealand Cash": 3.1,
+                "Global Value Tilted Equities": 6.0,
+                "Global Quality Tilted Equities":   6.4,
+                "Global Momentum Tilted Equities":  7.3,
+                "Global Minimum Variance Equities": 6.6,
+                "EM Asia Equities": 6.7,
+                "EM EMEA Equities": 8.9,
+                "EM Latin America Equities":    13.5
 
             },
             "Vanguard": {
@@ -619,7 +632,7 @@
                 "Cash (3-Month T-Bill)": 3.5
             }
         };
-        
+   
         // Defines the categories for each asset class to facilitate sorting and grouping.
         // The categories are ordered for display purposes.
         const assetCategories = {
@@ -702,14 +715,6 @@
             '#6A5ACD', '#FF6347', '#48D1CC', '#9932CC', '#8B0000', '#2E8B57', '#BDB76B', '#5F9EA0', '#FF8C00', '#BA55D3'
         ];
 
-
-        const defaultSafeAssets = [
-            'US Aggregate Fixed Income', 
-            'US Large Cap Equities', 
-            'Hedge Funds', 
-            'Listed Real Estate', 
-            'US Inflation Linked (TIPS)'
-        ];
 
         function populateAllPossibleAssetClasses() {
             for (const sourceName in allAssetReturns) {
@@ -854,13 +859,8 @@
                 
                 // Determine if checkbox should be checked
                 let shouldBeChecked = false;
-                // If only Northern Trust is selected initially, select default safe assets
-                // This condition now applies only if NO other sources are selected AND it's a default safe asset
-                if (selectedSources.has('Northern Trust') && selectedSources.size === 1 && defaultSafeAssets.includes(assetClass)) {
-                    shouldBeChecked = true;
-                } 
                 // If the asset was previously selected AND is still available in current source(s)
-                else if (selectedAssetClasses.has(assetClass) && currentAvailableAssets[assetClass] !== undefined) {
+                if (selectedAssetClasses.has(assetClass) && currentAvailableAssets[assetClass] !== undefined) {
                     shouldBeChecked = true;
                 } 
                 // If the asset had a saved slider value greater than 0 AND is still available
@@ -933,7 +933,7 @@
             });
 
             if (selectedAssetsForSliders.length === 0) {
-                 calculatorInputsDiv.innerHTML = '<p class="text-gray-500">Please select asset classes above to view and adjust allocations.</p>';
+                calculatorInputsDiv.innerHTML = '<p class="text-gray-500">Please select asset classes above to view and adjust allocations.</p>';
             }
 
             selectedAssetsForSliders.forEach(asset => {
@@ -1046,23 +1046,27 @@
             // Define the default portfolio allocations
             const defaultPortfolio = {
                 "US Small Cap Equities": 15,
-                "US Large Cap Equities": 15,
+                "US Large Cap Equities": 10,
                 "US Investment Grade Bonds": 5,
-                "Venture Capital": 25,
-                "Growth (Private Equity)": 20,
+                "Venture Capital": 30,
+                "Growth (Private Equity)": 25,
                 "Hedge Funds": 5,
-                "Real Estate (REITs)": 10,
-                "Cash Equivalents / US Cash": 5
+                "Real Estate (REITs)": 8,
+                "Cash Equivalents / US Cash": 2
             };
 
-            // Set Northern Trust as initially selected source and pre-set default portfolio
-            selectedSources.add('Northern Trust');
+            // Select all sources by default
+            for (const sourceName in allAssetReturns) {
+                selectedSources.add(sourceName);
+            }
+
+            // Pre-set default portfolio values to savedSliderValues and selectedAssetClasses
             for (const asset in defaultPortfolio) {
                 savedSliderValues[asset] = defaultPortfolio[asset].toString();
                 selectedAssetClasses.add(asset);
             }
 
-            // Now render the source checkboxes, which will now correctly show Northern Trust as checked
+            // Now render the source checkboxes, which will now correctly show all sources as checked
             renderSourceCheckboxes(); 
 
             // Initialize the allocation chart
