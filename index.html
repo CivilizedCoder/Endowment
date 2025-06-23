@@ -180,7 +180,7 @@
                 </div>
                 <div class="card p-6">
                     <h3 class="text-2xl font-bold section-title mb-4">Geopolitical Restructuring & Energy Transition</h3>
-                    <p class="text-gray-700">Global energy demand is rising alongside a desire for energy independence, requiring new innovations and financing. Geopolitical tensions are reshaping supply chains and trade, leading to a "bent, not broken" globalization with realigned trade pacts and expanded tariffs, notably impacting the U.S.-China relationship.</p>
+                    <p class="text-gray-700">Global energy demand is rising alongside a desire for energy independence, requiring new innovations and financing. Geopolitical tensions are reshaping supply chains and trade, leading to a "bent, not broken" globalization with realigned trade pacts and expanded tariffs, notably impacting the U.U.S.-China relationship.</p>
                 </div>
                 <div class="card p-6">
                     <h3 class="text-2xl font-bold section-title mb-4">Evolving Policy & Regulatory Paradigms</h3>
@@ -245,6 +245,10 @@
                     <div class="text-center mb-6">
                         <p class="text-lg font-semibold text-gray-700">Projected 10+ Year Nominal Return</p>
                         <p id="projectedReturn10Plus" class="text-5xl font-extrabold kpi-endowment">0.0%</p>
+                    </div>
+                    <!-- New chart for allocation visualization -->
+                    <div class="chart-container h-60 mt-6">
+                        <canvas id="allocationChart"></canvas>
                     </div>
                 </div>
             </div>
@@ -690,6 +694,14 @@
         let selectedAssetClasses = new Set();
 
         let savedSliderValues = {}; 
+        let allocationChart; // Global variable for the new allocation chart
+
+        // A comprehensive color palette for the doughnut chart, ensuring variety
+        const allocationChartColors = [
+            '#003B6D', '#00529B', '#70C4FF', '#FFBC42', '#D62828', '#8B4513', '#228B22', '#4682B4', '#DAA520', '#CD5C5C',
+            '#6A5ACD', '#FF6347', '#48D1CC', '#9932CC', '#8B0000', '#2E8B57', '#BDB76B', '#5F9EA0', '#FF8C00', '#BA55D3'
+        ];
+
 
         const defaultSafeAssets = [
             'US Aggregate Fixed Income', 
@@ -977,6 +989,10 @@
 
             let totalPercent = 0;
             let calculatedReturn = 0;
+            const chartLabels = [];
+            const chartData = [];
+            const chartBackgroundColors = [];
+            let colorIndex = 0;
 
             for (const assetClass in currentSliders) {
                 const percent = parseFloat(currentSliders[assetClass].value);
@@ -985,6 +1001,14 @@
 
                 if (currentExpectedReturns[assetClass] !== undefined && currentExpectedReturns[assetClass] !== null) {
                     calculatedReturn += (percent / 100) * currentExpectedReturns[assetClass];
+                }
+
+                // Add data for chart only if allocation is greater than 0
+                if (percent > 0) {
+                    chartLabels.push(assetClass);
+                    chartData.push(percent);
+                    chartBackgroundColors.push(allocationChartColors[colorIndex % allocationChartColors.length]);
+                    colorIndex++;
                 }
             }
 
@@ -998,6 +1022,14 @@
             }
            
             projectedReturn10PlusEl.textContent = `${calculatedReturn.toFixed(1)}%`;
+
+            // Update the allocation chart
+            if (allocationChart) {
+                allocationChart.data.labels = chartLabels;
+                allocationChart.data.datasets[0].data = chartData;
+                allocationChart.data.datasets[0].backgroundColor = chartBackgroundColors;
+                allocationChart.update();
+            }
         }
 
         function updateCalculatorDisplay() {
@@ -1032,6 +1064,58 @@
 
             // Now render the source checkboxes, which will now correctly show Northern Trust as checked
             renderSourceCheckboxes(); 
+
+            // Initialize the allocation chart
+            const ctx = document.getElementById('allocationChart').getContext('2d');
+            allocationChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: [], // Will be populated dynamically
+                    datasets: [{
+                        data: [], // Will be populated dynamically
+                        backgroundColor: [], // Will be populated dynamically
+                        borderWidth: 1,
+                        borderColor: '#ffffff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                font: {
+                                    size: 10, // Smaller font for legend labels
+                                }
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Current Portfolio Allocation',
+                            font: {
+                                size: 14, // Smaller font for chart title
+                                weight: 'bold'
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed !== null) {
+                                        label += context.parsed + '%';
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    },
+                    cutout: '60%', // Makes it a doughnut chart
+                }
+            });
 
             // Initial render and calculation
             updateCalculatorDisplay();
