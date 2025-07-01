@@ -1,0 +1,1982 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Endowment Strategies & Long-Term Return Forecasts</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@2.2.1/dist/chartjs-plugin-annotation.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1/dist/chartjs-plugin-zoom.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F0F4F8;
+            color: #1F2937;
+        }
+        .card {
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            padding: 1.5rem;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+        .section-title {
+            color: #003B6D;
+        }
+        .kpi-demographic {
+            color: #D62828;
+            font-weight: 900;
+        }
+        .kpi-endowment {
+            color: #00529B;
+            font-weight: 900;
+        }
+        .kpi-label {
+            font-weight: 600;
+            color: #4B5563;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px; /* Default max-width for charts */
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 450px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .flowchart-arrow {
+            color: #70C4FF;
+            font-size: 2rem;
+            line-height: 1;
+            /* Always point downwards */
+            transform: rotate(90deg); 
+        }
+        .flowchart-step {
+            border-color: #70C4FF;
+            background-color: #F9FAFB;
+            border-width: 2px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Distribute space between content */
+            width: 100%; /* Take full width on all screens */
+        }
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            max-width: 90%;
+            width: 500px;
+            position: relative;
+        }
+        .modal-close-button {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #4A5568;
+        }
+        .calculator-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #00529B;
+            cursor: pointer;
+        }
+        .calculator-slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #00529B;
+            cursor: pointer;
+        }
+        .asset-input-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 1rem;
+        }
+        .asset-input-group label {
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        .asset-input-group .value-display {
+            font-weight: bold;
+            color: #00529B;
+        }
+        .radio-group label {
+            display: flex;
+            align-items: center;
+            margin-right: 1.5rem;
+            cursor: pointer;
+            font-weight: 500;
+            color: #374151;
+        }
+        .radio-group input[type="radio"] {
+            margin-right: 0.5rem;
+            accent-color: #00529B;
+        }
+        /* Style for editable content */
+        [contenteditable="true"] {
+            border: 1px dashed #ccc;
+            padding: 2px;
+            outline: none;
+        }
+        /* Reverted presentation slide styles */
+        .presentation-section { /* Renamed from .presentation-slide */
+            margin-bottom: 3rem; /* Space between sections */
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            padding: 1.5rem;
+        }
+        .presentation-section h2 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #003B6D;
+            margin-bottom: 1.5rem;
+            text-align: center; /* Ensure titles are centered */
+        }
+        .presentation-section p {
+            font-size: 1.25rem;
+            color: #374151;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 1rem;
+            text-align: center; /* Ensure paragraphs are centered */
+        }
+
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-white shadow-md p-6 text-center sticky top-0 z-50">
+        <div class="flex justify-between items-center max-w-7xl mx-auto">
+            <div class="flex-grow text-center">
+                <h1 class="text-3xl md:text-4xl font-extrabold section-title" contenteditable="false">Endowment Strategies & Long-Term Return Forecasts</h1>
+                <p class="text-md text-gray-600 mt-2 max-w-4xl mx-auto" contenteditable="false">Navigating demographic shifts and capital market evolution with strategic endowment management and data-driven forecasts.</p>
+            </div>
+            <button id="editModeToggle" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors flex-shrink-0 ml-4">Enable Edit Mode</button>
+        </div>
+    </header>
+
+    <main class="p-4 md:p-8 max-w-6xl mx-auto"> <!-- Added max-w-6xl mx-auto for professional report look -->
+
+        <!-- Section 1: Introduction -->
+        <section class="presentation-section">
+            <h2 contenteditable="false">Our Existential "Why": The Imperative for Change</h2>
+            <p contenteditable="false">We face a critical juncture, defined by significant demographic shifts and evolving macroeconomic realities. Our current strategy, while prudent in past cycles, may no longer adequately ensure the long-term purchasing power and growth of our endowment.</p>
+            <p contenteditable="false">This presentation will lay the groundwork for a more robust, less risk-averse investment strategy, vital for securing our institution's future.</p>
+        </section>
+
+        <!-- Section 2: Demographic Cliff -->
+        <section class="presentation-section">
+            <h2 contenteditable="false">Demographic Cliff: U.S. High School Graduate Projections</h2>
+            <p contenteditable="false">U.S. high school graduations are projected to peak this year with 3.9M students, followed by a sustained decline in population reaching 3.4M by 2041. This necessitates strategic adjustments for higher education institutions. Regional projections tell a similar story.</p>
+            <div class="card p-6 md:p-8 w-full">
+                <h3 class="text-2xl font-bold text-center section-title mb-4" contenteditable="false">Ohio Graduation Trends</h3>
+                <p class="text-center text-gray-700 max-w-4xl mx-auto mb-8" contenteditable="false">This chart illustrates Ohio's projected high school graduate trends, reflecting a regional example of the national 2025 peak and subsequent decline.</p>
+                <div class="chart-container">
+                    <canvas id="nationalDeclineChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Regional Impact -->
+        <section class="presentation-section">
+            <h2 class="section-title mb-8" contenteditable="false">Regional Impact: Ohio & Neighboring States</h2>
+            <p contenteditable="false">The demographic cliff's impact varies regionally. Ohio and nearby states anticipate significant declines in high school graduates through 2041, increasing enrollment competition and underscoring the need for robust financial planning and endowment growth.</p>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center w-full">
+                <div class="card p-6 md:p-8">
+                    <h3 class="text-2xl font-bold section-title mb-4" contenteditable="false">Projected Decline in HS Grads (2023-2041) by State</h3>
+                    <p class="text-center text-gray-700 mb-6" contenteditable="false">Decline varies significantly; West Virginia and Michigan face the steepest drops, impacting tuition-dependent private colleges most severely.</p>
+                    <div class="chart-container">
+                        <canvas id="regionalDeclineChart"></canvas>
+                    </div>
+                </div>
+                <div class="card p-6 md:p-8">
+                    <h3 class="2xl font-bold section-title mb-6 text-center" contenteditable="false">Ohio College-Going Rate</h3>
+                    <p class="text-center text-gray-700 mb-6" contenteditable="false">Compounding the issue, fewer Ohio high school graduates are immediately pursuing higher education. This chart shows the decline from 2010 to 2023.</p>
+                    <div class="chart-container">
+                        <canvas id="ohioCollegeRateChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Shifting Macroeconomic Environment -->
+        <section class="presentation-section">
+            <h2 contenteditable="false">Shifting Macroeconomic Environment: Fundamental Changes</h2>
+            <p contenteditable="false">Our investment decisions must now factor in profound, interconnected macroeconomic shifts. The "worldview concept" guiding past investment strategies is fundamentally changing.</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
+                <div class="card p-6">
+                    <h3 class="text-2xl font-bold section-title mb-4" contenteditable="false">Technological Transformation (AI)</h3>
+                    <p class="text-gray-700" contenteditable="false">AI adoption is expected to boost economic growth and counterbalance the workforce declines from the retiring baby boomer generation in the U.S.</p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="2xl font-bold section-title mb-4" contenteditable="false">Geopolitical Restructuring & Energy Transition</h3>
+                    <p class="text-gray-700" contenteditable="false">Rising global energy demand, energy independence goals, and geopolitical tensions are reshaping supply chains and trade (e.g., U.S.-China relations).</p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="2xl font-bold section-title mb-4" contenteditable="false">Evolving Policy & Regulatory Paradigms</h3>
+                    <p class="text-gray-700" contenteditable="false">Expect declining short-term interest rates and modest yield-curve steepening. Deregulation, increased retail exposure to private markets, and tax reform discussions are ongoing.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: The Bond Market & Interest Expense -->
+        <section class="presentation-section">
+            <h2 contenteditable="false">The Bond Market: A Critical Indicator</h2>
+            <p contenteditable="false">The bond market is a primary indicator of expected inflation and future economic conditions. With federal debt and M2 money supply significantly elevated, and rising interest expenses, the traditional role of bonds in a portfolio needs re-evaluation.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
+                <div class="card p-6">
+                    <h3 class="text-2xl font-bold section-title mb-4" contenteditable="false">Federal Debt & Debt-to-GDP</h3>
+                    <p class="text-gray-700 mb-4" contenteditable="false">Federal debt is approximately $37 trillion, with a Debt-to-GDP ratio around 120%. These figures are projected to continue rising, posing significant questions for long-term fiscal stability and inflation.</p>
+                    <div class="chart-container">
+                        <canvas id="federalDebtToGDPChart"></canvas>
+                    </div>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-2xl font-bold section-title mb-4" contenteditable="false">Interest Expense as % of Federal Spending</h3>
+                    <p class="text-gray-700 mb-4" contenteditable="false">Should interest rates remain high, the cost of servicing the federal debt will become substantially more expensive, potentially crowding out other federal expenditures.</p>
+                    <div class="chart-container">
+                        <canvas id="interestExpenseChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: Inflation Erosion & Portfolio Returns -->
+        <section class="presentation-section">
+            <h2 contenteditable="false">Inflation Erosion & Portfolio Returns</h2>
+            <p contenteditable="false">While equities offer long-term return potential, public market participation alone may not suffice to outpace inflation. M2 money supply expansion correlates with nominal asset price gains (NASDAQ), yet fuels systemic inflationary pressures, diminishing real returns. Endowments should consider diversified alpha sources and inflation-protected allocations beyond traditional market returns.</p>
+            <div class="card p-6 md:p-8 w-full">
+                <h3 class="2xl font-bold text-center section-title mb-4" contenteditable="false">NASDAQ vs. M2 Money Stock</h3>
+                <div class="flex justify-center items-center w-full">
+                    <img src="https://fred.stlouisfed.org/graph/fredgraph.png?g=1JLoG" alt="NASDAQ vs. M2 Money Stock" class="w-full h-auto block mx-auto">
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 7: Measuring "Our" Inflation -->
+        <section class="presentation-section">
+            <h2 contenteditable="false">Are We Keeping Pace? Defining "Our" Inflation</h2>
+            <p contenteditable="false">Our endowment's primary goal is to preserve and grow purchasing power to support the institution's mission. This requires us to measure inflation not just by broad consumer price indices (CPI, PCE), but also by asset inflation and our specific spending needs (HEPI).</p>
+            <p contenteditable="false">The M2 money supply growth rate can serve as a relevant hurdle rate for our principal growth to truly maintain purchasing power.</p>
+            <div class="chart-container">
+                <canvas id="inflationChart"></canvas>
+            </div>
+            <p class="text-sm text-gray-600 mt-4" contenteditable="false">
+                <strong class="text-blue-700">Note:</strong> Inflation data is illustrative, based on historical averages/forecasts. Our projected portfolio return must consistently exceed these benchmarks.
+            </p>
+        </section>
+
+        <!-- Section 8: Our Performance & Benchmarking -->
+        <section class="presentation-section">
+            <h2 contenteditable="false">Are We Performing Well? Comparison and Benchmarking</h2>
+            <p contenteditable="false">To assess our performance, we must compare ourselves against relevant benchmarks and peers, not just internal targets. Our current return is around 6.5%, while our spending policy is 4.5% based on a 60-month trailing average.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
+                <div class="card p-6">
+                    <h3 class="text-2xl font-bold section-title mb-4" contenteditable="false">Current Spending Policy Impact</h3>
+                    <p class="text-gray-700 mb-4" contenteditable="false">With a 6.5% return and 4.5% spending, our principle growth is approximately 2.0%. If inflation, particularly asset inflation, exceeds this figure, our endowment's real purchasing power is diminishing.</p>
+                    <p class="text-gray-700" contenteditable="false">If we invested near 10% in fixed income, we would never be forced to sell low, ensuring gains are met.</p>
+                    <p class="text-gray-700" contenteditable="false">Shifting fixed income allocation from 35% to 10% could increase overall portfolio yield by an estimated 1.75%.</p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-2xl font-bold section-title mb-4" contenteditable="false">Comparison to Peers & Benchmarks</h3>
+                    <ul class="list-disc list-inside text-gray-700">
+                        <li contenteditable="false"><strong>NACUBO:</strong> National Association of College and University Business Officers provides benchmark data for endowments.</li>
+                        <li contenteditable="false"><strong>Peer Institutions:</strong> How do we compare to similar-sized endowments or those with similar missions?</li>
+                        <li contenteditable="false"><strong>Ivy League Endowments:</strong> Many Ivy League endowments achieve returns closer to 9% compared to our 6.5%, often with more aggressive asset allocations.</li>
+                        <li contenteditable="false"><strong>Asset Class Benchmarks:</strong> Our benchmarks are decided per asset class, e.g., S&P 500 for equities and a relevant bond index (like MSCI World) for fixed income.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+       <!-- Section 9: Portfolio Return Projection & Scenario Analysis -->
+        <section class="presentation-section">
+            <h2 contenteditable="false">Portfolio Return Projection & Scenario Analysis</h2>
+            <p contenteditable="false">We can model long-term nominal returns based on chosen Capital Market Assumptions and asset allocations to understand potential outcomes.</p>
+            <div class="card p-6 md:p-8 w-full">
+                <h3 class="text-2xl font-bold text-center section-title mb-2" contenteditable="false">Model Your Allocation Here</h3>
+                <p class="text-center text-lg text-gray-700 mb-8" contenteditable="false">Model long-term nominal returns based on chosen Capital Market Assumptions and asset allocations.</p>
+                
+                <div class="mb-6">
+                    <label for="sourceSelect" class="block text-xl font-bold section-title mb-2" contenteditable="false">Select Source(s):</label>
+                    <div id="sourceCheckboxes" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-2 gap-x-4">
+                        <!-- Source checkboxes will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <details id="assetSelectionDetails" class="mb-6 border rounded-lg shadow-sm">
+                    <summary class="p-4 cursor-pointer font-bold text-lg bg-gray-50 rounded-t-lg flex justify-between items-center" contenteditable="false">
+                        Manage Asset Classes (Based on selected sources)
+                        <span class="text-gray-500">▼</span>
+                    </summary>
+                    <div id="assetSelectionCheckboxes" class="p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-2 gap-x-4">
+                        <!-- Asset Checkboxes will be dynamically generated here -->
+                    </div>
+                </details>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
+                    <div id="calculator-inputs">
+                        <!-- Sliders will be dynamically generated here -->
+                    </div>
+
+                    <div class="flex flex-col items-center justify-center bg-gray-50 rounded-lg p-6">
+                        <p id="totalAllocation" class="text-lg font-bold text-green-600 mb-4" contenteditable="false">Total Allocation: 0%</p>
+                        <div class="text-center mb-6">
+                            <p class="text-lg font-semibold text-gray-700" contenteditable="false">Projected 10+ Year Nominal Return</p>
+                            <p id="projectedReturn10Plus" class="text-5xl font-extrabold kpi-endowment" contenteditable="false">0.0%</p>
+                        </div>
+                        <div class="chart-container h-60 mt-6">
+                            <canvas id="allocationChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Removed the 90/10 Portfolio vs. Current section -->
+        </section>
+
+        <!-- Section 10: Modern Portfolio Theory and Capital Market Line -->
+         <!--
+        <section class="presentation-section">
+            <h2 contenteditable="false">Modern Portfolio Theory (MPT) & The Capital Market Line</h2>
+            <p contenteditable="false">Introduced in 1952, Modern Portfolio Theory (MPT) provides a framework for constructing portfolios to maximize expected return for a given level of market risk, or minimize risk for a given level of expected return. The Capital Market Line (CML) illustrates the risk-return trade-off for efficient portfolios, and in today's environment, we might argue our optimal portfolio should be further "to the right" on this line, embracing a higher risk for greater expected return.</p>
+            <div class="chart-container">
+                <p class="text-center text-gray-600">Please provide data for a scatter plot representing a simplified Capital Market Line, showing risk vs. return for various portfolios, and potentially indicating a target optimal portfolio.</p>
+            </div>
+        </section>
+-->
+        <!-- Section 11: Strategic Importance: Diversification for Resilience -->
+        <section id="endowment-landscape" class="presentation-section">
+            <h2 class="section-title mb-2" contenteditable="false">Investment Landscape: Future Return Realities</h2>
+            <p class="text-lg text-gray-700 mb-8" contenteditable="false">Northern Trust's 2025 Capital Market Assumptions indicate shifts driven by AI, energy transition, and globalization. Elevated U.S. equity valuations may moderate future gains; private markets show greater potential. A strategic, globally diversified approach is essential for endowment growth against demographic pressures.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
+                <div class="card p-6">
+                    <h3 class="2xl font-bold section-title mb-4 text-center" contenteditable="false">Asset Allocation by Endowment Size</h3>
+                    <p class="text-center text-gray-700 mb-6" contenteditable="false">Larger endowments typically increase alternative allocations. Smaller institutions should consider mirroring this for higher returns.</p>
+                    <div class="chart-container h-96 md:h-[450px]">
+                        <canvas id="allocationBySizeChart"></canvas>
+                    </div>
+                </div>
+                <div class="card p-6">
+                    <h3 class="2xl font-bold section-title mb-4 text-center" contenteditable="false">Northern Trust 10-Year Expected Nominal Returns (2025)</h3>
+                    <p class="text-center text-gray-700 mb-6" contenteditable="false">Northern Trust forecasts strong potential in private equity, international equities, and real assets, underscoring diversification for target returns.</p>
+                    <div class="chart-container h-96 md:h-[450px]">
+                        <canvas id="expectedReturnsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+             <div class="mt-8 text-center text-gray-700">
+                <h3 class="2xl font-bold section-title mb-4" contenteditable="false">Strategic Importance: Diversification for Resilience</h3>
+                <p class="max-w-4xl mx-auto" contenteditable="false">Concentration in U.S. public markets is less advisable due to high valuations and new market dynamics. Northern Trust's analysis advocates global diversification, shifting to international equities, private markets (equity, credit), and real assets to capture higher expected returns and enhance resilience.</p>
+            </div>
+        </section>
+
+        <!-- Section 12: Actionable Endowment Strategy -->
+        <section id="endowment-implementation" class="presentation-section">
+            <h2 class="section-title mb-8" contenteditable="false">Actionable Endowment Strategy: Our Path Forward</h2>
+            <p contenteditable="false">Combating the demographic cliff and adapting to new market realities requires a clear implementation path. Proactive governance, expertise, and pacing are key to unlocking higher returns amidst evolving market dynamics.</p>
+            <div class="flowchart-container flex flex-col items-center space-y-4 w-full">
+                <div class="text-center p-4 flowchart-step rounded-lg w-full">
+                    <p class="text-4xl" contenteditable="false">1</p><h3 class="font-bold text-lg mt-2" contenteditable="false">Re-evaluate Risk Sensitivity</h3>
+                    <p class="text-sm" contenteditable="false">Recognize the changing landscape necessitates a less risk-averse investment posture to achieve real growth in light of inflation.</p>
+                </div>
+                <div class="flowchart-arrow" contenteditable="false">&rarr;</div>
+                <div class="text-center p-4 flowchart-step rounded-lg w-full">
+                    <p class="text-4xl" contenteditable="false">2</p><h3 class="font-bold text-lg mt-2" contenteditable="false">Increase Diversification</h3>
+                    <p class="text-sm" contenteditable="false">Shift from concentration in U.S. Bond markets towards global diversification, including international equities, private markets (equity, credit), and real assets.</p>
+                </div>
+                <div class="flowchart-arrow" contenteditable="false">&rarr;</div>
+                <div class="text-center p-4 flowchart-step rounded-lg w-full">
+                    <p class="text-4xl" contenteditable="false">3</p><h3 class="font-bold text-lg mt-2" contenteditable="false">Rewrite Risk Management Frameworks</h3>
+                    <p class="text-sm" contenteditable="false"> Develop and implement more sophisticated risk models to quantify the potential downsides of either decision. If the endowment takes on more market risk, it does so with a clear understanding.</p>
+                </div>
+                <div class="flowchart-arrow" contenteditable="false">&rarr;</div>
+                <div class="text-center p-4 flowchart-step rounded-lg w-full">
+                    <p class="text-4xl" contenteditable="false">4</p><h3 class="font-bold text-lg mt-2" contenteditable="false">Implement a Phased Allocation Shift</h3>
+                    <p class="text-sm" contenteditable="false">Adopt a gradual approach to reallocating assets towards less liquid alternative investments. Enhancing market monitoring, adjustmenting based on performance, and building internal comfort and understanding.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 13: Social Proof & Industry Leaders -->
+        
+
+    </main>
+
+    <footer class="text-center p-6 mt-12 bg-gray-800 text-white">
+        <p contenteditable="false">Infographic synthesizes data for strategic planning.</p>
+        <p class="text-sm text-gray-400 mt-2" contenteditable="false">Demographic data: WICHE. Financial forecasts: Northern Trust Capital Market Assumptions 10-Year Outlook: 2025 Edition (Jan 2025), with supplementary data from Spring 2025 outlooks.</p>
+    </footer>
+
+    <script>
+        Chart.register(ChartZoom); 
+
+        const chartColors = {
+            blue1: '#003B6D',
+            blue2: '#00529B',
+            blue3: '#70C4FF',
+            accentGold: '#FFBC42',
+            accentRed: '#D62828',
+            gray: '#E5E7EB',
+            green: '#28A745', 
+            purple: '#6610f2',
+            darkBlue: '#0A2540', /* Added for more distinction */
+            lightGreen: '#66bb6a', /* Added for more distinction */
+            orange: '#ff9800' /* Added for more distinction */
+        };
+
+        const FONT_COLOR = '#1F2937';
+        Chart.defaults.color = FONT_COLOR;
+        Chart.defaults.font.family = "'Inter', sans-serif";
+
+        const wrapLabel = (label, maxWidth = 16) => {
+            if (typeof label !== 'string') return label;
+            const words = label.split(' ');
+            let lines = [];
+            let currentLine = '';
+            words.forEach(word => {
+                if ((currentLine + ' ' + word).trim().length > maxWidth && currentLine !== '') {
+                    lines.push(currentLine.trim());
+                    currentLine = word;
+                } else {
+                    currentLine = (currentLine + ' ' + word).trim();
+                }
+            });
+            if (currentLine) lines.push(currentLine.trim());
+            return lines;
+        };
+
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) return label.join(' ');
+            return label;
+        };
+
+        const commonPlugins = {
+            legend: {
+                position: 'bottom',
+                labels: { color: FONT_COLOR, font: { weight: '600' } }
+            },
+            tooltip: {
+                enabled: true,
+                mode: 'index',
+                intersect: false,
+                callbacks: { title: tooltipTitleCallback },
+                backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                titleFont: { size: 14, weight: 'bold' },
+                bodyFont: { size: 12 },
+            }
+        };
+
+        const defaultChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: commonPlugins,
+            scales: {
+                y: { beginAtZero: false, grid: { color: '#E0E0E0' }, ticks: { font: { size: 12 } } },
+                x: { grid: { display: false }, ticks: { font: { size: 12 } } }
+            }
+        };
+
+        new Chart(document.getElementById('nationalDeclineChart'), {//Ohio, not national
+            type: 'line',
+            data: {
+                labels: ['2025', '2027', '2029', '2031', '2033', '2035', '2037', '2039', '2041'],
+                datasets: [{
+                    label: 'Projected HS Graduates',
+                    data: [143303, 140034, 136317, 135396, 131197, 134895, 131405, 127684, 124461],
+                    borderColor: chartColors.accentRed,
+                    backgroundColor: 'rgba(214, 40, 40, 0.1)',
+                    fill: true,
+                    tension: 0.1
+                }]
+            },
+            options: { ...defaultChartOptions, scales: { y: { ...defaultChartOptions.scales.y, title: { display: true, text: 'Number of Graduates' } } } }
+        });
+
+        const regionalData = [
+            { state: 'Ohio', decline: -6 },
+            { state: 'Kentucky', decline: -9 },
+            { state: 'Indiana', decline: -10 },
+            { state: 'Pennsylvania', decline: -17 },
+            { state: 'Michigan', decline: -20 },
+            { state: 'West Virginia', decline: -26 },
+        ].sort((a, b) => a.decline - b.decline);
+
+        new Chart(document.getElementById('regionalDeclineChart'), {
+            type: 'bar',
+            data: {
+                labels: regionalData.map(d => wrapLabel(d.state, 12)),
+                datasets: [{
+                    label: 'Projected % Change in HS Grads (2023-2041)',
+                    data: regionalData.map(d => d.decline),
+                    backgroundColor: chartColors.blue2,
+                    borderColor: chartColors.blue1,
+                    borderWidth: 1
+                }]
+            },
+            options: { ...defaultChartOptions, indexAxis: 'y', scales: { x: { title: { display: true, text: 'Percent Change (%)' } } } }
+        });
+
+        new Chart(document.getElementById('ohioCollegeRateChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['2010: Enrolled', '2010: Not Enrolled', '2023: Enrolled', '2023: Not Enrolled'],
+                datasets: [{
+                    label: '2010 Rate',
+                    data: [72, 28, 0, 0],
+                    backgroundColor: [chartColors.blue2, chartColors.gray],
+                    circumference: 180,
+                    rotation: -90
+                }, {
+                    label: '2023 Rate',
+                    data: [0, 0, 66, 34],
+                    backgroundColor: [chartColors.accentRed, chartColors.gray],
+                    circumference: 180,
+                    rotation: -90
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'top' },
+                    title: { display: true, text: 'Ohio College-Going Rate', font: { size: 16, weight: 'bold' } },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                if (context.dataIndex > 1) { // 2023 data
+                                    return `2023 ${context.label.split(':')[1]}: ${context.parsed}%`;
+                                }
+                                return `2010 ${context.label.split(':')[1]}: ${context.parsed}%`;
+                            },
+                            title: () => ''
+                        }
+                    }
+                },
+                cutout: '60%'
+            }
+        });
+
+        new Chart(document.getElementById('allocationBySizeChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Under $25M', '$25M to $50M', '$50M to $100M', '$100M to $500M', '$500M to $1B', 'Over $1B'],
+                datasets: [
+                    { label: 'Cash', data: [7, 7, 6, 6, 7, 4], backgroundColor: chartColors.blue1 }, // Use blue1 for cash
+                    { label: 'Fixed Income', data: [24, 20, 17, 13, 9, 7], backgroundColor: chartColors.blue2 }, // Use blue2 for fixed income
+                    { label: 'U.S. Equities', data: [42, 37, 33, 27, 20, 13], backgroundColor: chartColors.accentGold }, // Use accentGold for US Equities
+                    { label: 'Non-U.S. Equities', data: [16, 19, 22, 22, 22, 19], backgroundColor: chartColors.blue3 }, // Use blue3 for Non-US Equities
+                    { label: 'Alternatives', data: [11, 17, 22, 32, 42, 57], backgroundColor: chartColors.accentRed }, // Use accentRed for Alternatives
+                ]
+            },
+            options: { ...defaultChartOptions, scales: { x: { stacked: true }, y: { stacked: true, title: { display: true, text: 'Allocation (%)' } } } }
+        });
+    
+        const ntExpectedReturnsChartData = {
+            labels: [
+                wrapLabel('U.S. Inflation Linked (TIPS)'),
+                wrapLabel('U.S. Aggregate Fixed Income'),
+                wrapLabel('Hedge Funds'),
+                wrapLabel('Listed Real Estate'),
+                wrapLabel('Emerging Markets Equities'),
+                wrapLabel('Global Equities'),
+                wrapLabel('U.S. Equities'),
+                wrapLabel('Private Real Estate'),
+                wrapLabel('Private Credit'),
+                wrapLabel('Opportunistic Private Credit'),
+                wrapLabel('Private Equity')
+            ],
+            returns: [4.0, 4.7, 5.5, 6.3, 6.4, 7.1, 7.5, 7.3, 8.4, 12.2, 10.1]
+        };
+        ntExpectedReturnsChartData.labels.sort((a, b) => {
+            const indexA = ntExpectedReturnsChartData.labels.indexOf(a);
+            const indexB = ntExpectedReturnsChartData.labels.indexOf(b);
+            return ntExpectedReturnsChartData.returns[indexA] - ntExpectedReturnsChartData.returns[indexB];
+        });
+        ntExpectedReturnsChartData.returns.sort((a, b) => a - b);
+
+
+        new Chart(document.getElementById('expectedReturnsChart'), {
+            type: 'bar',
+            data: {
+                labels: ntExpectedReturnsChartData.labels,
+                datasets: [{
+                    label: 'Northern Trust 10-Year Nominal Return (%)',
+                    data: ntExpectedReturnsChartData.returns,
+                    backgroundColor: chartColors.blue1
+                }]
+            },
+            options: { ...defaultChartOptions, indexAxis: 'y', scales: { x: { title: { display: true, text: 'Annualized Nominal Return (%)' } } } }
+        });
+    
+        const allAssetReturns = {
+            "Northern Trust": {
+                "US Large Cap Equities":    7.5,
+                "US Small Cap Equities":    9.6,
+                "Developed International Equities (General)":   7.1,
+                "Emerging Market Equities": 6.4,
+                "Global Equities (ACWI)":7.1,
+                "Global Developed Equities":    7.1,
+                "US Investment Grade Bonds":    4.7,
+                "US High Yield Bonds":  5.6,
+                "US TIPS":  4.0,
+                "Cash Equivalents / US Cash":   3.3,
+                "Real Estate (REITs)":  6.3,
+                "Commodities":  6.2,
+                "Private Equity":   10.1,
+                "Private Debt / Private Credit":    8.4,
+                "Hedge Funds":  5.5,
+                "Global Investment Grade Bonds":    3.6,
+                "Global High Yield Bonds":  5.9,
+                "Global Natural Resources": 6.2,
+                "Global Listed Infrastructure": 6.6,
+                "Australian Equities":  8.2,
+                "Canadian Equities":    5.3,
+                "Europe Equities":  5.2,
+                "UK Equities":  4.4,
+                "Japan Equities":   6.0,
+                "Canadian Bonds (Aggregate/Universe)":  3.6,
+                "Euro Government Bonds":    3.1,
+                "Euro Corporate Bonds": 3.1,
+                "Australian Government Bonds":  4.5,
+                "Japanese Government Bonds":  1.4,
+                "Japanese Corporate Bonds": 1.9,
+                "UK Government Bonds":  4.9,
+                "Venture Capital":  11.6,
+                "Buyout":   9.5,
+                "Growth (Private Equity)":  11.0,
+                "Inflation Linked (Canada)":    2.5,
+                "Inflation Linked (Euro)":  3.0,
+                "Inflation Linked (UK)":    3.2,
+                "Inflation Linked (Japan)": 1.5,
+                "Inflation Linked (Australia)": 4.2,
+                "Inflation Linked (Global)":    3.3,
+                "Municipal Bonds":  4.0,
+                "HF-Equity Hedge":  5.4,
+                "HF-Relative Value":    5.6,
+                "HF-Macro": 6.0,
+                "HF-Event Driven":  5.1
+            },
+            "Janney Montgomery Scott": {
+                "US Large Cap Equities":    7.0,
+                "US Small Cap Equities":    8.5,
+                "Developed International Equities (General)":   8.0,
+                "Emerging Market Equities": 8.5,
+                "US Investment Grade Bonds":    5.25,
+                "US High Yield Bonds":  6.5,
+                "Cash Equivalents / US Cash":   3.2,
+                "Real Estate (REITs)":  7.0,
+                "Commodities":  5.0,
+                "Private Equity":   9.0,
+                "Private Debt / Private Credit":    6.75
+
+            },
+            "State Street Global Advisors": {
+                "US Large Cap Equities":    6.1,
+                "US Small Cap Equities":6.6,
+                "US Mid Cap Equities":  6.3,
+                "Developed International Equities (General)":   6.6,
+                "Developed International Small Cap Equities":   7.4,
+                "Emerging Market Equities": 7.3,
+                "Global Equities (ACWI)":   6.3,
+                "Global Developed Equities":    6.2,
+                "US Investment Grade Bonds":    4.8,
+                "US High Yield Bonds":  5.4,
+                "US TIPS":  4.2,
+                "US Government Bonds":  4.5,
+                "US Long Treasury STRIPS Bond": 6.0,
+                "Cash Equivalents / US Cash ":3.1,
+                "Real Estate (REITs)":  5.7,
+                "Commodities":  5.0,
+                "Private Equity":7.9,
+                "Hedge Funds":4.8,
+                "Global Investment Grade Bonds":    4.2,
+                "Developed Pacific Equities":   5.5,
+                "Australian Equities":  7.4,
+                "New Zealand Equities": 4.6,
+                "Canadian Equities":    6.5,
+                "Europe Equities":  7.3,
+                "Euro Equities":    7.1,
+                "Canadian Bonds (Aggregate/Universe)":  3.2,
+                "Canadian Government Bonds":    3.0,
+                "Canadian Corporate Bonds":3.6,
+                "Non-US Government Bonds":  2.5,
+                "Non-US Corporate Bonds":   3.3,
+                "Euro Government Bonds":    2.8,
+                "Euro Corporate Bonds": 2.8,
+                "Australian Government Bonds":  4.3,
+                "Australian Corporate Bonds":   4.7,
+                "New Zealand Government Bonds": 4.0,
+                "Japanese Government Bonds":    1.3,
+                "Japanese Corporate Bonds": 1.,
+                "UK Government Bonds":  5.1,
+                "UK Corporate Bonds":   5.2,
+                "Emerging Markets Bonds":   7.7,
+                "Core Private Credit":  6.9,
+                "Opportunistic Private Credit": 12.2,
+                "Direct Real Estate - US":  8.3,
+                "UK Cash":  2.9,
+                "EMU Cash": 1.9,
+                "Canada Cash":  2.5,
+                "Australia Cash":   2.6,
+                "New Zealand Cash": 3.1,
+                "Global Value Tilted Equities": 6.0,
+                "Global Quality Tilted Equities":   6.4,
+                "Global Momentum Tilted Equities":  7.3,
+                "Global Minimum Variance Equities": 6.6,
+                "EM Asia Equities": 6.7,
+                "EM EMEA Equities": 8.9,
+                "EM Latin America Equities":    13.5
+
+            },
+            "Vanguard": {
+                "US Large Cap Equities": 5.3,
+                "Developed International Equities (General)": 7.6,
+                "Emerging Markets Equities (General)": 4.7
+            },
+            "Charles Schwab": {
+                "US Large Cap Equities": 6.0,
+                "US Small Cap Equities": 6.2,
+                "Developed International Equities (General)": 7.1,
+                "Developed International Small Cap Equities": 8.1,
+                "Emerging Market Equities": 7.0,
+                "US Investment Grade Bonds": 4.9,
+                "US TIPS": 4.2,
+                "Cash (3-Month T-Bill)": 3.5
+            }
+        };
+    
+        const assetCategories = {
+            "Equities": [
+                "US Large Cap Equities", "US Small Cap Equities", "US Mid Cap Equities",
+                "Developed International Equities (General)", "Developed International Small Cap Equities",
+                "Emerging Market Equities", "Emerging Markets Equities (General)", "Global Equities (ACWI)",
+                "Global Developed Equities", "Australian Equities", "Canadian Equities", "Europe Equities",
+                "UK Equities", "Japan Equities", "New Zealand Equities", "Developed Pacific Equities",
+                "Euro Equities", "Global Value Tilted Equities", "Global Quality Tilted Equities",
+                "Global Momentum Tilted Equities", "Global Minimum Variance Equities", "EM Asia Equities",
+                "EM EMEA Equities", "EM Latin America Equities"
+            ],
+            "Fixed Income": [
+                "US Investment Grade Bonds", "US High Yield Bonds", "US TIPS", "US Government Bonds",
+                "US Long Treasury STRIPS Bond", "Global Investment Grade Bonds", "Global High Yield Bonds",
+                "Canadian Bonds (Aggregate/Universe)", "Canadian Government Bonds", "Canadian Corporate Bonds",
+                "Euro Government Bonds", "Euro Corporate Bonds", "Australian Government Bonds",
+                "Australian Corporate Bonds", "New Zealand Government Bonds", "Japanese Government Bonds",
+                "Japanese Corporate Bonds", "UK Government Bonds", "UK Corporate Bonds",
+                "Emerging Markets Bonds", "Non-US Government Bonds", "Non-US Corporate Bonds",
+                "Municipal Bonds", "Inflation Linked (Canada)", "Inflation Linked (Euro)",
+                "Inflation Linked (UK)", "Inflation Linked (Japan)", "Inflation Linked (Australia)",
+                "Inflation Linked (Global)"
+            ],
+            "Alternatives & Private Markets": [
+                "Private Equity", "Private Debt / Private Credit", "Hedge Funds",
+                "Opportunistic Private Credit", "Venture Capital", "Buyout", "Growth (Private Equity)",
+                "HF-Equity Hedge", "HF-Relative Value", "HF-Macro", "HF-Event Driven", "Core Private Credit"
+            ],
+            "Real Assets": [
+                "Real Estate (REITs)", "Commodities", "Global Natural Resources",
+                "Global Listed Infrastructure", "Direct Real Estate - US"
+            ],
+            "Cash & Equivalents": [
+                "Cash Equivalents / US Cash", "Cash (3-Month T-Bill)", "UK Cash", "EMU Cash", "Canada Cash",
+                "Australia Cash", "New Zealand Cash"
+            ]
+        };
+
+        function getAssetCategory(assetName) {
+            for (const category in assetCategories) {
+                if (assetCategories[category].includes(assetName)) {
+                    return category;
+                }
+            }
+            return "Other"; 
+        }
+
+        const categoryOrder = [
+            "Equities",
+            "Fixed Income",
+            "Alternatives & Private Markets",
+            "Real Assets",
+            "Cash & Equivalents",
+            "Other"
+        ];
+
+        const sourceCheckboxesDiv = document.getElementById('sourceCheckboxes');
+        const calculatorInputsDiv = document.getElementById('calculator-inputs');
+        const totalAllocationEl = document.getElementById('totalAllocation');
+        const projectedReturn10PlusEl = document.getElementById('projectedReturn10Plus');
+        const assetSelectionCheckboxesDiv = document.getElementById('assetSelectionCheckboxes');
+        const assetSelectionDetails = document.getElementById('assetSelectionDetails');
+
+        let currentSliders = {};
+        let currentValuesDisplays = {};
+        let allPossibleAssetClasses = new Set();
+        let selectedSources = new Set();
+        let selectedAssetClasses = new Set();
+
+        let savedSliderValues = {}; 
+        let allocationChart; 
+        let inflationChart; 
+        let federalDebtToGDPChart; // New chart variable
+        let interestExpenseChart; // New chart variable
+        let currentPortfolioMetrics = { return: 0 }; 
+
+        const allocationChartColors = [
+            '#003B6D', '#00529B', '#70C4FF', '#FFBC42', '#D62828', '#8B4513', '#228B22', '#4682B4', '#DAA520', '#CD5C5C',
+            '#6A5ACD', '#FF6347', '#48D1CC', '#9932CC', '#8B0000', '#2E8B57', '#BDB76B', '#5F9EA0', '#FF8C00', '#BA55D3'
+        ];
+    
+        const inflationRates = {
+            "CPI": {
+                label: "CPI (Consumer Price Index) Annual Average",
+                data: [2.5, 2.7, 2.8, 2.6, 2.9],
+                borderColor: chartColors.accentRed,
+                backgroundColor: 'rgba(214, 40, 40, 0.2)',
+            },
+            "PCE": {
+                label: "PCE (Personal Consumption Expenditures) Annual Average",
+                data: [2.0, 2.2, 2.3, 2.1, 2.4],
+                borderColor: chartColors.blue2,
+                backgroundColor: 'rgba(0, 82, 155, 0.2)',
+            },
+            "HEPI": {
+                label: "HEPI (Higher Education Price Index) Annual Average",
+                data: [3.0, 3.2, 3.5, 3.3, 3.6],
+                borderColor: chartColors.green,
+                backgroundColor: 'rgba(40, 167, 69, 0.2)',
+            },
+            "M2": {
+                label: "M2 Money Supply Annual Growth Rate",
+                data: [5.0, 6.5, 8.0, 7.0, 5.5], // Illustrative data for M2 growth
+                borderColor: chartColors.purple,
+                backgroundColor: 'rgba(102, 16, 242, 0.2)',
+            }
+        };
+        const inflationLabels = ['Year -4', 'Year -3', 'Year -2', 'Year -1', 'Current/Forecast']; 
+
+        function renderInflationChart(projectedReturn) {
+            const datasets = [];
+
+            // Add all inflation measures
+            for (const measureKey in inflationRates) {
+                const inflationDataset = inflationRates[measureKey];
+                datasets.push({
+                    label: inflationDataset.label,
+                    data: inflationDataset.data,
+                    borderColor: inflationDataset.borderColor,
+                    backgroundColor: inflationDataset.backgroundColor,
+                    fill: false,
+                    tension: 0.1,
+                    pointRadius: 4,
+                    pointBackgroundColor: inflationDataset.borderColor
+                });
+            }
+
+            // Add the Projected Portfolio Return
+            datasets.push({
+                label: 'Your Projected Portfolio Return',
+                data: Array(inflationLabels.length).fill(projectedReturn),
+                borderColor: chartColors.blue1,
+                backgroundColor: 'rgba(0, 59, 109, 0.2)',
+                fill: false,
+                tension: 0,
+                borderDash: [5, 5],
+                pointRadius: 0 
+            });
+
+            // Add the 6.5% Return Target
+            datasets.push({
+                label: '6.5% Return Target', 
+                data: Array(inflationLabels.length).fill(6.5),
+                borderColor: chartColors.orange, // Changed color to orange for better distinction
+                backgroundColor: 'rgba(255, 152, 0, 0.2)',
+                fill: false,
+                tension: 0,
+                borderDash: [2, 2], 
+                pointRadius: 0
+            });
+            // Removed the M2 Growth Rate Target (8.0%) as requested.
+            // datasets.push({
+            //     label: 'M2 Growth Rate Target (8.0%)', 
+            //     data: Array(inflationLabels.length).fill(8.0),
+            //     borderColor: chartColors.darkBlue, 
+            //     backgroundColor: 'rgba(10, 37, 64, 0.2)',
+            //     fill: false,
+            //     tension: 0,
+            //     borderDash: [3, 3], 
+            //     pointRadius: 0
+            // });
+
+            // Calculate the maximum value among all data points to set the Y-axis max
+            let allDataPoints = [projectedReturn, 6.5]; // Removed 8.0 from here
+            for (const measureKey in inflationRates) {
+                allDataPoints = allDataPoints.concat(inflationRates[measureKey].data);
+            }
+            const yAxisMax = Math.max(...allDataPoints) * 1.1; // 10% buffer above the max value
+
+            const inflationOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: commonPlugins,
+                scales: {
+                    y: {
+                        beginAtZero: true, 
+                        title: {
+                            display: true,
+                            text: 'Annual Rate (%)',
+                            color: FONT_COLOR,
+                            font: { size: 14, weight: 'bold' }
+                        },
+                        ticks: {
+                            callback: function(value, index, ticks) {
+                                return value.toFixed(1) + '%';
+                            }
+                        },
+                        max: yAxisMax 
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Period',
+                            color: FONT_COLOR,
+                            font: { size: 14, weight: 'bold' }
+                        }
+                    }
+                }
+            };
+
+            if (inflationChart) {
+                inflationChart.data.labels = inflationLabels;
+                inflationChart.data.datasets = datasets;
+                inflationChart.options.scales.y.max = yAxisMax; 
+                inflationChart.update();
+            } else {
+                const ctx = document.getElementById('inflationChart').getContext('2d');
+                inflationChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: inflationLabels,
+                        datasets: datasets
+                    },
+                    options: inflationOptions
+                });
+            }
+        }
+
+        function populateAllPossibleAssetClasses() {
+            for (const sourceName in allAssetReturns) {
+                for (const assetClass in allAssetReturns[sourceName]) {
+                    allPossibleAssetClasses.add(assetClass);
+                }
+            }
+        }
+
+        function renderSourceCheckboxes() {
+            sourceCheckboxesDiv.innerHTML = '';
+
+            const sortedSourceNames = Object.keys(allAssetReturns).sort();
+            sortedSourceNames.forEach(sourceName => {
+                const checkboxDiv = document.createElement('div');
+                checkboxDiv.classList.add('flex', 'items-center');
+
+                const input = document.createElement('input');
+                input.type = 'checkbox';
+                input.id = `source-${sourceName.replace(/[^a-zA-Z0-9]/g, '')}`;
+                input.value = sourceName;
+                input.classList.add('h-4', 'w-4', 'text-blue-600', 'border-gray-300', 'rounded', 'focus:ring-2', 'focus:ring-blue-500');
+                input.addEventListener('change', handleSourceChange);
+
+                if (selectedSources.has(sourceName)) {
+                    input.checked = true;
+                }
+
+                const label = document.createElement('label');
+                label.setAttribute('for', `source-${sourceName.replace(/[^a-zA-Z0-9]/g, '')}`);
+                label.classList.add('ml-2', 'text-sm', 'font-medium', 'text-gray-900');
+                label.textContent = sourceName;
+
+                checkboxDiv.appendChild(input);
+                checkboxDiv.appendChild(label);
+                sourceCheckboxesDiv.appendChild(checkboxDiv);
+            });
+        }
+
+        function handleSourceChange(event) {
+            const sourceName = event.target.value;
+            if (event.target.checked) {
+                selectedSources.add(sourceName);
+            } else {
+                selectedSources.delete(sourceName);
+            }
+            updateCalculatorDisplay();
+        }
+
+        function getExpectedReturnsForSelectedSources() {
+            const combinedReturns = {};
+            const assetSourceCounts = {};
+
+            if (selectedSources.size === 0) {
+                return {};
+            }
+
+            selectedSources.forEach(sourceName => {
+                const sourceData = allAssetReturns[sourceName];
+                for (const assetClass in sourceData) {
+                    if (sourceData[assetClass] !== undefined && sourceData[assetClass] !== null) {
+                        if (!combinedReturns[assetClass]) {
+                            combinedReturns[assetClass] = 0;
+                            assetSourceCounts[assetClass] = 0;
+                        }
+                        combinedReturns[assetClass] += sourceData[assetClass];
+                        assetSourceCounts[assetClass]++;
+                    }
+                }
+            });
+
+            const averagedReturns = {};
+            for (const assetClass in combinedReturns) {
+                if (assetSourceCounts[assetClass] > 0) {
+                    averagedReturns[assetClass] = combinedReturns[assetClass] / assetSourceCounts[assetClass];
+                }
+            }
+            return averagedReturns;
+        }
+
+        function renderAssetSelectionCheckboxes() {
+            assetSelectionCheckboxesDiv.innerHTML = '';
+    
+            const currentAvailableAssets = getExpectedReturnsForSelectedSources();
+    
+            let assetsToSort = Object.keys(currentAvailableAssets).map(assetName => ({
+                name: assetName,
+                return: currentAvailableAssets[assetName],
+                category: getAssetCategory(assetName)
+            }));
+
+            assetsToSort.sort((a, b) => {
+                const categoryCompare = categoryOrder.indexOf(a.category) - categoryOrder.indexOf(b.category);
+                if (categoryCompare !== 0) {
+                    return categoryCompare;
+                }
+                const returnCompare = b.return - a.return; 
+                if (returnCompare !== 0) {
+                    return returnCompare;
+                }
+                return a.name.localeCompare(b.name); 
+            });
+            
+            const newSelectedAssetClasses = new Set(); 
+
+            if (assetsToSort.length === 0) {
+                assetSelectionCheckboxesDiv.innerHTML = '<p class="text-gray-500">No asset classes available for the selected source(s).</p>';
+                selectedAssetClasses = newSelectedAssetClasses;
+                return;
+            }
+
+            assetsToSort.forEach(asset => {
+                const assetClass = asset.name;
+                const expectedReturn = asset.return;
+                const assetCategory = asset.category;
+
+                if (!document.getElementById(`category-header-${assetCategory.replace(/[^a-zA-Z0-9]/g, '')}`)) {
+                    const categoryHeader = document.createElement('h4');
+                    categoryHeader.id = `category-header-${assetCategory.replace(/[^a-zA-Z0-9]/g, '')}`;
+                    categoryHeader.classList.add('col-span-full', 'text-md', 'font-semibold', 'text-gray-700', 'mt-4', 'mb-2');
+                    categoryHeader.textContent = assetCategory;
+                    assetSelectionCheckboxesDiv.appendChild(categoryHeader);
+                }
+
+                const checkboxDiv = document.createElement('div');
+                checkboxDiv.classList.add('flex', 'items-center');
+
+                const input = document.createElement('input');
+                input.type = 'checkbox';
+                input.id = `checkbox-${assetClass.replace(/[^a-zA-Z0-9]/g, '')}`;
+                input.value = assetClass;
+                input.classList.add('h-4', 'w-4', 'text-blue-600', 'border-gray-300', 'rounded', 'focus:ring-2', 'focus:ring-blue-500');
+                
+                let shouldBeChecked = false;
+                if (selectedAssetClasses.has(assetClass) && currentAvailableAssets[assetClass] !== undefined) {
+                    shouldBeChecked = true;
+                } 
+                else if (savedSliderValues[assetClass] !== undefined && parseFloat(savedSliderValues[assetClass]) > 0 && currentAvailableAssets[assetClass] !== undefined) {
+                    shouldBeChecked = true;
+                }
+
+                if (shouldBeChecked) {
+                    input.checked = true;
+                    newSelectedAssetClasses.add(assetClass);
+                } else {
+                    input.checked = false;
+                }
+
+                input.addEventListener('change', (event) => {
+                    if (event.target.checked) {
+                        selectedAssetClasses.add(assetClass);
+                    } else {
+                        selectedAssetClasses.delete(assetClass);
+                        savedSliderValues[assetClass] = '0';
+                    }
+                    renderSliders(); 
+                    calculateReturns(); 
+                    updateInflationChartOnly(); 
+                });
+
+                const label = document.createElement('label');
+                label.setAttribute('for', `checkbox-${assetClass.replace(/[^a-zA-Z0-9]/g, '')}`);
+                label.classList.add('ml-2', 'text-sm', 'font-medium', 'text-gray-900');
+                
+                const expectedReturnText = expectedReturn !== undefined ? ` (${expectedReturn.toFixed(1)}% Exp.)` : '';
+                label.textContent = `${assetClass}${expectedReturnText}`;
+
+                checkboxDiv.appendChild(input);
+                checkboxDiv.appendChild(label);
+                assetSelectionCheckboxesDiv.appendChild(checkboxDiv);
+            });
+            selectedAssetClasses = newSelectedAssetClasses;
+        }
+
+        function renderSliders() {
+            for (const assetClass in currentSliders) {
+                savedSliderValues[assetClass] = currentSliders[assetClass].value;
+            }
+
+            calculatorInputsDiv.innerHTML = ''; 
+            currentSliders = {};
+            currentValuesDisplays = {};
+
+            const currentExpectedReturns = getExpectedReturnsForSelectedSources();
+            
+            let selectedAssetsForSliders = Array.from(selectedAssetClasses).map(assetName => ({
+                name: assetName,
+                return: currentExpectedReturns[assetName],
+                category: getAssetCategory(assetName)
+            })).filter(asset => asset.return !== undefined && asset.return !== null); 
+
+            selectedAssetsForSliders.sort((a, b) => {
+                const categoryCompare = categoryOrder.indexOf(a.category) - categoryOrder.indexOf(b.category);
+                if (categoryCompare !== 0) {
+                    return categoryCompare;
+                }
+                const returnCompare = b.return - a.return;
+                if (returnCompare !== 0) {
+                    return returnCompare;
+                }
+                return a.name.localeCompare(b.name);
+            });
+
+            if (selectedAssetsForSliders.length === 0) {
+                calculatorInputsDiv.innerHTML = '<p class="text-gray-500">Select asset classes above to adjust allocations.</p>';
+            }
+
+            selectedAssetsForSliders.forEach(asset => {
+                const assetClass = asset.name;
+                const expectedReturn = asset.return;
+                const assetCategory = asset.category;
+
+                if (!document.getElementById(`slider-category-header-${assetCategory.replace(/[^a-zA-Z0-9]/g, '')}`)) {
+                    const categoryHeader = document.createElement('h4');
+                    categoryHeader.id = `slider-category-header-${assetCategory.replace(/[^a-zA-Z0-9]/g, '')}`;
+                    categoryHeader.classList.add('col-span-full', 'text-md', 'font-semibold', 'text-gray-700', 'mt-4', 'mb-2');
+                    categoryHeader.textContent = assetCategory;
+                    calculatorInputsDiv.appendChild(categoryHeader);
+                }
+
+                const inputGroup = document.createElement('div');
+                inputGroup.classList.add('asset-input-group');
+
+                const label = document.createElement('label');
+                label.setAttribute('for', `${assetClass.replace(/[^a-zA-Z0-9]/g, '')}Slider`);
+                label.innerHTML = `${assetClass}: <span class="value-display" id="${assetClass.replace(/[^a-zA-Z0-9]/g, '')}ExpectedReturn">${expectedReturn.toFixed(1)}%</span> Expected`;
+                
+                const sliderLabel = document.createElement('span');
+                sliderLabel.textContent = ` Allocation: `;
+                label.appendChild(sliderLabel);
+
+                const sliderValueDisplay = document.createElement('span');
+                sliderValueDisplay.id = `${assetClass.replace(/[^a-zA-Z0-9]/g, '')}Value`;
+                sliderValueDisplay.textContent = '0%'; 
+                sliderLabel.appendChild(sliderValueDisplay);
+
+                const slider = document.createElement('input');
+                slider.type = 'range';
+                slider.id = `${assetClass.replace(/[^a-zA-Z0-9]/g, '')}Slider`;
+                slider.min = '0';
+                slider.max = '100';
+                slider.value = savedSliderValues[assetClass] !== undefined ? savedSliderValues[assetClass] : '0';
+                slider.classList.add('w-full', 'h-2', 'bg-gray-200', 'rounded-lg', 'appearance-none', 'cursor-pointer', 'calculator-slider');
+                slider.addEventListener('input', calculateReturns);
+
+                inputGroup.appendChild(label);
+                inputGroup.appendChild(slider);
+                calculatorInputsDiv.appendChild(inputGroup);
+
+                currentSliders[assetClass] = slider;
+                currentValuesDisplays[assetClass] = sliderValueDisplay;
+            });
+        }
+
+        function calculateReturns() {
+            const currentExpectedReturns = getExpectedReturnsForSelectedSources();
+
+            let totalPercent = 0;
+            let calculatedReturn = 0;
+            const chartLabels = [];
+            const chartData = [];
+            const chartBackgroundColors = [];
+            let colorIndex = 0;
+
+            const currentPortfolioWeights = {};
+            const activeAssetNames = [];
+
+            for (const assetClass in currentSliders) {
+                const percent = parseFloat(currentSliders[assetClass].value);
+                totalPercent += percent;
+                currentValuesDisplays[assetClass].textContent = `${percent.toFixed(0)}%`;
+
+                if (currentExpectedReturns[assetClass] !== undefined && currentExpectedReturns[assetClass] !== null) {
+                    calculatedReturn += (percent / 100) * currentExpectedReturns[assetClass];
+                }
+
+                if (percent > 0) {
+                    chartLabels.push(assetClass);
+                    chartData.push(percent);
+                    chartBackgroundColors.push(allocationChartColors[colorIndex % allocationChartColors.length]);
+                    colorIndex++;
+                }
+
+                currentPortfolioWeights[assetClass] = percent / 100;
+                if (percent > 0) { 
+                    activeAssetNames.push(assetClass);
+                }
+            }
+
+            totalAllocationEl.textContent = `Total Allocation: ${totalPercent.toFixed(0)}%`;
+            if (Math.round(totalPercent) !== 100) {
+                totalAllocationEl.classList.remove('text-green-600');
+                totalAllocationEl.classList.add('text-red-600');
+            } else {
+                totalAllocationEl.classList.remove('text-red-600');
+                totalAllocationEl.classList.add('text-green-600');
+            }
+            
+            projectedReturn10PlusEl.textContent = `${calculatedReturn.toFixed(1)}%`;
+
+            currentPortfolioMetrics.return = calculatedReturn;
+
+            if (allocationChart) {
+                allocationChart.data.labels = chartLabels;
+                allocationChart.data.datasets[0].data = chartData;
+                allocationChart.data.datasets[0].backgroundColor = chartBackgroundColors;
+                allocationChart.update();
+            }
+
+            updateInflationChartOnly(); 
+        }
+
+        function updateCalculatorDisplay() {
+            renderAssetSelectionCheckboxes();
+            renderSliders();
+            calculateReturns();
+        }
+
+        function updateInflationChartOnly() {
+            renderInflationChart(currentPortfolioMetrics.return); 
+        }
+
+        let isEditMode = false;
+        const editableElements = []; 
+
+        function setupEditableElements() {
+            const selectors = [
+                'header h1', 'header p',
+                '.presentation-section h2', '.presentation-section p', /* Changed from .presentation-slide */
+                '.presentation-section .card h3', '.presentation-section .card p', /* Changed from .presentation-slide */
+                '#returns-calculator h2', '#returns-calculator p', '#returns-calculator label', '#totalAllocation', '#projectedReturn10Plus',
+                '#inflation-comparison h2', '#inflation-comparison p', '#inflation-comparison strong',
+                '#endowment-implementation h2', '#endowment-implementation p',
+                '#endowment-implementation .flowchart-step p', '#endowment-implementation .flowchart-step h3',
+                'footer p'
+            ];
+            
+            selectors.forEach(selector => {
+                document.querySelectorAll(selector).forEach(el => {
+                    if (!el.querySelector('input, button, select, textarea, a') && el.getAttribute('contenteditable') !== 'false') {
+                         editableElements.push(el);
+                         el.setAttribute('contenteditable', 'false'); 
+                    }
+                });
+            });
+
+            document.querySelectorAll('.flowchart-arrow').forEach(arrow => {
+                arrow.setAttribute('contenteditable', 'false');
+            });
+        }
+
+        function toggleEditMode() {
+            isEditMode = !isEditMode;
+            const toggleButton = document.getElementById('editModeToggle');
+
+            editableElements.forEach(el => {
+                if (el.tagName === 'INPUT' || el.tagName === 'BUTTON' || el.tagName === 'SELECT' || el.tagName === 'TEXTAREA') {
+                    return;
+                }
+                el.setAttribute('contenteditable', isEditMode);
+            });
+
+            if (isEditMode) {
+                toggleButton.textContent = 'Disable Edit Mode';
+                toggleButton.classList.remove('bg-blue-600', 'hover:bg-blue-700');
+                toggleButton.classList.add('bg-red-600', 'hover:bg-red-700');
+            } else {
+                toggleButton.textContent = 'Enable Edit Mode';
+                toggleButton.classList.remove('bg-red-600', 'hover:bg-red-700');
+                toggleButton.classList.add('bg-blue-600', 'hover:bg-blue-700');
+            }
+        }
+
+        window.onload = function() {
+            populateAllPossibleAssetClasses();
+            
+            const defaultPortfolio = {
+                "US Small Cap Equities": 15,
+                "US Large Cap Equities": 10,
+                "US Investment Grade Bonds": 5,
+                "Venture Capital": 30,
+                "Growth (Private Equity)": 25,
+                "Hedge Funds": 5,
+                "Real Estate (REITs)": 8,
+                "Cash Equivalents / US Cash": 2
+            };
+
+            for (const sourceName in allAssetReturns) {
+                selectedSources.add(sourceName);
+            }
+
+            for (const asset in defaultPortfolio) {
+                savedSliderValues[asset] = defaultPortfolio[asset].toString();
+                selectedAssetClasses.add(asset);
+            }
+
+            renderSourceCheckboxes(); 
+
+            const ctxAllocation = document.getElementById('allocationChart').getContext('2d');
+            allocationChart = new Chart(ctxAllocation, {
+                type: 'doughnut',
+                data: {
+                    labels: [], 
+                    datasets: [{
+                        data: [], 
+                        backgroundColor: [], 
+                        borderWidth: 1,
+                        borderColor: '#ffffff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                font: {
+                                    size: 10, 
+                                }
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Current Portfolio Allocation',
+                            font: {
+                                size: 14, 
+                                weight: 'bold'
+                            }
+                        },
+                        tooltip: { 
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed !== null) {
+                                        label += context.parsed + '%';
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    },
+                    cutout: '60%', 
+                }
+            });
+
+            // Data for Federal Debt to GDP chart
+            const federalDebtToGDPDataRaw = `
+2000-10-01    54.25790
+2001-01-01    55.14434
+2001-04-01    54.03165
+2001-07-01    54.79763
+2001-10-01    55.75216
+2002-01-01    55.69650
+2002-04-01    56.27087
+2002-07-01    56.70260
+2002-10-01    57.91028
+2003-01-01    57.81906
+2003-04-01    58.96101
+2003-07-01    58.64541
+2003-10-01    59.44466
+2004-01-01    59.80710
+2004-04-01    60.05487
+2004-07-01    59.96643
+2004-10-01    60.63713
+2005-01-01    60.91302
+2005-04-01    60.64153
+2005-07-01    60.35856
+2005-10-01    61.32008
+2006-01-01    61.55642
+2006-04-01    61.22142
+2006-07-01    61.33280
+2006-10-01    61.82689
+2007-01-01    62.25297
+2007-04-01    61.57219
+2007-07-01    61.84826
+2007-10-01    62.71924
+2008-01-01    64.17278
+2008-04-01    63.85172
+2008-07-01    67.28455
+2008-10-01    73.24515
+2009-01-01    77.10496
+2009-04-01    80.28013
+2009-07-01    82.42733
+2009-10-01    84.02935
+2010-01-01    86.51175
+2010-04-01    88.12832
+2010-07-01    89.56528
+2010-10-01    91.61134
+2011-01-01    92.95614
+2011-04-01    92.19380
+2011-07-01    94.52098
+2011-10-01    96.09072
+2012-01-01    97.12308
+2012-04-01    97.82763
+2012-07-01    98.44787
+2012-10-01    100.07497
+2013-01-01    100.73997
+2013-04-01    100.05758
+2013-07-01    98.72797
+2013-10-01    99.79118
+2014-01-01    102.34617
+2014-04-01    100.65130
+2014-07-01    100.11145
+2014-10-01    101.28050
+2015-01-01    100.49009
+2015-04-01    99.30094
+2015-07-01    98.63595
+2015-10-01    102.64192
+2016-01-01    103.98904
+2016-04-01    103.58005
+2016-07-01    103.60355
+2016-10-01    104.64891
+2017-01-01    102.93741
+2017-04-01    102.08817
+2017-07-01    102.80463
+2017-10-01    102.27408
+2018-01-01    103.74395
+2018-04-01    102.98411
+2018-07-01    103.44890
+2018-10-01    105.04941
+2019-01-01    104.34017
+2019-04-01    102.92245
+2019-07-01    104.61492
+2019-10-01    105.78193
+2020-01-01    106.88595
+2020-04-01    132.81490
+2020-07-01    124.26077
+2020-10-01    125.73334
+2021-01-01    124.16837
+2021-04-01    122.08313
+2021-07-01    118.84010
+2021-10-01    119.53493
+2022-01-01    120.56462
+2022-04-01    118.45629
+2022-07-01    117.72571
+2022-10-01    117.52586
+2023-01-01    115.80777
+2023-04-01    117.76969
+2023-07-01    118.59158
+2023-10-01    120.15950
+2024-01-01    120.83025
+2024-04-01    120.03990
+2024-07-01    120.73116
+2024-10-01    121.85026
+            `;
+
+            function parseFederalDebtToGDPData(rawData) {
+                const lines = rawData.trim().split('\n');
+                const yearlyData = {};
+
+                lines.forEach(line => {
+                    const parts = line.trim().split(/\s+/);
+                    const date = parts[0];
+                    const value = parseFloat(parts[1]);
+                    const year = new Date(date).getFullYear();
+
+                    // Keep only the last entry for each year
+                    yearlyData[year] = value;
+                });
+
+                const labels = Object.keys(yearlyData).sort();
+                const data = labels.map(year => yearlyData[year]);
+                return { labels, data };
+            }
+
+            const { labels: debtLabels, data: debtValues } = parseFederalDebtToGDPData(federalDebtToGDPDataRaw);
+
+            new Chart(document.getElementById('federalDebtToGDPChart'), {
+                type: 'line',
+                data: {
+                    labels: debtLabels,
+                    datasets: [{
+                        label: 'Federal Debt to GDP (%)',
+                        data: debtValues,
+                        borderColor: chartColors.blue1,
+                        backgroundColor: 'rgba(0, 59, 109, 0.1)',
+                        fill: true,
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    ...defaultChartOptions,
+                    scales: {
+                        y: {
+                            ...defaultChartOptions.scales.y,
+                            title: { display: true, text: 'Debt to GDP (%)' },
+                            beginAtZero: false // Allow y-axis to not start at zero for better visualization of trends
+                        },
+                        x: {
+                            ...defaultChartOptions.scales.x,
+                            title: { display: true, text: 'Year' }
+                        }
+                    }
+                }
+            });
+
+            // Data for Interest Expense as % of Federal Spending chart
+            const interestExpenseDataRaw = `
+1947-01-01    0.13085
+1947-04-01    0.13285
+1947-07-01    0.12750
+1947-10-01    0.14260
+1948-01-01    0.14072
+1948-04-01    0.13813
+1948-07-01    0.12990
+1948-10-01    0.12885
+1949-01-01    0.12599
+1949-04-01    0.12438
+1949-07-01    0.12600
+1949-10-01    0.13119
+1950-01-01    0.11440
+1950-04-01    0.13302
+1950-07-01    0.14772
+1950-10-01    0.13619
+1951-01-01    0.12417
+1951-04-01    0.11436
+1951-07-01    0.10672
+1951-10-01    0.10459
+1952-01-01    0.10588
+1952-04-01    0.10049
+1952-07-01    0.09781
+1952-10-01    0.09836
+1953-01-01    0.09906
+1953-04-01    0.09704
+1953-07-01    0.10093
+1953-10-01    0.10038
+1954-01-01    0.10525
+1954-04-01    0.10866
+1954-07-01    0.11021
+1954-10-01    0.10973
+1955-01-01    0.10876
+1955-04-01    0.10915
+1955-07-01    0.10964
+1955-10-01    0.11469
+1956-01-01    0.11548
+1956-04-01    0.11556
+1956-07-01    0.12019
+1956-10-01    0.12382
+1957-01-01    0.11816
+1957-04-01    0.12008
+1957-07-01    0.12253
+1957-10-01    0.12229
+1958-01-01    0.11815
+1958-04-01    0.11117
+1958-07-01    0.11256
+1958-10-01    0.11433
+1959-01-01    0.12711
+1959-04-01    0.12164
+1959-07-01    0.12678
+1959-10-01    0.13002
+1960-01-01    0.15427
+1960-04-01    0.15080
+1960-07-01    0.14754
+1960-10-01    0.14217
+1961-01-01    0.14187
+1961-04-01    0.13727
+1961-07-01    0.13906
+1961-10-01    0.13899
+1962-01-01    0.13704
+1962-04-01    0.13889
+1962-07-01    0.14014
+1962-10-01    0.14048
+1963-01-01    0.14093
+1963-04-01    0.14333
+1963-07-01    0.14418
+1963-10-01    0.14435
+1964-01-01    0.14506
+1964-04-01    0.14591
+1964-07-01    0.14961
+1964-10-01    0.15129
+1965-01-01    0.15136
+1965-04-01    0.15036
+1965-07-01    0.14512
+1965-10-01    0.14413
+1966-01-01    0.14288
+1966-04-01    0.14051
+1966-07-01    0.13941
+1966-10-01    0.13886
+1967-01-01    0.13308
+1967-04-01    0.13172
+1967-07-01    0.13193
+1967-10-01    0.13243
+1968-01-01    0.13258
+1968-04-01    0.13270
+1968-07-01    0.13407
+1968-10-01    0.13335
+1969-01-01    0.13642
+1969-04-01    0.13676
+1969-07-01    0.13928
+1969-10-01    0.14485
+1970-01-01    0.15105
+1970-04-01    0.14938
+1970-07-01    0.15343
+1970-10-01    0.15221
+1971-01-01    0.14904
+1971-04-01    0.14309
+1971-07-01    0.14595
+1971-10-01    0.14542
+1972-01-01    0.14112
+1972-04-01    0.13897
+1972-07-01    0.14559
+1972-10-01    0.13635
+1973-01-01    0.14466
+1973-04-01    0.14840
+1973-07-01    0.15404
+1973-10-01    0.15493
+1974-01-01    0.15289
+1974-04-01    0.15065
+1974-07-01    0.15059
+1974-10-01    0.14633
+1975-01-01    0.14206
+1975-04-01    0.13628
+1975-07-01    0.13990
+1975-10-01    0.14185
+1976-01-01    0.14435
+1976-04-01    0.14680
+1976-07-01    0.14587
+1976-10-01    0.14681
+1977-01-01    0.14743
+1977-04-01    0.14872
+1977-07-01    0.14849
+1977-10-01    0.15208
+1978-01-01    0.15792
+1978-04-01    0.16161
+1978-07-01    0.16451
+1978-10-01    0.16689
+1979-01-01    0.17109
+1979-04-01    0.17194
+1979-07-01    0.16985
+1979-10-01    0.17171
+1980-01-01    0.17513
+1980-04-01    0.17622
+1980-07-01    0.16886
+1980-10-01    0.17120
+1981-01-01    0.18527
+1981-04-01    0.18620
+1981-07-01    0.18798
+1981-10-01    0.19283
+1982-01-01    0.19480
+1982-04-01    0.19661
+1982-07-01    0.19626
+1982-10-01    0.18962
+1983-01-01    0.19109
+1983-04-01    0.19136
+1983-07-01    0.19675
+1983-10-01    0.20456
+1984-01-01    0.20893
+1984-04-01    0.20985
+1984-07-01    0.21742
+1984-10-01    0.21757
+1985-01-01    0.21874
+1985-04-01    0.22049
+1985-07-01    0.21786
+1985-10-01    0.21983
+1986-01-01    0.22092
+1986-04-01    0.21709
+1986-07-01    0.21353
+1986-10-01    0.21608
+1987-01-01    0.21718
+1987-04-01    0.21594
+1987-07-01    0.21897
+1987-10-01    0.22019
+1988-01-01    0.22034
+1988-04-01    0.22060
+1988-07-01    0.22202
+1988-10-01    0.22057
+1989-01-01    0.22477
+1989-04-01    0.22547
+1989-07-01    0.22383
+1989-10-01    0.22346
+1990-01-01    0.22225
+1990-04-01    0.22137
+1990-07-01    0.22606
+1990-10-01    0.22586
+1991-01-01    0.23482
+1991-04-01    0.22601
+1991-07-01    0.21983
+1991-10-01    0.21795
+1992-01-01    0.21012
+1992-04-01    0.20855
+1992-07-01    0.20529
+1992-10-01    0.20076
+1993-01-01    0.20413
+1993-04-01    0.20347
+1993-07-01    0.20150
+1993-10-01    0.19756
+1994-01-01    0.19913
+1994-04-01    0.20195
+1994-07-01    0.20291
+1994-10-01    0.20557
+1995-01-01    0.20965
+1995-04-01    0.21215
+1995-07-01    0.21285
+1995-10-01    0.21453
+1996-01-01    0.21110
+1996-04-01    0.20872
+1996-07-01    0.21059
+1996-10-01    0.20888
+1997-01-01    0.20854
+1997-04-01    0.20775
+1997-07-01    0.20881
+1997-10-01    0.20616
+1998-01-01    0.20824
+1998-04-01    0.20632
+1998-07-01    0.20475
+1998-10-01    0.19845
+1999-01-01    0.19459
+1999-04-01    0.19381
+1999-07-01    0.19047
+1999-10-01    0.18821
+2000-01-01    0.19012
+2000-04-01    0.18553
+2000-07-01    0.18392
+2000-10-01    0.18213
+2001-01-01    0.17425
+2001-04-01    0.16709
+2001-07-01    0.16039
+2001-10-01    0.15538
+2002-01-01    0.14580
+2002-04-01    0.14175
+2002-07-01    0.13972
+2002-10-01    0.13641
+2003-01-01    0.13097
+2003-04-01    0.12623
+2003-07-01    0.12628
+2003-10-01    0.12546
+2004-01-01    0.12511
+2004-04-01    0.12484
+2004-07-01    0.12688
+2004-10-01    0.12859
+2005-01-01    0.12928
+2005-04-01    0.13324
+2005-07-01    0.13343
+2005-10-01    0.13408
+2006-01-01    0.13130
+2006-04-01    0.13365
+2006-07-01    0.13557
+2006-10-01    0.13869
+2007-01-01    0.13801
+2007-04-01    0.14041
+2007-07-01    0.14060
+2007-10-01    0.13832
+2008-01-01    0.13257
+2008-04-01    0.11431
+2008-07-01    0.11964
+2008-10-01    0.11889
+2009-01-01    0.10891
+2009-04-01    0.09991
+2009-07-01    0.09916
+2009-10-01    0.09937
+2010-01-01    0.09709
+2010-04-01    0.10063
+2010-07-01    0.10264
+2010-10-01    0.10486
+2011-01-01    0.10779
+2011-04-01    0.11040
+2011-07-01    0.11434
+2011-10-01    0.11445
+2012-01-01    0.11349
+2012-04-01    0.11247
+2012-07-01    0.11145
+2012-10-01    0.11058
+2013-01-01    0.10936
+2013-04-01    0.10924
+2013-07-01    0.11043
+2013-10-01    0.11266
+2014-01-01    0.11309
+2014-04-01    0.11352
+2014-07-01    0.11245
+2014-10-01    0.11264
+2015-01-01    0.10798
+2015-04-01    0.10672
+2015-07-01    0.10665
+2015-10-01    0.10732
+2016-01-01    0.10925
+2016-04-01    0.11051
+2016-07-01    0.11023
+2016-10-01    0.11021
+2017-01-01    0.10989
+2017-04-01    0.11231
+2017-07-01    0.11318
+2017-10-01    0.11421
+2018-01-01    0.11541
+2018-04-01    0.11940
+2018-07-01    0.12231
+2018-10-01    0.12436
+2019-01-01    0.12366
+2019-04-01    0.12385
+2019-07-01    0.12114
+2019-10-01    0.11764
+2020-01-01    0.11188
+2020-04-01    0.05794
+2020-07-01    0.07095
+2020-10-01    0.08730
+2021-01-01    0.06425
+2021-04-01    0.07262
+2021-07-01    0.08674
+2021-10-01    0.09841
+2022-01-01    0.10623
+2022-04-01    0.11287
+2022-07-01    0.12177
+2022-10-01    0.13053
+2023-01-01    0.13476
+2023-04-01    0.13913
+2023-07-01    0.14836
+2023-10-01    0.15571
+2024-01-01    0.15759
+2024-04-01    0.15978
+2024-07-01    0.15839
+2024-10-01    0.15815
+2025-01-01    0.15552
+            `;
+
+            function parseInterestExpenseData(rawData) {
+                const lines = rawData.trim().split('\n');
+                const yearlyData = {};
+
+                lines.forEach(line => {
+                    const parts = line.trim().split(/\s+/);
+                    const date = parts[0];
+                    const value = parseFloat(parts[1]) * 100; // Convert to percentage
+                    const year = new Date(date).getFullYear();
+
+                    // Keep only the last entry for each year
+                    yearlyData[year] = value;
+                });
+
+                const labels = Object.keys(yearlyData).sort();
+                const data = labels.map(year => yearlyData[year]);
+                return { labels, data };
+            }
+
+            const { labels: interestLabels, data: interestValues } = parseInterestExpenseData(interestExpenseDataRaw);
+
+            new Chart(document.getElementById('interestExpenseChart'), {
+                type: 'line',
+                data: {
+                    labels: interestLabels,
+                    datasets: [{
+                        label: 'Interest Expense as % of Federal Spending',
+                        data: interestValues,
+                        borderColor: chartColors.accentRed,
+                        backgroundColor: 'rgba(214, 40, 40, 0.1)',
+                        fill: true,
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    ...defaultChartOptions,
+                    scales: {
+                        y: {
+                            ...defaultChartOptions.scales.y,
+                            title: { display: true, text: 'Percentage (%)' },
+                            ticks: {
+                                callback: function(value) {
+                                    return value.toFixed(1) + '%';
+                                }
+                            },
+                            beginAtZero: false
+                        },
+                        x: {
+                            ...defaultChartOptions.scales.x,
+                            title: { display: true, text: 'Year' }
+                        }
+                    }
+                }
+            });
+
+            setupEditableElements();
+            document.getElementById('editModeToggle').addEventListener('click', toggleEditMode);
+
+            updateCalculatorDisplay(); 
+        };
+
+    </script>
+</body>
+</html>
