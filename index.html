@@ -14,13 +14,13 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            /* Body background set to light grey for subtle contrast */
-            background-color: #F0F4F8; 
+            /* Body background set to white */
+            background-color: white;
             color: #1F2937;
         }
         .card {
-            /* Card background set to white */
-            background-color: white; 
+            /* Card background set to light grey for subtle contrast */
+            background-color: #F0F4F8;
             border-radius: 0.75rem;
             box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
             transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
@@ -49,7 +49,7 @@
             position: relative;
             width: 100%;
             /* Increased max-width for better screenshotting in presentations */
-            max-width: 800px; 
+            max-width: 800px;
             margin-left: auto;
             margin-right: auto;
             height: 350px;
@@ -65,12 +65,12 @@
             font-size: 2rem;
             line-height: 1;
             /* Always point downwards */
-            transform: rotate(90deg); 
+            transform: rotate(90deg);
         }
         .flowchart-step {
             border-color: #70C4FF;
             /* Flowchart step background set to white */
-            background-color: white; 
+            background-color: white;
             border-width: 2px;
             display: flex;
             flex-direction: column;
@@ -158,8 +158,8 @@
         /* Reverted presentation slide styles */
         .presentation-section { /* Renamed from .presentation-slide */
             margin-bottom: 3rem; /* Space between sections */
-            /* Presentation section background set to white */
-            background-color: white; 
+            /* Presentation section background set to light grey */
+            background-color: #F0F4F8;
             border-radius: 0.75rem;
             box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
             padding: 1.5rem;
@@ -205,7 +205,7 @@
             <p contenteditable="false">U.S. high school graduations are projected to peak this year with 3.9M students, followed by a sustained decline in population reaching 3.4M by 2041. This necessitates strategic adjustments for higher education institutions. Regional projections tell a similar story.</p>
             <div class="card p-6 md:p-8 w-full">
                 <h3 class="text-2xl font-bold text-center section-title mb-4" contenteditable="false">Ohio Graduation Trends</h3>
-                <p class="text-center text-gray-700 max-w-4xl mx-auto mb-8" contenteditable="false">This chart illustrates Ohio's projected high school graduate trends, reflecting a regional example of the national 2025 peak and subsequent decline.</p> 
+                <p class="text-center text-gray-700 max-w-4xl mx-auto mb-8" contenteditable="false">This chart illustrates Ohio's projected high school graduate trends, reflecting a regional example of the national 2025 peak and subsequent decline.</p>
                 <div class="chart-container">
                     <canvas id="nationalDeclineChart"></canvas>
                 </div>
@@ -216,22 +216,30 @@
         <section class="presentation-section">
             <h2 class="section-title mb-8" contenteditable="false">Regional Impact: Ohio & Neighboring States</h2>
             <p contenteditable="false">The demographic cliff's impact varies regionally. Ohio is projected to fare better than some neighboring states in terms of high school graduate decline through 2041; however, this relative advantage does not imply immunity from increasing enrollment competition, underscoring the need for robust financial planning and endowment growth.</p>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center w-full">
-                <div class="card p-6 md:p-8">
-                    <h3 class="text-2xl font-bold section-title mb-4" contenteditable="false">Projected Decline in HS Grads (2023-2041) by State</h3>
-                    <p class="text-center text-gray-700 mb-6" contenteditable="false">Decline varies significantly; West Virginia and Michigan face the steepest drops, impacting tuition-dependent private colleges most severely.</p>
-                    <div class="chart-container">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch w-full">
+                <div class="card p-6 md:p-8 flex flex-col">
+                    <div>
+                        <h3 class="text-2xl font-bold section-title mb-4" contenteditable="false">Projected Decline in HS Grads (2023-2041) by State</h3>
+                        <p class="text-center text-gray-700 mb-6" contenteditable="false">Decline varies significantly; West Virginia and Michigan face the steepest drops, impacting tuition-dependent private colleges most severely.</p>
+                    </div>
+                    <div class="chart-container mt-auto">
                         <canvas id="regionalDeclineChart"></canvas>
                     </div>
-                    <a href="https://www.wiche.edu/knocking/data-visualizations/geography/">source</a>
-                </div>
-                <div class="card p-6 md:p-8">
-                    <h3 class="2xl font-bold section-title mb-6 text-center" contenteditable="false">Ohio College-Going Rate</h3>
-                    <p class="text-center text-gray-700 mb-6" contenteditable="false">Compounding the issue, fewer Ohio high school graduates are immediately pursuing higher education. This chart shows the decline from 2010 to 2023.</p>
-                    <div class="chart-container">
-                        <canvas id="ohioCollegeRateChart"></canvas>
+                    <div class="text-center mt-4">
+                        <a href="https://www.wiche.edu/knocking/data-visualizations/geography/" class="text-xs text-gray-500">source</a>
                     </div>
-                    <a href="https://www.wiche.edu/knocking/data-visualizations/geography/">source</a>
+                </div>
+                <div class="card p-6 md:p-8 flex flex-col">
+                    <div>
+                        <h3 class="text-2xl font-bold section-title mb-4 text-center" contenteditable="false">Ohio College Enrollment</h3>
+                        <p class="text-center text-gray-700 mb-4" contenteditable="false">Compounding the graduation decline, Ohio's total college enrollment dropped to 612,352 in 2020, a 17.8% decrease from 2010 levels.</p>
+                    </div>
+                    <div class="chart-container mt-auto" style="height: 200px; max-height: 200px;">
+                        <canvas id="ohioEnrollmentChart"></canvas>
+                    </div>
+                    <div class="text-center mt-4">
+                        <a href="https://www.wiche.edu/knocking/data-visualizations/geography/" class="text-xs text-gray-500">source</a>
+                    </div>
                 </div>
             </div>
         </section>
@@ -317,7 +325,7 @@
             <div class="card p-6 md:p-8 w-full">
                 <h3 class="text-2xl font-bold text-center section-title mb-2" contenteditable="false">Model Your Allocation Here</h3>
                 <p class="text-center text-lg text-gray-700 mb-8" contenteditable="false">Model long-term nominal returns based on chosen Capital Market Assumptions and asset allocations.</p>
-               
+
                 <div class="mb-6">
                     <label for="sourceSelect" class="block text-xl font-bold section-title mb-2" contenteditable="false">Select Source(s):</label>
                     <div id="sourceCheckboxes" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-2 gap-x-4">
@@ -410,7 +418,40 @@
     </footer>
 
     <script>
-        Chart.register(ChartZoom); 
+        Chart.register(ChartZoom);
+
+        // Custom plugin to draw text in the center of a doughnut chart
+        const doughnutTextPlugin = {
+            id: 'doughnutText',
+            afterDraw(chart, args, options) {
+                if (chart.config.type !== 'doughnut' || !options.text) {
+                    return;
+                }
+                const { ctx, chartArea: { top, right, bottom, left, width, height } } = chart;
+                ctx.save();
+                
+                const text = options.text;
+                const subtext = options.subtext || '';
+                const textY = (height / 2) + top;
+
+                // Main text
+                ctx.font = options.font || 'bold 3rem Inter';
+                ctx.fillStyle = options.color || '#D62828';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(text, width / 2, textY - 10); // Adjust Y position slightly up
+
+                // Subtext
+                if (subtext) {
+                    ctx.font = options.subtextFont || '1rem Inter';
+                    ctx.fillStyle = options.subtextColor || '#4B5563';
+                    ctx.fillText(subtext, width / 2, textY + 20); // Adjust Y position down
+                }
+                ctx.restore();
+            }
+        };
+        Chart.register(doughnutTextPlugin);
+
 
         const chartColors = {
             blue1: '#003B6D',
@@ -419,7 +460,7 @@
             accentGold: '#FFBC42',
             accentRed: '#D62828',
             gray: '#E5E7EB',
-            green: '#28A745', 
+            green: '#28A745',
             purple: '#6610f2',
             darkBlue: '#0A2540', /* Added for more distinction */
             lightGreen: '#66bb6a', /* Added for more distinction */
@@ -521,43 +562,39 @@
             options: { ...defaultChartOptions, indexAxis: 'y', scales: { x: { title: { display: true, text: 'Percent Change (%)' } } } }
         });
 
-        new Chart(document.getElementById('ohioCollegeRateChart'), {
+        // New Ohio Enrollment Chart
+        new Chart(document.getElementById('ohioEnrollmentChart'), {
             type: 'doughnut',
             data: {
-                labels: ['2010: Enrolled', '2010: Not Enrolled', '2023: Enrolled', '2023: Not Enrolled'],
                 datasets: [{
-                    label: '2010 Rate',
-                    data: [72, 28, 0, 0],
-                    backgroundColor: [chartColors.blue2, chartColors.gray],
-                    circumference: 180,
-                    rotation: -90
-                }, {
-                    label: '2023 Rate',
-                    data: [0, 0, 66, 34],
+                    data: [17.8, 100 - 17.8],
                     backgroundColor: [chartColors.accentRed, chartColors.gray],
-                    circumference: 180,
-                    rotation: -90
+                    borderColor: '#F0F4F8',
+                    borderWidth: 4,
+                    circumference: 180, // Make it a semi-circle
+                    rotation: -90      // Start at the top
                 }]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
+                cutout: '75%',
                 plugins: {
-                    legend: { position: 'top' },
-                    title: { display: true, text: 'Ohio College-Going Rate', font: { size: 16, weight: 'bold' } },
+                    legend: {
+                        display: false
+                    },
                     tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                if (context.dataIndex > 1) { // 2023 data
-                                    return `2023 ${context.label.split(':')[1]}: ${context.parsed}%`;
-                                }
-                                return `2010 ${context.label.split(':')[1]}: ${context.parsed}%`;
-                            }
-                        }
+                        enabled: false
+                    },
+                    doughnutText: {
+                        text: '-17.8%',
+                        subtext: 'Decline 2010-2020',
+                        color: chartColors.accentRed,
+                        font: 'bold 2rem Inter',
+                        subtextColor: '#4B5563',
+                        subtextFont: '0.9rem Inter'
                     }
-                },
-                cutout: '60%',
-                backgroundColor: 'white' // Explicitly set chart background to white
+                }
             }
         });
 
@@ -575,8 +612,8 @@
             },
             options: { ...defaultChartOptions, scales: { x: { stacked: true }, y: { stacked: true, title: { display: true, text: 'Allocation (%)' } } } }
         });
- 
-        const ntExpectedReturnsChartData = {
+
+        const ntExpectedReturnsDataRaw = {
             labels: [
                 wrapLabel('U.S. Inflation Linked (TIPS)'),
                 wrapLabel('U.S. Aggregate Fixed Income'),
@@ -592,27 +629,57 @@
             ],
             returns: [4.0, 4.7, 5.5, 6.3, 6.4, 7.1, 7.5, 7.3, 8.4, 12.2, 10.1]
         };
-        ntExpectedReturnsChartData.labels.sort((a, b) => {
-            const indexA = ntExpectedReturnsChartData.labels.indexOf(a);
-            const indexB = ntExpectedReturnsChartData.labels.indexOf(b);
-            return ntExpectedReturnsChartData.returns[indexA] - ntExpectedReturnsChartData.returns[indexB];
+        
+        const combinedData = ntExpectedReturnsDataRaw.labels.map((label, index) => {
+            return {
+                label: label,
+                return: ntExpectedReturnsDataRaw.returns[index]
+            };
         });
-        ntExpectedReturnsChartData.returns.sort((a, b) => a - b);
 
+        combinedData.sort((a, b) => a.return - b.return);
+
+        const sortedLabels = combinedData.map(item => item.label);
+        const sortedReturns = combinedData.map(item => item.return);
 
         new Chart(document.getElementById('expectedReturnsChart'), {
             type: 'bar',
             data: {
-                labels: ntExpectedReturnsChartData.labels,
+                labels: sortedLabels,
                 datasets: [{
                     label: 'Northern Trust 10-Year Nominal Return (%)',
-                    data: ntExpectedReturnsChartData.returns,
+                    data: sortedReturns,
                     backgroundColor: chartColors.blue1
                 }]
             },
-            options: { ...defaultChartOptions, indexAxis: 'y', scales: { x: { title: { display: true, text: 'Annualized Nominal Return (%)' } } } }
+            options: {
+                ...defaultChartOptions,
+                indexAxis: 'y',
+                plugins: {
+                    ...defaultChartOptions.plugins,
+                    tooltip: {
+                        ...defaultChartOptions.plugins.tooltip,
+                        mode: 'y', // Correct interaction mode for horizontal bars
+                    },
+                    zoom: { // Disable zoom and pan for this chart
+                        pan: { enabled: false },
+                        zoom: {
+                            drag: { enabled: false },
+                            wheel: { enabled: false },
+                            pinch: { enabled: false }
+                        }
+                    }
+                },
+                scales: {
+                    ...defaultChartOptions.scales,
+                    x: {
+                        ...defaultChartOptions.scales.x,
+                        title: { display: true, text: 'Annualized Nominal Return (%)' }
+                    }
+                }
+            }
         });
- 
+
         const allAssetReturns = {
             "Northern Trust": {
                 "US Large Cap Equities":    7.5,
@@ -749,7 +816,7 @@
                 "Cash (3-Month T-Bill)": 3.5
             }
         };
- 
+
         const assetCategories = {
             "Equities": [
                 "US Large Cap Equities", "US Small Cap Equities", "US Mid Cap Equities",
@@ -794,7 +861,7 @@
                     return category;
                 }
             }
-            return "Other"; 
+            return "Other";
         }
 
         const categoryOrder = [
@@ -819,18 +886,18 @@
         let selectedSources = new Set();
         let selectedAssetClasses = new Set();
 
-        let savedSliderValues = {}; 
-        let allocationChart; 
-        let inflationChart; 
+        let savedSliderValues = {};
+        let allocationChart;
+        let inflationChart;
         let federalDebtToGDPChart; // New chart variable
         let interestExpenseChart; // New chart variable
-        let currentPortfolioMetrics = { return: 0 }; 
+        let currentPortfolioMetrics = { return: 0 };
 
         const allocationChartColors = [
             '#003B6D', '#00529B', '#70C4FF', '#FFBC42', '#D62828', '#8B4513', '#228B22', '#4682B4', '#DAA520', '#CD5C5C',
             '#6A5ACD', '#FF6347', '#48D1CC', '#9932CC', '#8B0000', '#2E8B57', '#BDB76B', '#5F9EA0', '#FF8C00', '#BA55D3'
         ];
- 
+
         const inflationRates = {
             // Updated with actual 10-year data (2015-2024)
             "CPI": {
@@ -843,7 +910,7 @@
             "HEPI": {
                 label: "HEPI (Higher Education Price Index)",
                 // HEPI data up to FY2023, with 2024 estimated as average of last 3 years (2021-2023)
-                data: [2.1, 1.8, 3.7, 2.8, 2.5, 2.2, 2.7, 5.2, 4.0, 4.0], 
+                data: [2.1, 1.8, 3.7, 2.8, 2.5, 2.2, 2.7, 5.2, 4.0, 4.0],
                 borderColor: chartColors.green,
                 backgroundColor: 'rgba(40, 167, 69, 0.2)',
             },
@@ -855,7 +922,7 @@
             }
         };
         // Updated labels for the 10-year period
-        const inflationLabels = ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024']; 
+        const inflationLabels = ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024'];
 
         function renderInflationChart(projectedReturn) {
             const datasets = [];
@@ -884,23 +951,23 @@
                 fill: false,
                 tension: 0,
                 borderDash: [5, 5],
-                pointRadius: 0 
+                pointRadius: 0
             });
 
             // Add the 6.5% Return Target
             datasets.push({
-                label: '6.5% Return Target', 
+                label: '6.5% Return Target',
                 data: Array(inflationLabels.length).fill(6.5),
                 borderColor: chartColors.orange, // Changed color to orange for better distinction
                 backgroundColor: 'rgba(255, 152, 0, 0.2)',
                 fill: false,
                 tension: 0,
-                borderDash: [2, 2], 
+                borderDash: [2, 2],
                 pointRadius: 0
             });
 
             // Calculate the maximum value among all data points to set the Y-axis max
-            let allDataPoints = [projectedReturn, 6.5]; 
+            let allDataPoints = [projectedReturn, 6.5];
             for (const measureKey in inflationRates) {
                 allDataPoints = allDataPoints.concat(inflationRates[measureKey].data);
             }
@@ -912,7 +979,7 @@
                 plugins: commonPlugins,
                 scales: {
                     y: {
-                        beginAtZero: true, 
+                        beginAtZero: true,
                         title: {
                             display: true,
                             text: 'Annual Rate (%)',
@@ -924,7 +991,7 @@
                                 return value.toFixed(1) + '%';
                             }
                         },
-                        max: yAxisMax 
+                        max: yAxisMax
                     },
                     x: {
                         title: {
@@ -941,7 +1008,7 @@
             if (inflationChart) {
                 inflationChart.data.labels = inflationLabels;
                 inflationChart.data.datasets = datasets;
-                inflationChart.options.scales.y.max = yAxisMax; 
+                inflationChart.options.scales.y.max = yAxisMax;
                 inflationChart.update();
             } else {
                 const ctx = document.getElementById('inflationChart').getContext('2d');
@@ -1037,9 +1104,9 @@
 
         function renderAssetSelectionCheckboxes() {
             assetSelectionCheckboxesDiv.innerHTML = '';
- 
+
             const currentAvailableAssets = getExpectedReturnsForSelectedSources();
- 
+
             let assetsToSort = Object.keys(currentAvailableAssets).map(assetName => ({
                 name: assetName,
                 return: currentAvailableAssets[assetName],
@@ -1051,14 +1118,14 @@
                 if (categoryCompare !== 0) {
                     return categoryCompare;
                 }
-                const returnCompare = b.return - a.return; 
+                const returnCompare = b.return - a.return;
                 if (returnCompare !== 0) {
                     return returnCompare;
                 }
-                return a.name.localeCompare(b.name); 
+                return a.name.localeCompare(b.name);
             });
-           
-            const newSelectedAssetClasses = new Set(); 
+
+            const newSelectedAssetClasses = new Set();
 
             if (assetsToSort.length === 0) {
                 assetSelectionCheckboxesDiv.innerHTML = '<p class="text-gray-500">No asset classes available for the selected source(s).</p>';
@@ -1087,11 +1154,11 @@
                 input.id = `checkbox-${assetClass.replace(/[^a-zA-Z0-9]/g, '')}`;
                 input.value = assetClass;
                 input.classList.add('h-4', 'w-4', 'text-blue-600', 'border-gray-300', 'rounded', 'focus:ring-2', 'focus:ring-blue-500');
-               
+
                 let shouldBeChecked = false;
                 if (selectedAssetClasses.has(assetClass) && currentAvailableAssets[assetClass] !== undefined) {
                     shouldBeChecked = true;
-                } 
+                }
                 else if (savedSliderValues[assetClass] !== undefined && parseFloat(savedSliderValues[assetClass]) > 0 && currentAvailableAssets[assetClass] !== undefined) {
                     shouldBeChecked = true;
                 }
@@ -1110,15 +1177,15 @@
                         selectedAssetClasses.delete(assetClass);
                         savedSliderValues[assetClass] = '0';
                     }
-                    renderSliders(); 
-                    calculateReturns(); 
-                    updateInflationChartOnly(); 
+                    renderSliders();
+                    calculateReturns();
+                    updateInflationChartOnly();
                 });
 
                 const label = document.createElement('label');
                 label.setAttribute('for', `checkbox-${assetClass.replace(/[^a-zA-Z0-9]/g, '')}`);
                 label.classList.add('ml-2', 'text-sm', 'font-medium', 'text-gray-900');
-               
+
                 const expectedReturnText = expectedReturn !== undefined ? ` (${expectedReturn.toFixed(1)}% Exp.)` : '';
                 label.textContent = `${assetClass}${expectedReturnText}`;
 
@@ -1134,17 +1201,17 @@
                 savedSliderValues[assetClass] = currentSliders[assetClass].value;
             }
 
-            calculatorInputsDiv.innerHTML = ''; 
+            calculatorInputsDiv.innerHTML = '';
             currentSliders = {};
             currentValuesDisplays = {};
 
             const currentExpectedReturns = getExpectedReturnsForSelectedSources();
-           
+
             let selectedAssetsForSliders = Array.from(selectedAssetClasses).map(assetName => ({
                 name: assetName,
                 return: currentExpectedReturns[assetName],
                 category: getAssetCategory(assetName)
-            })).filter(asset => asset.return !== undefined && asset.return !== null); 
+            })).filter(asset => asset.return !== undefined && asset.return !== null);
 
             selectedAssetsForSliders.sort((a, b) => {
                 const categoryCompare = categoryOrder.indexOf(a.category) - categoryOrder.indexOf(b.category);
@@ -1181,14 +1248,14 @@
                 const label = document.createElement('label');
                 label.setAttribute('for', `${assetClass.replace(/[^a-zA-Z0-9]/g, '')}Slider`);
                 label.innerHTML = `${assetClass}: <span class="value-display" id="${assetClass.replace(/[^a-zA-Z0-9]/g, '')}ExpectedReturn">${expectedReturn.toFixed(1)}%</span> Expected`;
-               
+
                 const sliderLabel = document.createElement('span');
                 sliderLabel.textContent = ` Allocation: `;
                 label.appendChild(sliderLabel);
 
                 const sliderValueDisplay = document.createElement('span');
                 sliderValueDisplay.id = `${assetClass.replace(/[^a-zA-Z0-9]/g, '')}Value`;
-                sliderValueDisplay.textContent = '0%'; 
+                sliderValueDisplay.textContent = '0%';
                 sliderLabel.appendChild(sliderValueDisplay);
 
                 const slider = document.createElement('input');
@@ -1239,7 +1306,7 @@
                 }
 
                 currentPortfolioWeights[assetClass] = percent / 100;
-                if (percent > 0) { 
+                if (percent > 0) {
                     activeAssetNames.push(assetClass);
                 }
             }
@@ -1252,7 +1319,7 @@
                 totalAllocationEl.classList.remove('text-red-600');
                 totalAllocationEl.classList.add('text-green-600');
             }
-           
+
             projectedReturn10PlusEl.textContent = `${calculatedReturn.toFixed(1)}%`;
 
             currentPortfolioMetrics.return = calculatedReturn;
@@ -1264,7 +1331,7 @@
                 allocationChart.update();
             }
 
-            updateInflationChartOnly(); 
+            updateInflationChartOnly();
         }
 
         function updateCalculatorDisplay() {
@@ -1274,11 +1341,11 @@
         }
 
         function updateInflationChartOnly() {
-            renderInflationChart(currentPortfolioMetrics.return); 
+            renderInflationChart(currentPortfolioMetrics.return);
         }
 
         let isEditMode = false;
-        const editableElements = []; 
+        const editableElements = [];
 
         function setupEditableElements() {
             const selectors = [
@@ -1291,12 +1358,12 @@
                 '#endowment-implementation .flowchart-step p', '#endowment-implementation .flowchart-step h3',
                 'footer p'
             ];
-           
+
             selectors.forEach(selector => {
                 document.querySelectorAll(selector).forEach(el => {
                     if (!el.querySelector('input, button, select, textarea, a') && el.getAttribute('contenteditable') !== 'false') {
                          editableElements.push(el);
-                         el.setAttribute('contenteditable', 'false'); 
+                         el.setAttribute('contenteditable', 'false');
                     }
                 });
             });
@@ -1330,7 +1397,7 @@
 
         window.onload = function() {
             populateAllPossibleAssetClasses();
-           
+
             const defaultPortfolio = {
                 "US Small Cap Equities": 15,
                 "US Large Cap Equities": 10,
@@ -1351,16 +1418,16 @@
                 selectedAssetClasses.add(asset);
             }
 
-            renderSourceCheckboxes(); 
+            renderSourceCheckboxes();
 
             const ctxAllocation = document.getElementById('allocationChart').getContext('2d');
             allocationChart = new Chart(ctxAllocation, {
                 type: 'doughnut',
                 data: {
-                    labels: [], 
+                    labels: [],
                     datasets: [{
-                        data: [], 
-                        backgroundColor: [], 
+                        data: [],
+                        backgroundColor: [],
                         borderWidth: 1,
                         borderColor: '#ffffff'
                     }]
@@ -1373,7 +1440,7 @@
                             position: 'bottom',
                             labels: {
                                 font: {
-                                    size: 10, 
+                                    size: 10,
                                 }
                             }
                         },
@@ -1381,11 +1448,11 @@
                             display: true,
                             text: 'Current Portfolio Allocation',
                             font: {
-                                size: 14, 
+                                size: 14,
                                 weight: 'bold'
                             }
                         },
-                        tooltip: { 
+                        tooltip: {
                             callbacks: {
                                 label: function(context) {
                                     let label = context.label || '';
@@ -1930,7 +1997,7 @@
             setupEditableElements();
             document.getElementById('editModeToggle').addEventListener('click', toggleEditMode);
 
-            updateCalculatorDisplay(); 
+            updateCalculatorDisplay();
         };
 
     </script>
