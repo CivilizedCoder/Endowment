@@ -149,12 +149,6 @@
             margin-right: 0.5rem;
             accent-color: #00529B;
         }
-        /* Style for editable content */
-        [contenteditable="true"] {
-            border: 1px dashed #ccc;
-            padding: 2px;
-            outline: none;
-        }
         /* Reverted presentation slide styles */
         .presentation-section { /* Renamed from .presentation-slide */
             margin-bottom: 3rem; /* Space between sections */
@@ -186,26 +180,25 @@
 <body class="antialiased">
 
     <header class="bg-white shadow-md p-6 text-center sticky top-0 z-50">
-        <div class="flex justify-between items-center max-w-7xl mx-auto">
+        <div class="flex justify-center items-center max-w-7xl mx-auto">
             <div class="flex-grow text-center">
-                <h1 class="text-3xl md:text-4xl font-extrabold section-title" contenteditable="false">Endowment Strategies & Long-Term Return Forecasts</h1>
-                <p class="text-md text-gray-600 mt-2 max-w-4xl mx-auto" contenteditable="false">Navigating demographic shifts and capital market evolution with strategic endowment management and data-driven forecasts.</p>
+                <h1 class="text-3xl md:text-4xl font-extrabold section-title">Endowment Strategies & Long-Term Return Forecasts</h1>
+                <p class="text-md text-gray-600 mt-2 max-w-4xl mx-auto">Navigating demographic shifts and capital market evolution with strategic endowment management and data-driven forecasts.</p>
             </div>
-            <button id="editModeToggle" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors flex-shrink-0 ml-4">Enable Edit Mode</button>
         </div>
     </header>
 
     <main class="p-4 md:p-8 max-w-6xl mx-auto"> <section class="presentation-section">
-            <h2 contenteditable="false">The Imperative for Change</h2>
-            <p contenteditable="false">Futureproofing our institution demands a candid assessment: the returns we've grown accustomed to will fall short. The looming demographic cliff directly translates to increased student acquisition challenges, demanding enhanced endowment growth to compensate, precisely when many traditional investment returns are projected to diminish.</p>
+            <h2>The Imperative for Change</h2>
+            <p>Futureproofing our institution demands a candid assessment: the returns we've grown accustomed to will fall short. The looming demographic cliff directly translates to increased student acquisition challenges, demanding enhanced endowment growth to compensate, precisely when many traditional investment returns are projected to diminish.</p>
         </section>
 
         <section class="presentation-section">
-            <h2 contenteditable="false">Demographic Cliff: U.S. High School Graduate Projections</h2>
-            <p contenteditable="false">U.S. high school graduations are projected to peak this year with 3.9M students, followed by a sustained decline in population reaching 3.4M by 2041. This necessitates strategic adjustments for higher education institutions. Regional projections tell a similar story.</p>
+            <h2>Demographic Cliff: U.S. High School Graduate Projections</h2>
+            <p>U.S. high school graduations are projected to peak this year with 3.9M students, followed by a sustained decline in population reaching 3.4M by 2041. This necessitates strategic adjustments for higher education institutions. Regional projections tell a similar story.</p>
             <div class="card p-6 md:p-8 w-full">
-                <h3 class="text-2xl font-bold text-center section-title mb-4" contenteditable="false">Ohio Graduation Trends</h3>
-                <p class="text-center text-gray-700 max-w-4xl mx-auto mb-8" contenteditable="false">This chart illustrates Ohio's projected high school graduate trends, reflecting a regional example of the national 2025 peak and subsequent decline.</p>
+                <h3 class="text-2xl font-bold text-center section-title mb-4">Ohio Graduation Trends</h3>
+                <p class="text-center text-gray-700 max-w-4xl mx-auto mb-8">This chart illustrates Ohio's projected high school graduate trends, reflecting a regional example of the national 2025 peak and subsequent decline.</p>
                 <div class="chart-container">
                     <canvas id="nationalDeclineChart"></canvas>
                 </div>
@@ -214,13 +207,13 @@
         </section>
 
         <section class="presentation-section">
-            <h2 class="section-title mb-8" contenteditable="false">Regional Impact: Ohio & Neighboring States</h2>
-            <p contenteditable="false">The demographic cliff's impact varies regionally. Ohio is projected to fare better than some neighboring states in terms of high school graduate decline through 2041; however, this relative advantage does not imply immunity from increasing enrollment competition, underscoring the need for robust financial planning and endowment growth.</p>
+            <h2 class="section-title mb-8">Regional Impact: Ohio & Neighboring States</h2>
+            <p>The demographic cliff's impact varies regionally. Ohio is projected to fare better than some neighboring states in terms of high school graduate decline through 2041; however, this relative advantage does not imply immunity from increasing enrollment competition, underscoring the need for robust financial planning and endowment growth.</p>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch w-full">
                 <div class="card p-6 md:p-8 flex flex-col">
                     <div>
-                        <h3 class="text-2xl font-bold section-title mb-4" contenteditable="false">Projected Decline in HS Grads (2023-2041) by State</h3>
-                        <p class="text-center text-gray-700 mb-6" contenteditable="false">Decline varies significantly; West Virginia and Michigan face the steepest drops, impacting tuition-dependent private colleges most severely.</p>
+                        <h3 class="text-2xl font-bold section-title mb-4">Projected Decline in HS Grads (2023-2041) by State</h3>
+                        <p class="text-center text-gray-700 mb-6">Decline varies significantly; West Virginia and Michigan face the steepest drops, impacting tuition-dependent private colleges most severely.</p>
                     </div>
                     <div class="chart-container mt-auto">
                         <canvas id="regionalDeclineChart"></canvas>
@@ -231,8 +224,8 @@
                 </div>
                 <div class="card p-6 md:p-8 flex flex-col">
                     <div>
-                        <h3 class="text-2xl font-bold section-title mb-4 text-center" contenteditable="false">Ohio College Enrollment</h3>
-                        <p class="text-center text-gray-700 mb-4" contenteditable="false">Compounding the graduation decline, Ohio's total college enrollment dropped to 612,352 in 2020, a 17.8% decrease from 2010 levels.</p>
+                        <h3 class="text-2xl font-bold section-title mb-4 text-center">Ohio College Enrollment</h3>
+                        <p class="text-center text-gray-700 mb-4">Compounding the graduation decline, Ohio's total college enrollment dropped to 612,352 in 2020, a 17.8% decrease from 2010 levels.</p>
                     </div>
                     <div class="chart-container mt-auto" style="height: 200px; max-height: 200px;">
                         <canvas id="ohioEnrollmentChart"></canvas>
@@ -245,38 +238,38 @@
         </section>
 
         <section class="presentation-section">
-            <h2 contenteditable="false">Shifting Macroeconomic Environment: Fundamental Changes</h2>
-            <p contenteditable="false">Our investment decisions must now factor in profound, interconnected macroeconomic shifts. The "worldview concept" guiding past investment strategies is fundamentally changing.</p>
+            <h2>Shifting Macroeconomic Environment: Fundamental Changes</h2>
+            <p>Our investment decisions must now factor in profound, interconnected macroeconomic shifts. The "worldview concept" guiding past investment strategies is fundamentally changing.</p>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
                 <div class="card p-6">
-                    <h3 class="text-2xl font-bold section-title mb-4" contenteditable="false">Technological Transformation (AI)</h3>
-                    <p class="text-gray-700" contenteditable="false">AI adoption is expected to boost economic growth and counterbalance the workforce declines from the retiring baby boomer generation in the U.S.</p>
+                    <h3 class="text-2xl font-bold section-title mb-4">Technological Transformation (AI)</h3>
+                    <p class="text-gray-700">AI adoption is expected to boost economic growth and counterbalance the workforce declines from the retiring baby boomer generation in the U.S.</p>
                 </div>
                 <div class="card p-6">
-                    <h3 class="2xl font-bold section-title mb-4" contenteditable="false">Geopolitical Restructuring & Energy Transition</h3>
-                    <p class="text-gray-700" contenteditable="false">Rising global energy demand, energy independence goals, and geopolitical tensions are reshaping supply chains and trade (e.g., U.S.-China relations).</p>
+                    <h3 class="2xl font-bold section-title mb-4">Geopolitical Restructuring & Energy Transition</h3>
+                    <p class="text-gray-700">Rising global energy demand, energy independence goals, and geopolitical tensions are reshaping supply chains and trade (e.g., U.S.-China relations).</p>
                 </div>
                 <div class="card p-6">
-                    <h3 class="2xl font-bold section-title mb-4" contenteditable="false">Evolving Policy & Regulatory Paradigms</h3>
-                    <p class="text-gray-700" contenteditable="false">Expect declining short-term interest rates and modest yield-curve steepening. Deregulation, increased retail exposure to private markets, and tax reform discussions are ongoing.</p>
+                    <h3 class="2xl font-bold section-title mb-4">Evolving Policy & Regulatory Paradigms</h3>
+                    <p class="text-gray-700">Expect declining short-term interest rates and modest yield-curve steepening. Deregulation, increased retail exposure to private markets, and tax reform discussions are ongoing.</p>
                 </div>
             </div>
         </section>
 
         <section class="presentation-section">
-            <h2 contenteditable="false">The Bond Market: A Critical Indicator</h2>
-            <p contenteditable="false">The bond market is a primary indicator of expected inflation and future economic conditions. With federal debt and M2 money supply significantly elevated, and rising interest expenses, the traditional role of bonds in a portfolio needs re-evaluation.</p>
+            <h2>The Bond Market: A Critical Indicator</h2>
+            <p>The bond market is a primary indicator of expected inflation and future economic conditions. With federal debt and M2 money supply significantly elevated, and rising interest expenses, the traditional role of bonds in a portfolio needs re-evaluation.</p>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
                 <div class="card p-6">
-                    <h3 class="text-2xl font-bold section-title mb-4" contenteditable="false">Federal Debt & Debt-to-GDP</h3>
-                    <p class="text-gray-700 mb-4" contenteditable="false">Federal debt is approximately $37 trillion, with a Debt-to-GDP ratio around 120%. These figures are projected to continue rising, posing significant questions for long-term fiscal stability and inflation.</p>
+                    <h3 class="text-2xl font-bold section-title mb-4">Federal Debt & Debt-to-GDP</h3>
+                    <p class="text-gray-700 mb-4">Federal debt is approximately $37 trillion, with a Debt-to-GDP ratio around 120%. These figures are projected to continue rising, posing significant questions for long-term fiscal stability and inflation.</p>
                     <div class="chart-container">
                         <canvas id="federalDebtToGDPChart"></canvas>
                     </div>
                 </div>
                 <div class="card p-6">
-                    <h3 class="text-2xl font-bold section-title mb-4" contenteditable="false">Interest Expense as % of Federal Spending</h3>
-                    <p class="text-gray-700 mb-4" contenteditable="false">Should interest rates remain high, the cost of servicing the federal debt will become substantially more expensive, potentially crowding out other federal expenditures.</p>
+                    <h3 class="text-2xl font-bold section-title mb-4">Interest Expense as % of Federal Spending</h3>
+                    <p class="text-gray-700 mb-4">Should interest rates remain high, the cost of servicing the federal debt will become substantially more expensive, potentially crowding out other federal expenditures.</p>
                     <div class="chart-container">
                         <canvas id="interestExpenseChart"></canvas>
                     </div>
@@ -285,10 +278,10 @@
         </section>
 
         <section class="presentation-section">
-            <h2 contenteditable="false">Inflation Erosion & Portfolio Returns</h2>
-            <p contenteditable="false">While equities offer long-term return potential, public market participation alone may not suffice to outpace inflation. M2 money supply expansion correlates with nominal asset price gains (NASDAQ), yet fuels systemic inflationary pressures, diminishing real returns. Endowments should consider diversified alpha sources and inflation-protected allocations beyond traditional market returns.</p>
+            <h2>Inflation Erosion & Portfolio Returns</h2>
+            <p>While equities offer long-term return potential, public market participation alone may not suffice to outpace inflation. M2 money supply expansion correlates with nominal asset price gains (NASDAQ), yet fuels systemic inflationary pressures, diminishing real returns. Endowments should consider diversified alpha sources and inflation-protected allocations beyond traditional market returns.</p>
             <div class="card p-6 md:p-8 w-full">
-                <h3 class="2xl font-bold text-center section-title mb-4" contenteditable="false">NASDAQ vs. M2 Money Stock</h3>
+                <h3 class="2xl font-bold text-center section-title mb-4">NASDAQ vs. M2 Money Stock</h3>
                 <div class="flex justify-center items-center w-full">
                     <img src="https://fred.stlouisfed.org/graph/fredgraph.png?g=1JLoG" alt="NASDAQ vs. M2 Money Stock" class="w-full h-auto block mx-auto">
                 </div>
@@ -296,44 +289,44 @@
         </section>
 
         <section class="presentation-section">
-            <h2 contenteditable="false">Are We Keeping Pace? Defining "Our" Inflation</h2>
-            <p contenteditable="false">Our endowment's primary goal is to preserve and grow purchasing power to support the institution's mission. This requires us to measure inflation not just by broad consumer price indices (CPI, PCE), but also by asset inflation and our specific spending needs (HEPI).</p>
-            <p contenteditable="false">The M2 money supply growth rate can serve as a relevant hurdle rate for our principal growth to truly maintain purchasing power.</p>
+            <h2>Are We Keeping Pace? Defining "Our" Inflation</h2>
+            <p>Our endowment's primary goal is to preserve and grow purchasing power to support the institution's mission. This requires us to measure inflation not just by broad consumer price indices (CPI, PCE), but also by asset inflation and our specific spending needs (HEPI).</p>
+            <p>The M2 money supply growth rate can serve as a relevant hurdle rate for our principal growth to truly maintain purchasing power.</p>
             <div class="chart-container">
                 <canvas id="inflationChart"></canvas>
             </div>
-            <p class="text-sm text-gray-600 mt-4" contenteditable="false">
+            <p class="text-sm text-gray-600 mt-4">
                 <strong class="text-blue-700">Note:</strong> Inflation data is illustrative, based on historical averages/forecasts. Our projected portfolio return must consistently exceed these benchmarks.
             </p>
         </section>
 
         <section class="presentation-section">
-            <h2 contenteditable="false">What this means for asset classes</h2>
-            <p class="text-left" contenteditable="false">
+            <h2>What this means for asset classes</h2>
+            <p class="text-left">
                 <strong class="section-title">Bonds:</strong> While nominally safe, their real value is eroded over time. Yields are often below inflation, leading to a guaranteed loss of purchasing power.
             </p>
-            <p class="text-left" contenteditable="false">
+            <p class="text-left">
                 <strong class="section-title">Equities & Real Assets:</strong> Provide crucial exposure to the real, productive economy. These have historically outperformed during inflationary regimes, helping to preserve wealth.
             </p>
-            <p class="text-left" contenteditable="false">
+            <p class="text-left">
                 <strong class="section-title">Alternative & Private Markets:</strong> These sophisticated strategies and less traditional assets have consistently demonstrated a lead in generating strong returns.
             </p>
         </section>
         <section class="presentation-section">
-            <h2 contenteditable="false">Portfolio Return Projection & Scenario Analysis</h2>
-            <p contenteditable="false">We can model long-term nominal returns based on chosen Capital Market Assumptions and asset allocations to understand potential outcomes.</p>
+            <h2>Portfolio Return Projection & Scenario Analysis</h2>
+            <p>We can model long-term nominal returns based on chosen Capital Market Assumptions and asset allocations to understand potential outcomes.</p>
             <div class="card p-6 md:p-8 w-full">
-                <h3 class="text-2xl font-bold text-center section-title mb-2" contenteditable="false">Model Your Allocation Here</h3>
-                <p class="text-center text-lg text-gray-700 mb-8" contenteditable="false">Model long-term nominal returns based on chosen Capital Market Assumptions and asset allocations.</p>
+                <h3 class="text-2xl font-bold text-center section-title mb-2">Model Your Allocation Here</h3>
+                <p class="text-center text-lg text-gray-700 mb-8">Model long-term nominal returns based on chosen Capital Market Assumptions and asset allocations.</p>
 
                 <div class="mb-6">
-                    <label for="sourceSelect" class="block text-xl font-bold section-title mb-2" contenteditable="false">Select Source(s):</label>
+                    <label for="sourceSelect" class="block text-xl font-bold section-title mb-2">Select Source(s):</label>
                     <div id="sourceCheckboxes" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-2 gap-x-4">
                     </div>
                 </div>
 
                 <details id="assetSelectionDetails" class="mb-6 border rounded-lg shadow-sm">
-                    <summary class="p-4 cursor-pointer font-bold text-lg bg-gray-50 rounded-t-lg flex justify-between items-center" contenteditable="false">
+                    <summary class="p-4 cursor-pointer font-bold text-lg bg-gray-50 rounded-t-lg flex justify-between items-center">
                         Manage Asset Classes (Based on selected sources)
                         <span class="text-gray-500">▼</span>
                     </summary>
@@ -346,10 +339,10 @@
                     </div>
 
                     <div class="flex flex-col items-center justify-center bg-gray-50 rounded-lg p-6">
-                        <p id="totalAllocation" class="text-lg font-bold text-green-600 mb-4" contenteditable="false">Total Allocation: 0%</p>
+                        <p id="totalAllocation" class="text-lg font-bold text-green-600 mb-4">Total Allocation: 0%</p>
                         <div class="text-center mb-6">
-                            <p class="text-lg font-semibold text-gray-700" contenteditable="false">Projected 10+ Year Nominal Return</p>
-                            <p id="projectedReturn10Plus" class="text-5xl font-extrabold kpi-endowment" contenteditable="false">0.0%</p>
+                            <p class="text-lg font-semibold text-gray-700">Projected 10+ Year Nominal Return</p>
+                            <p id="projectedReturn10Plus" class="text-5xl font-extrabold kpi-endowment">0.0%</p>
                         </div>
                         <div class="chart-container h-60 mt-6">
                             <canvas id="allocationChart"></canvas>
@@ -360,52 +353,52 @@
             </section>
 
         <section id="endowment-landscape" class="presentation-section">
-            <h2 class="section-title mb-2" contenteditable="false">Investment Landscape: Future Return Realities</h2>
-            <p class="text-lg text-gray-700 mb-8" contenteditable="false">Northern Trust's 2025 Capital Market Assumptions indicate shifts driven by AI, energy transition, and globalization. Elevated U.S. equity valuations may moderate future gains; private markets show greater potential. A strategic, globally diversified approach is essential for endowment growth against demographic pressures.</p>
+            <h2 class="section-title mb-2">Investment Landscape: Future Return Realities</h2>
+            <p class="text-lg text-gray-700 mb-8">Northern Trust's 2025 Capital Market Assumptions indicate shifts driven by AI, energy transition, and globalization. Elevated U.S. equity valuations may moderate future gains; private markets show greater potential. A strategic, globally diversified approach is essential for endowment growth against demographic pressures.</p>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
                 <div class="card p-6">
-                    <h3 class="2xl font-bold section-title mb-4 text-center" contenteditable="false">Asset Allocation by Endowment Size</h3>
-                    <p class="text-center text-gray-700 mb-6" contenteditable="false">Larger endowments typically increase alternative allocations. Smaller institutions should consider mirroring this for higher returns.</p>
+                    <h3 class="2xl font-bold section-title mb-4 text-center">Asset Allocation by Endowment Size</h3>
+                    <p class="text-center text-gray-700 mb-6">Larger endowments typically increase alternative allocations. Smaller institutions should consider mirroring this for higher returns.</p>
                     <div class="chart-container">
                         <canvas id="allocationBySizeChart"></canvas>
                     </div>
                 </div>
                 <div class="card p-6">
-                    <h3 class="2xl font-bold section-title mb-4 text-center" contenteditable="false">Northern Trust 10-Year Expected Nominal Returns (2025)</h3>
-                    <p class="text-center text-gray-700 mb-6" contenteditable="false">Northern Trust forecasts strong potential in private equity, international equities, and real assets, underscoring diversification for target returns.</p>
+                    <h3 class="2xl font-bold section-title mb-4 text-center">Northern Trust 10-Year Expected Nominal Returns (2025)</h3>
+                    <p class="text-center text-gray-700 mb-6">Northern Trust forecasts strong potential in private equity, international equities, and real assets, underscoring diversification for target returns.</p>
                     <div class="chart-container">
                         <canvas id="expectedReturnsChart"></canvas>
                     </div>
                 </div>
             </div>
              <div class="mt-8 text-center text-gray-700">
-                <h3 class="2xl font-bold section-title mb-4" contenteditable="false">Strategic Importance: Diversification for Resilience</h3>
-                <p class="max-w-4xl mx-auto" contenteditable="false">Concentration in U.S. public markets is less advisable due to high valuations and new market dynamics. Northern Trust's analysis advocates global diversification, shifting to international equities, private markets (equity, credit), and real assets to capture higher expected returns and enhance resilience.</p>
+                <h3 class="2xl font-bold section-title mb-4">Strategic Importance: Diversification for Resilience</h3>
+                <p class="max-w-4xl mx-auto">Concentration in U.S. public markets is less advisable due to high valuations and new market dynamics. Northern Trust's analysis advocates global diversification, shifting to international equities, private markets (equity, credit), and real assets to capture higher expected returns and enhance resilience.</p>
             </div>
         </section>
 
         <section id="endowment-implementation" class="presentation-section">
-            <h2 class="section-title mb-8" contenteditable="false">Actionable Endowment Strategy: Our Path Forward</h2>
-            <p contenteditable="false">Combating the demographic cliff and adapting to new market realities requires a clear implementation path. Proactive governance, expertise, and pacing are key to unlocking higher returns amidst evolving market dynamics.</p>
+            <h2 class="section-title mb-8">Actionable Endowment Strategy: Our Path Forward</h2>
+            <p>Combating the demographic cliff and adapting to new market realities requires a clear implementation path. Proactive governance, expertise, and pacing are key to unlocking higher returns amidst evolving market dynamics.</p>
             <div class="flowchart-container flex flex-col items-center space-y-4 w-full">
                 <div class="text-center p-4 flowchart-step rounded-lg w-full">
-                    <p class="text-4xl" contenteditable="false">1</p><h3 class="font-bold text-lg mt-2" contenteditable="false">Re-evaluate Risk Sensitivity</h3>
-                    <p class="text-sm" contenteditable="false">Recognize the changing landscape necessitates a less risk-averse investment posture to achieve real growth in light of inflation.</p>
+                    <p class="text-4xl">1</p><h3 class="font-bold text-lg mt-2">Re-evaluate Risk Sensitivity</h3>
+                    <p class="text-sm">Recognize the changing landscape necessitates a less risk-averse investment posture to achieve real growth in light of inflation.</p>
                 </div>
-                <div class="flowchart-arrow" contenteditable="false">&rarr;</div>
+                <div class="flowchart-arrow">&rarr;</div>
                 <div class="text-center p-4 flowchart-step rounded-lg w-full">
-                    <p class="text-4xl" contenteditable="false">2</p><h3 class="font-bold text-lg mt-2" contenteditable="false">Increase Diversification</h3>
-                    <p class="text-sm" contenteditable="false">Shift from concentration in U.S. Bond markets towards global diversification, including international equities, private markets (equity, credit), and real assets.</p>
+                    <p class="text-4xl">2</p><h3 class="font-bold text-lg mt-2">Increase Diversification</h3>
+                    <p class="text-sm">Shift from concentration in U.S. Bond markets towards global diversification, including international equities, private markets (equity, credit), and real assets.</p>
                 </div>
-                <div class="flowchart-arrow" contenteditable="false">&rarr;</div>
+                <div class="flowchart-arrow">&rarr;</div>
                 <div class="text-center p-4 flowchart-step rounded-lg w-full">
-                    <p class="text-4xl" contenteditable="false">3</p><h3 class="font-bold text-lg mt-2" contenteditable="false">Rewrite Risk Management Frameworks</h3>
-                    <p class="text-sm" contenteditable="false"> Develop and implement more sophisticated risk models to quantify the potential downsides of either decision. If the endowment takes on more market risk, it does so with a clear understanding.</p>
+                    <p class="text-4xl">3</p><h3 class="font-bold text-lg mt-2">Rewrite Risk Management Frameworks</h3>
+                    <p class="text-sm"> Develop and implement more sophisticated risk models to quantify the potential downsides of either decision. If the endowment takes on more market risk, it does so with a clear understanding.</p>
                 </div>
-                <div class="flowchart-arrow" contenteditable="false">&rarr;</div>
+                <div class="flowchart-arrow">&rarr;</div>
                 <div class="text-center p-4 flowchart-step rounded-lg w-full">
-                    <p class="text-4xl" contenteditable="false">4</p><h3 class="font-bold text-lg mt-2" contenteditable="false">Implement a Phased Allocation Shift</h3>
-                    <p class="text-sm" contenteditable="false">Adopt a gradual approach to reallocating assets towards less liquid alternative investments. Enhancing market monitoring, adjustmenting based on performance, and building internal comfort and understanding.</p>
+                    <p class="text-4xl">4</p><h3 class="font-bold text-lg mt-2">Implement a Phased Allocation Shift</h3>
+                    <p class="text-sm">Adopt a gradual approach to reallocating assets towards less liquid alternative investments. Enhancing market monitoring, adjustmenting based on performance, and building internal comfort and understanding.</p>
                 </div>
             </div>
         </section>
@@ -413,8 +406,8 @@
         </main>
 
     <footer class="text-center p-6 mt-12 bg-gray-800 text-white">
-        <p contenteditable="false">Infographic synthesizes data for strategic planning.</p>
-        <p class="text-sm text-gray-400 mt-2" contenteditable="false">Demographic data: WICHE. Financial forecasts: Northern Trust Capital Market Assumptions 10-Year Outlook: 2025 Edition (Jan 2025), with supplementary data from Spring 2025 outlooks.</p>
+        <p>Infographic synthesizes data for strategic planning.</p>
+        <p class="text-sm text-gray-400 mt-2">Demographic data: WICHE. Financial forecasts: Northern Trust Capital Market Assumptions 10-Year Outlook: 2025 Edition (Jan 2025), with supplementary data from Spring 2025 outlooks.</p>
     </footer>
 
     <script>
@@ -1344,57 +1337,6 @@
             renderInflationChart(currentPortfolioMetrics.return);
         }
 
-        let isEditMode = false;
-        const editableElements = [];
-
-        function setupEditableElements() {
-            const selectors = [
-                'header h1', 'header p',
-                '.presentation-section h2', '.presentation-section p', /* Changed from .presentation-slide */
-                '.presentation-section .card h3', '.presentation-section .card p', /* Changed from .presentation-slide */
-                '#returns-calculator h2', '#returns-calculator p', '#returns-calculator label', '#totalAllocation', '#projectedReturn10Plus',
-                '#inflation-comparison h2', '#inflation-comparison p', '#inflation-comparison strong',
-                '#endowment-implementation h2', '#endowment-implementation p',
-                '#endowment-implementation .flowchart-step p', '#endowment-implementation .flowchart-step h3',
-                'footer p'
-            ];
-
-            selectors.forEach(selector => {
-                document.querySelectorAll(selector).forEach(el => {
-                    if (!el.querySelector('input, button, select, textarea, a') && el.getAttribute('contenteditable') !== 'false') {
-                         editableElements.push(el);
-                         el.setAttribute('contenteditable', 'false');
-                    }
-                });
-            });
-
-            document.querySelectorAll('.flowchart-arrow').forEach(arrow => {
-                arrow.setAttribute('contenteditable', 'false');
-            });
-        }
-
-        function toggleEditMode() {
-            isEditMode = !isEditMode;
-            const toggleButton = document.getElementById('editModeToggle');
-
-            editableElements.forEach(el => {
-                if (el.tagName === 'INPUT' || el.tagName === 'BUTTON' || el.tagName === 'SELECT' || el.tagName === 'TEXTAREA') {
-                    return;
-                }
-                el.setAttribute('contenteditable', isEditMode);
-            });
-
-            if (isEditMode) {
-                toggleButton.textContent = 'Disable Edit Mode';
-                toggleButton.classList.remove('bg-blue-600', 'hover:bg-blue-700');
-                toggleButton.classList.add('bg-red-600', 'hover:bg-red-700');
-            } else {
-                toggleButton.textContent = 'Enable Edit Mode';
-                toggleButton.classList.remove('bg-red-600', 'hover:bg-red-700');
-                toggleButton.classList.add('bg-blue-600', 'hover:bg-blue-700');
-            }
-        }
-
         window.onload = function() {
             populateAllPossibleAssetClasses();
 
@@ -1993,9 +1935,6 @@
                     }
                 }
             });
-
-            setupEditableElements();
-            document.getElementById('editModeToggle').addEventListener('click', toggleEditMode);
 
             updateCalculatorDisplay();
         };
