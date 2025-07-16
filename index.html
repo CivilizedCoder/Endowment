@@ -246,11 +246,11 @@
                     <p class="text-gray-700">AI adoption is expected to boost economic growth and counterbalance the workforce declines from the retiring baby boomer generation in the U.S.</p>
                 </div>
                 <div class="card p-6">
-                    <h3 class="2xl font-bold section-title mb-4">Geopolitical Restructuring & Energy Transition</h3>
+                    <h3 class="text-2xl font-bold section-title mb-4">Geopolitical Restructuring & Energy Transition</h3>
                     <p class="text-gray-700">Rising global energy demand, energy independence goals, and geopolitical tensions are reshaping supply chains and trade (e.g., U.S.-China relations).</p>
                 </div>
                 <div class="card p-6">
-                    <h3 class="2xl font-bold section-title mb-4">Evolving Policy & Regulatory Paradigms</h3>
+                    <h3 class="text-2xl font-bold section-title mb-4">Evolving Policy & Regulatory Paradigms</h3>
                     <p class="text-gray-700">Expect declining short-term interest rates and modest yield-curve steepening. Deregulation, increased retail exposure to private markets, and tax reform discussions are ongoing.</p>
                 </div>
             </div>
@@ -259,19 +259,12 @@
         <section class="presentation-section">
             <h2>The Bond Market: A Critical Indicator</h2>
             <p>The bond market is a primary indicator of expected inflation and future economic conditions. With federal debt and M2 money supply significantly elevated, and rising interest expenses, the traditional role of bonds in a portfolio needs re-evaluation.</p>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
-                <div class="card p-6">
+            <div class="flex justify-center w-full">
+                <div class="card p-6 md:w-3/4">
                     <h3 class="text-2xl font-bold section-title mb-4">Federal Debt & Debt-to-GDP</h3>
                     <p class="text-gray-700 mb-4">Federal debt is approximately $37 trillion, with a Debt-to-GDP ratio around 120%. These figures are projected to continue rising, posing significant questions for long-term fiscal stability and inflation.</p>
                     <div class="chart-container">
                         <canvas id="federalDebtToGDPChart"></canvas>
-                    </div>
-                </div>
-                <div class="card p-6">
-                    <h3 class="text-2xl font-bold section-title mb-4">Interest Expense as % of Federal Spending</h3>
-                    <p class="text-gray-700 mb-4">Should interest rates remain high, the cost of servicing the federal debt will become substantially more expensive, potentially crowding out other federal expenditures.</p>
-                    <div class="chart-container">
-                        <canvas id="interestExpenseChart"></canvas>
                     </div>
                 </div>
             </div>
@@ -281,7 +274,7 @@
             <h2>Inflation Erosion & Portfolio Returns</h2>
             <p>While equities offer long-term return potential, public market participation alone may not suffice to outpace inflation. M2 money supply expansion correlates with nominal asset price gains (NASDAQ), yet fuels systemic inflationary pressures, diminishing real returns. Endowments should consider diversified alpha sources and inflation-protected allocations beyond traditional market returns.</p>
             <div class="card p-6 md:p-8 w-full">
-                <h3 class="2xl font-bold text-center section-title mb-4">NASDAQ vs. M2 Money Stock</h3>
+                <h3 class="text-2xl font-bold text-center section-title mb-4">NASDAQ vs. M2 Money Stock</h3>
                 <div class="flex justify-center items-center w-full">
                     <img src="https://fred.stlouisfed.org/graph/fredgraph.png?g=1JLoG" alt="NASDAQ vs. M2 Money Stock" class="w-full h-auto block mx-auto">
                 </div>
@@ -312,6 +305,7 @@
                 <strong class="section-title">Alternative & Private Markets:</strong> These sophisticated strategies and less traditional assets have consistently demonstrated a lead in generating strong returns.
             </p>
         </section>
+        
         <section class="presentation-section">
             <h2>Portfolio Return Projection & Scenario Analysis</h2>
             <p>We can model long-term nominal returns based on chosen Capital Market Assumptions and asset allocations to understand potential outcomes.</p>
@@ -350,21 +344,21 @@
                     </div>
                 </div>
             </div>
-            </section>
+        </section>
 
         <section id="endowment-landscape" class="presentation-section">
             <h2 class="section-title mb-2">Investment Landscape: Future Return Realities</h2>
             <p class="text-lg text-gray-700 mb-8">Northern Trust's 2025 Capital Market Assumptions indicate shifts driven by AI, energy transition, and globalization. Elevated U.S. equity valuations may moderate future gains; private markets show greater potential. A strategic, globally diversified approach is essential for endowment growth against demographic pressures.</p>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
                 <div class="card p-6">
-                    <h3 class="2xl font-bold section-title mb-4 text-center">Asset Allocation by Endowment Size</h3>
+                    <h3 class="text-2xl font-bold section-title mb-4 text-center">Asset Allocation by Endowment Size</h3>
                     <p class="text-center text-gray-700 mb-6">Larger endowments typically increase alternative allocations. Smaller institutions should consider mirroring this for higher returns.</p>
                     <div class="chart-container">
                         <canvas id="allocationBySizeChart"></canvas>
                     </div>
                 </div>
                 <div class="card p-6">
-                    <h3 class="2xl font-bold section-title mb-4 text-center">Northern Trust 10-Year Expected Nominal Returns (2025)</h3>
+                    <h3 class="text-2xl font-bold section-title mb-4 text-center">Northern Trust 10-Year Expected Nominal Returns (2025)</h3>
                     <p class="text-center text-gray-700 mb-6">Northern Trust forecasts strong potential in private equity, international equities, and real assets, underscoring diversification for target returns.</p>
                     <div class="chart-container">
                         <canvas id="expectedReturnsChart"></canvas>
@@ -372,36 +366,142 @@
                 </div>
             </div>
              <div class="mt-8 text-center text-gray-700">
-                <h3 class="2xl font-bold section-title mb-4">Strategic Importance: Diversification for Resilience</h3>
+                <h3 class="text-2xl font-bold section-title mb-4">Strategic Importance: Diversification for Resilience</h3>
                 <p class="max-w-4xl mx-auto">Concentration in U.S. public markets is less advisable due to high valuations and new market dynamics. Northern Trust's analysis advocates global diversification, shifting to international equities, private markets (equity, credit), and real assets to capture higher expected returns and enhance resilience.</p>
             </div>
         </section>
 
-        <section id="endowment-implementation" class="presentation-section">
-            <h2 class="section-title mb-8">Actionable Endowment Strategy: Our Path Forward</h2>
-            <p>Combating the demographic cliff and adapting to new market realities requires a clear implementation path. Proactive governance, expertise, and pacing are key to unlocking higher returns amidst evolving market dynamics.</p>
-            <div class="flowchart-container flex flex-col items-center space-y-4 w-full">
-                <div class="text-center p-4 flowchart-step rounded-lg w-full">
-                    <p class="text-4xl">1</p><h3 class="font-bold text-lg mt-2">Re-evaluate Risk Sensitivity</h3>
-                    <p class="text-sm">Recognize the changing landscape necessitates a less risk-averse investment posture to achieve real growth in light of inflation.</p>
+        <!-- Addressing Bitcoin Concerns Section Start -->
+        <section class="presentation-section">
+            <h2 class="section-title mb-4 text-center">Addressing Bitcoin Concerns: Volatility & Risk</h2>
+            <p class="text-lg text-gray-700 mb-8 text-center max-w-4xl mx-auto">
+                For many institutional investors, Bitcoin's primary concern has been its historical volatility. While undeniably a volatile asset, recent trends suggest a maturation process. It's also crucial to contextualize this volatility against other high-growth assets and historical precedents, such as gold during its initial integration into the modern financial system.
+            </p>
+            <div class="grid grid-cols-1 gap-8 w-full max-w-3xl mx-auto">
+                <!-- Card 1: Bitcoin Volatility -->
+                <div class="card p-6 flex flex-col items-center">
+                    <h3 class="text-xl font-bold section-title mb-4 text-center">Declining Volatility Trend</h3>
+                    <img src="https://fwc.widen.net/content/0gxab3wf3d/jpeg/5%20-%20Bitcoin%20Realized%20Volatility.jpeg?w=640&keep=c&crop=yes&color=cccccc&quality=100&u=5lvvtn" alt="Bitcoin Realized Volatility" class="w-full h-auto rounded-lg shadow-md mb-4">
+                    <p class="text-gray-700 text-center">Bitcoin's 90-day realized volatility has shown a notable downward trend, indicating a potential shift towards greater price stability as the asset class matures.</p>
                 </div>
-                <div class="flowchart-arrow">&rarr;</div>
-                <div class="text-center p-4 flowchart-step rounded-lg w-full">
-                    <p class="text-4xl">2</p><h3 class="font-bold text-lg mt-2">Increase Diversification</h3>
-                    <p class="text-sm">Shift from concentration in U.S. Bond markets towards global diversification, including international equities, private markets (equity, credit), and real assets.</p>
+                <!-- Card 2: Gold Volatility -->
+                <div class="card p-6 flex flex-col items-center">
+                     <h3 class="text-xl font-bold section-title mb-4 text-center">A Historical Parallel: Gold</h3>
+                    <img src="https://fwc.widen.net/content/nvlnlqlenp/jpeg/6%20-%20Gold%20Price%20and%20Historical%20Volatility.jpeg?w=640&keep=c&crop=yes&color=cccccc&quality=100&u=5lvvtn" alt="Gold Price and Historical Volatility" class="w-full h-auto rounded-lg shadow-md mb-4">
+                    <p class="text-gray-700 text-center">Gold experienced significant volatility after the breakdown of the Bretton Woods system in the 1970s, a pattern that mirrors Bitcoin's early years as a new store of value.</p>
                 </div>
-                <div class="flowchart-arrow">&rarr;</div>
-                <div class="text-center p-4 flowchart-step rounded-lg w-full">
-                    <p class="text-4xl">3</p><h3 class="font-bold text-lg mt-2">Rewrite Risk Management Frameworks</h3>
-                    <p class="text-sm"> Develop and implement more sophisticated risk models to quantify the potential downsides of either decision. If the endowment takes on more market risk, it does so with a clear understanding.</p>
+                <!-- Card 3: Risk in Context -->
+                <div class="card p-6 flex flex-col items-center">
+                     <h3 class="text-xl font-bold section-title mb-4 text-center">Risk in Context</h3>
+                    <img src="https://fwc.widen.net/content/um3l0lghfo/jpeg/3%20-%20Maginificent%20Seven.jpeg?w=640&keep=c&crop=yes&color=cccccc&quality=100&u=5lvvtn" alt="Bitcoin vs Magnificent Seven Stocks Risk" class="w-full h-auto rounded-lg shadow-md mb-4">
+                    <p class="text-gray-700 text-center">When viewed alongside the "Magnificent Seven" tech stocks, Bitcoin's risk profile, while high, is within the range of other growth-oriented assets familiar to modern portfolios.</p>
+                    <div class="mt-6 pt-4 border-t border-gray-300 w-full text-left text-xs text-gray-600">
+                        <h4 class="font-bold text-sm text-gray-800 mb-2">Disclaimers & Citations:</h4>
+                        <ul class="list-disc list-inside space-y-1">
+                            <li><strong>Definition of Risk:</strong> "Less risk" refers specifically to lower historical annualized volatility, which is not the sole determinant of investment risk.</li>
+                            <li><strong>Timeframe Sensitivity:</strong> Data is time-sensitive. The claim that Bitcoin was less volatile than "92 of the S&P 500 stocks" refers to 90-day realized volatility in October 2023.</li>
+                            <li><strong>Historical Data:</strong> Past performance and historical volatility are not indicative of future results.</li>
+                        </ul>
+                        <p class="mt-3">
+                            <strong>Source:</strong> Fidelity Digital Assets. "A Closer Look: Bitcoin's Volatility." (Jan. 2024). Data via Glassnode.
+                        </p>
+                    </div>
                 </div>
-                <div class="flowchart-arrow">&rarr;</div>
-                <div class="text-center p-4 flowchart-step rounded-lg w-full">
-                    <p class="text-4xl">4</p><h3 class="font-bold text-lg mt-2">Implement a Phased Allocation Shift</h3>
-                    <p class="text-sm">Adopt a gradual approach to reallocating assets towards less liquid alternative investments. Enhancing market monitoring, adjustmenting based on performance, and building internal comfort and understanding.</p>
+                 <!-- Card 4: Sharpe vs. Sortino Ratio -->
+                <div class="card p-6 flex flex-col">
+                    <h3 class="text-xl font-bold section-title mb-4 text-center">Sharpe vs. Sortino: A Better View of Risk</h3>
+                    <div class="flex-grow">
+                        <p class="text-gray-700 text-center mb-4">
+                            The <strong>Sharpe ratio</strong> measures return against total volatility (both upside and downside). For an asset like Bitcoin, with significant upside potential, this can be misleading as it penalizes positive price swings.
+                        </p>
+                        <p class="text-gray-700 text-center mb-6">
+                            The <strong>Sortino ratio</strong>, however, only considers downside volatility. This provides a more favorable and arguably more relevant measure of risk-adjusted return for assets with asymmetric return profiles, as it doesn't punish the "good" volatility that investors seek.
+                        </p>
+                    </div>
+                    <div class="bg-gray-100 p-4 rounded-lg w-full mt-auto">
+                        <h4 class="text-lg font-bold text-center section-title mb-3">Calculated Ratios (for selected period)</h4>
+                        <div class="flex justify-around text-center">
+                            <div>
+                                <p class="text-xs font-semibold text-gray-500 uppercase">SHARPE RATIO</p>
+                                <p id="sharpeRatio" class="text-2xl font-bold text-gray-800">--</p>
+                            </div>
+                            <div>
+                                <p class="text-xs font-semibold text-gray-500 uppercase">SORTINO RATIO</p>
+                                <p id="sortinoRatio" class="text-2xl font-bold text-blue-600">--</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
+        <!-- Addressing Bitcoin Concerns Section End -->
+
+        <!-- MODIFIED BITCOIN SECTION START -->
+        <section class="presentation-section">
+            <h2>Bitcoin Price History</h2>
+            <p>Explore the historical price of Bitcoin. Use the sliders to select the investment duration and move the analysis window through Bitcoin's history.</p>
+            <div class="card p-6 md:p-8 w-full">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6 items-center">
+                    <div class="md:col-span-2 space-y-4">
+                        <div>
+                            <label for="btcTimeHorizonSlider" class="block text-sm font-medium text-gray-700 mb-1">Select Time Horizon: <span id="btcTimeHorizonDisplay" class="font-bold">48 months (4.0 years)</span></label>
+                            <input type="range" id="btcTimeHorizonSlider" min="1" max="120" value="48" class="w-full h-2 bg-gray-300 rounded-lg appearance-none cursor-pointer calculator-slider">
+                        </div>
+                        <div>
+                            <label for="btcRangeSlider" class="block text-sm font-medium text-gray-700 mb-1">Adjust Time Window Start Date</label>
+                            <input type="range" id="btcRangeSlider" class="w-full h-2 bg-gray-300 rounded-lg appearance-none cursor-pointer calculator-slider">
+                            <div id="btcDateRangeDisplay" class="text-sm text-gray-500 mt-2 text-center font-medium"></div>
+                        </div>
+                    </div>
+                    <div class="text-center md:text-left bg-gray-100 p-4 rounded-lg space-y-2">
+                        <div>
+                            <p class="text-xs font-semibold text-gray-500 uppercase">Start Price</p>
+                            <p id="btcStartPrice" class="text-lg font-bold text-gray-800">$0.00</p>
+                        </div>
+                        <div>
+                            <p class="text-xs font-semibold text-gray-500 uppercase">End Price</p>
+                            <p id="btcEndPrice" class="text-lg font-bold text-gray-800">$0.00</p>
+                        </div>
+                        <div>
+                            <p class="text-xs font-semibold text-gray-500 uppercase">Total Return</p>
+                            <p id="btcTotalReturn" class="text-2xl font-bold text-gray-800">+0.00%</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="chart-container" style="height: 450px;">
+                    <canvas id="bitcoinChart"></canvas>
+                </div>
+            </div>
+        </section>
+        <!-- MODIFIED BITCOIN SECTION END -->
+
+        <!-- Institutional Adoption Section Start -->
+        <section class="presentation-section">
+            <h2 class="section-title mb-4 text-center">Institutional Bitcoin Adoption: A New Frontier</h2>
+            <p class="text-lg text-gray-700 mb-8 text-center max-w-4xl mx-auto">Leading academic and financial institutions are beginning to allocate portions of their endowments and funds into Bitcoin ETFs, signaling a landmark shift in institutional investment strategy.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
+                <!-- Card 1: Brown University -->
+                <div class="card p-6 flex flex-col">
+                    <h3 class="text-2xl font-bold section-title mb-4">Brown University's Strategic Move</h3>
+                    <p class="text-gray-700 flex-grow">Citing Q1 2024 SEC filings, Brown University's ~$7 billion endowment disclosed a multi-million dollar investment in Bitcoin ETFs. Reports confirm holdings of over $7 million in BlackRock's IBIT and Grayscale's GBTC, marking a calculated entry into digital assets by a prominent Ivy League institution.</p>
+                    <p class="text-xs text-gray-500 mt-4">Source: 13F Filings, CoinDesk</p>
+                </div>
+
+                <!-- Card 2: BlackRock & Fidelity -->
+                <div class="card p-6 flex flex-col">
+                    <h3 class="text-2xl font-bold section-title mb-4">Titans of Finance: BlackRock & Fidelity</h3>
+                    <p class="text-gray-700 flex-grow">The launch of spot Bitcoin ETFs by giants like BlackRock (IBIT) and Fidelity (FBTC) has been monumental. These products shattered records for asset inflows, providing regulated, low-barrier access to Bitcoin. This innovation has legitimized digital assets for a broader range of investors and integrated them into mainstream finance.</p>
+                </div>
+
+                <!-- Card 3: University of Wisconsin -->
+                <div class="card p-6 flex flex-col">
+                    <h3 class="text-2xl font-bold section-title mb-4">A Bold Step by Wisconsin's SWIB</h3>
+                    <p class="text-gray-700 flex-grow">The State of Wisconsin Investment Board (SWIB), managing funds for the University of Wisconsin System, made a significant splash with its Bitcoin ETF investments. Filings revealed a holding of nearly $100 million in BlackRock's IBIT and over $63 million in Grayscale's GBTC, positioning them as one of the largest and most visible institutional adopters to date.</p>
+                     <p class="text-xs text-gray-500 mt-4">Source: 13F Filings</p>
+                </div>
+            </div>
+        </section>
+        <!-- Institutional Adoption Section End -->
 
         </main>
 
@@ -883,7 +983,6 @@
         let allocationChart;
         let inflationChart;
         let federalDebtToGDPChart; // New chart variable
-        let interestExpenseChart; // New chart variable
         let currentPortfolioMetrics = { return: 0 };
 
         const allocationChartColors = [
@@ -1337,6 +1436,396 @@
             renderInflationChart(currentPortfolioMetrics.return);
         }
 
+        // --- MODIFIED BITCOIN CHART LOGIC START ---
+        function setupBitcoinChart() {
+            const btcDataRaw = `
+                2010-08-31   | $0.0700
+2010-09-30   | $0.0600
+2010-10-31   | $0.1900
+2010-11-30   | $0.2800
+2010-12-31   | $0.2700
+2011-01-31   | $0.4500
+2011-02-28   | $1.0000
+2011-03-31   | $0.8000
+2011-04-30   | $1.7800
+2011-05-31   | $8.6800
+2011-06-30   | $17.3500
+2011-07-31   | $14.1000
+2011-08-31   | $9.4800
+2011-09-30   | $4.9400
+2011-10-31   | $3.1000
+2011-11-30   | $2.6400
+2011-12-31   | $4.4700
+2012-01-31   | $5.7000
+2012-02-29   | $4.9800
+2012-03-31   | $4.7700
+2012-04-30   | $5.0900
+2012-05-31   | $5.1800
+2012-06-30   | $6.5800
+2012-07-31   | $8.9500
+2012-08-31   | $10.9100
+2012-09-30   | $12.4600
+2012-10-31   | $10.9300
+2012-11-30   | $12.6200
+2012-12-31   | $13.6500
+2013-01-31   | $19.7800
+2013-02-28   | $31.2000
+2013-03-31   | $92.5000
+2013-04-30   | $128.5000
+2013-05-31   | $132.3000
+2013-06-30   | $104.0000
+2013-07-31   | $98.7000
+2013-08-31   | $118.5000
+2013-09-30   | $124.6500
+2013-10-31   | $206.9000
+2013-11-30   | $1,133.9500
+2013-12-31   | $723.9800
+2014-01-31   | $785.6000
+2014-02-28   | $559.5200
+2014-03-31   | $490.0000
+2014-04-30   | $461.4800
+2014-05-31   | $581.0000
+2014-06-30   | $599.9900
+2014-07-31   | $593.6800
+2014-08-31   | $506.6100
+2014-09-30   | $373.8700
+2014-10-31   | $350.9000
+2014-11-30   | $376.9800
+2014-12-31   | $311.0000
+2015-01-31   | $263.5200
+2015-02-28   | $239.9400
+2015-03-31   | $252.9600
+2015-04-30   | $225.6200
+2015-05-31   | $235.3100
+2015-06-30   | $248.5700
+2015-07-31   | $288.4500
+2015-08-31   | $225.1100
+2015-09-30   | $239.1400
+2015-10-31   | $328.1700
+2015-11-30   | $358.0000
+2015-12-31   | $433.2300
+2016-01-31   | $376.6000
+2016-02-29   | $431.5900
+2016-03-31   | $413.7400
+2016-04-30   | $445.2900
+2016-05-31   | $511.3000
+2016-06-30   | $630.1900
+2016-07-31   | $655.5400
+2016-08-31   | $571.5000
+2016-09-30   | $606.7900
+2016-10-31   | $685.9100
+2016-11-30   | $730.0200
+2016-12-31   | $930.3400
+2017-01-31   | $918.6200
+2017-02-28   | $1,150.3700
+2017-03-31   | $1,039.7700
+2017-04-30   | $1,288.0200
+2017-05-31   | $2,177.3800
+2017-06-30   | $2,541.6900
+2017-07-31   | $2,656.5300
+2017-08-31   | $4,376.6600
+2017-09-30   | $4,164.2700
+2017-10-31   | $5,769.8900
+2017-11-30   | $9,919.0000
+2017-12-31   | $12,612.5400
+2018-01-31   | $11,431.3700
+2018-02-28   | $9,699.7600
+2018-03-31   | $7,950.6100
+2018-04-30   | $9,398.4000
+2018-05-31   | $7,344.5600
+2018-06-30   | $5,878.1400
+2018-07-31   | $8,171.4900
+2018-08-31   | $6,901.2600
+2018-09-30   | $6,628.6600
+2018-10-31   | $6,301.6100
+2018-11-30   | $3,828.4500
+2018-12-31   | $3,770.3600
+2019-01-31   | $3,470.0000
+2019-02-28   | $3,833.2300
+2019-03-31   | $4,048.5100
+2019-04-30   | $5,301.2900
+2019-05-31   | $8,272.4600
+2019-06-30   | $11,132.8500
+2019-07-31   | $9,501.3300
+2019-08-31   | $9,577.9900
+2019-09-30   | $8,193.9000
+2019-10-31   | $9,433.3500
+2019-11-30   | $7,163.6300
+2019-12-31   | $7,301.0700
+2020-01-31   | $9,279.8100
+2020-02-29   | $8,785.5200
+2020-03-31   | $5,885.4100
+2020-04-30   | $7,699.2700
+2020-05-31   | $9,569.2100
+2020-06-30   | $9,185.3500
+2020-07-31   | $11,042.4000
+2020-08-31   | $11,534.7500
+2020-09-30   | $10,840.8000
+2020-10-31   | $13,651.4700
+2020-11-30   | $17,732.4200
+2020-12-31   | $28,856.5900
+2021-01-31   | $30,419.1700
+2021-02-28   | $50,624.8400
+2021-03-31   | $55,783.7100
+2021-04-30   | $53,584.1500
+2021-05-31   | $38,445.2900
+2021-06-30   | $34,456.6700
+2021-07-31   | $42,214.1500
+2021-08-31   | $49,056.8600
+2021-09-30   | $41,011.1600
+2021-10-31   | $61,731.2900
+2021-11-30   | $54,801.1500
+2021-12-31   | $46,408.8700
+2022-01-31   | $37,918.6200
+2022-02-28   | $37,704.5600
+2022-03-31   | $46,858.5300
+2022-04-30   | $39,770.0400
+2022-05-31   | $31,715.5800
+2022-06-30   | $20,702.2300
+2022-07-31   | $23,792.0000
+2022-08-31   | $19,793.0200
+2022-09-30   | $19,104.8900
+2022-10-31   | $20,816.1600
+2022-11-30   | $16,453.4700
+2022-12-31   | $16,539.2800
+2023-01-31   | $23,755.8500
+2023-02-28   | $23,563.1100
+2023-03-31   | $28,033.0600
+2023-04-30   | $29,480.3500
+2023-05-31   | $27,744.6600
+2023-06-30   | $30,266.7000
+2023-07-31   | $29,316.1200
+2023-08-31   | $27,731.2300
+2023-09-30   | $26,212.8200
+2023-10-31   | $34,090.6800
+2023-11-30   | $37,867.3700
+2023-12-31   | $43,470.7600
+2024-01-31   | $42,030.8100
+2024-02-29   | $51,727.7600
+2024-03-31   | $70,754.6900
+2024-04-30   | $63,832.7200
+2024-05-31   | $69,374.1700
+2024-06-30   | $60,315.6700
+2024-07-31   | $66,180.0000
+2024-08-31   | $59,466.8200
+2024-09-30   | $65,888.5000
+2024-10-31   | $72,329.8700
+2024-11-30   | $95,956.9900
+2024-12-31   | $93,536.4200
+2025-01-31   | $104,743.9700
+2025-02-28   | $84,645.8600
+2025-03-31   | $87,187.7700
+2025-04-30   | $94,998.2000
+2025-05-31   | $104,027.6700
+2025-06-30   | $107,110.3300
+2025-07-31   | $119,095.3900
+
+            `;
+
+            const btcData = btcDataRaw.trim().split('\n').map(line => {
+                const parts = line.split('|');
+                const date = parts[0].trim();
+                const price = parseFloat(parts[1].replace(/[$,]/g, '').trim());
+                return { date, price };
+            }).filter(d => !isNaN(d.price)); // Filter out any potential parsing errors
+
+            const timeHorizonSlider = document.getElementById('btcTimeHorizonSlider');
+            const timeHorizonDisplay = document.getElementById('btcTimeHorizonDisplay');
+            const rangeSlider = document.getElementById('btcRangeSlider');
+            const dateRangeDisplay = document.getElementById('btcDateRangeDisplay');
+            const startPriceEl = document.getElementById('btcStartPrice');
+            const endPriceEl = document.getElementById('btcEndPrice');
+            const totalReturnEl = document.getElementById('btcTotalReturn');
+            const sharpeRatioEl = document.getElementById('sharpeRatio');
+            const sortinoRatioEl = document.getElementById('sortinoRatio');
+            
+            const ctx = document.getElementById('bitcoinChart').getContext('2d');
+            const btcChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: 'Bitcoin Price (USD)',
+                        data: [],
+                        borderColor: chartColors.orange,
+                        backgroundColor: 'rgba(255, 152, 0, 0.2)',
+                        fill: true,
+                        tension: 0.1,
+                        pointRadius: 1,
+                    }]
+                },
+                options: {
+                    ...defaultChartOptions,
+                    scales: {
+                        y: {
+                            ...defaultChartOptions.scales.y,
+                            title: { display: true, text: 'Price (USD)' },
+                            type: 'logarithmic', // Use logarithmic scale for better visualization of large price changes
+                            ticks: {
+                                callback: function(value, index, ticks) {
+                                     if (value === 100 || value === 1000 || value === 10000 || value === 100000 || value === 1000000 || value === 10000000) {
+                                        return '$' + value.toLocaleString();
+                                    }
+                                    return '';
+                                }
+                            }
+                        },
+                        x: {
+                            ...defaultChartOptions.scales.x,
+                            title: { display: true, text: 'Date' }
+                        }
+                    },
+                    plugins: {
+                        ...defaultChartOptions.plugins,
+                        tooltip: {
+                            ...defaultChartOptions.plugins.tooltip,
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        label += '$' + context.parsed.y.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // --- Ratio Calculation Functions ---
+            function calculateRatios(prices) {
+                if (prices.length < 2) {
+                    return { sharpe: NaN, sortino: NaN };
+                }
+
+                // 1. Calculate monthly returns
+                const returns = [];
+                for (let i = 1; i < prices.length; i++) {
+                    returns.push((prices[i] - prices[i-1]) / prices[i-1]);
+                }
+
+                if (returns.length === 0) {
+                     return { sharpe: NaN, sortino: NaN };
+                }
+
+                // 2. Calculate average return
+                const meanReturn = returns.reduce((a, b) => a + b, 0) / returns.length;
+
+                // 3. Calculate standard deviation (for Sharpe)
+                const stdDev = Math.sqrt(returns.map(r => Math.pow(r - meanReturn, 2)).reduce((a, b) => a + b, 0) / returns.length);
+
+                // 4. Calculate downside deviation (for Sortino)
+                const riskFreeRate = 0; // Assuming 0 for simplicity
+                const negativeReturns = returns.filter(r => r < riskFreeRate);
+                const downsideDeviation = Math.sqrt(negativeReturns.map(r => Math.pow(r - riskFreeRate, 2)).reduce((a, b) => a + b, 0) / returns.length);
+
+                // 5. Calculate Ratios (annualized)
+                const annualizedMeanReturn = meanReturn * 12;
+                const annualizedStdDev = stdDev * Math.sqrt(12);
+                const annualizedDownsideDeviation = downsideDeviation * Math.sqrt(12);
+                
+                const sharpe = annualizedStdDev > 0 ? (annualizedMeanReturn - (riskFreeRate * 12)) / annualizedStdDev : 0;
+                const sortino = annualizedDownsideDeviation > 0 ? (annualizedMeanReturn - (riskFreeRate * 12)) / annualizedDownsideDeviation : 0;
+
+                return { sharpe, sortino };
+            }
+
+
+            function updateBitcoinAnalysis() {
+                const timeHorizonInMonths = parseInt(timeHorizonSlider.value, 10);
+                const startIndex = parseInt(rangeSlider.value, 10);
+                const endIndex = Math.min(startIndex + timeHorizonInMonths, btcData.length);
+                
+                const filteredData = btcData.slice(startIndex, endIndex);
+
+                if (filteredData.length < 2) {
+                    btcChart.data.labels = [];
+                    btcChart.data.datasets[0].data = [];
+                    btcChart.update('none');
+                    dateRangeDisplay.textContent = 'Not enough data';
+                    startPriceEl.textContent = '$--';
+                    endPriceEl.textContent = '$--';
+                    totalReturnEl.textContent = '--%';
+                    sharpeRatioEl.textContent = '--';
+                    sortinoRatioEl.textContent = '--';
+                    return;
+                }
+
+                const startDate = filteredData[0].date;
+                const endDate = filteredData[filteredData.length - 1].date;
+                dateRangeDisplay.textContent = `Showing: ${startDate} to ${endDate}`;
+
+                const startPrice = filteredData[0].price;
+                const endPrice = filteredData[filteredData.length - 1].price;
+                const totalReturn = ((endPrice - startPrice) / startPrice) * 100;
+
+                startPriceEl.textContent = `$${startPrice.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+                endPriceEl.textContent = `$${endPrice.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+                totalReturnEl.textContent = `${totalReturn >= 0 ? '+' : ''}${totalReturn.toFixed(2)}%`;
+                totalReturnEl.style.color = totalReturn >= 0 ? chartColors.green : chartColors.accentRed;
+
+
+                const chartLabels = filteredData.map(d => d.date);
+                const chartData = filteredData.map(d => d.price);
+
+                // Calculate and display ratios
+                const pricesForRatio = filteredData.map(d => d.price);
+                const ratios = calculateRatios(pricesForRatio);
+                sharpeRatioEl.textContent = isNaN(ratios.sharpe) ? '--' : ratios.sharpe.toFixed(2);
+                sortinoRatioEl.textContent = isNaN(ratios.sortino) ? '--' : ratios.sortino.toFixed(2);
+
+
+                btcChart.data.labels = chartLabels;
+                btcChart.data.datasets[0].data = chartData;
+                btcChart.update('none');
+            }
+
+            // Event listener for the new time horizon slider
+            timeHorizonSlider.addEventListener('input', () => {
+                const newHorizon = parseInt(timeHorizonSlider.value, 10);
+                timeHorizonDisplay.textContent = `${newHorizon} months (${(newHorizon / 12).toFixed(1)} years)`;
+
+                const newMax = btcData.length - newHorizon;
+                rangeSlider.max = newMax;
+
+                // Adjust the main slider's value if it's now out of bounds
+                if (parseInt(rangeSlider.value, 10) > newMax) {
+                    rangeSlider.value = newMax;
+                }
+                
+                updateBitcoinAnalysis();
+            });
+
+            // Event listener for the main date range slider
+            rangeSlider.addEventListener('input', updateBitcoinAnalysis);
+
+            // Initial setup
+            function initializeControls() {
+                // Set max for horizon slider (e.g., up to total data length minus a few points)
+                timeHorizonSlider.max = btcData.length - 2;
+                
+                // Set initial horizon value (e.g., 48 months)
+                const initialHorizon = 48;
+                timeHorizonSlider.value = initialHorizon;
+                timeHorizonDisplay.textContent = `${initialHorizon} months (${(initialHorizon / 12).toFixed(1)} years)`;
+
+                // Configure and initialize the main slider
+                const initialMax = btcData.length - initialHorizon;
+                rangeSlider.max = initialMax;
+                rangeSlider.value = initialMax; // Start at the most recent data
+                
+                // Initial call to populate the chart
+                updateBitcoinAnalysis();
+            }
+
+            initializeControls();
+        }
+        // --- MODIFIED BITCOIN CHART LOGIC END ---
+
         window.onload = function() {
             populateAllPossibleAssetClasses();
 
@@ -1565,378 +2054,10 @@
                 }
             });
 
-            // Data for Interest Expense as % of Federal Spending chart
-            const interestExpenseDataRaw = `
-1947-01-01    0.13085
-1947-04-01    0.13285
-1947-07-01    0.12750
-1947-10-01    0.14260
-1948-01-01    0.14072
-1948-04-01    0.13813
-1948-07-01    0.12990
-1948-10-01    0.12885
-1949-01-01    0.12599
-1949-04-01    0.12438
-1949-07-01    0.12600
-1949-10-01    0.13119
-1950-01-01    0.11440
-1950-04-01    0.13302
-1950-07-01    0.14772
-1950-10-01    0.13619
-1951-01-01    0.12417
-1951-04-01    0.11436
-1951-07-01    0.10672
-1951-10-01    0.10459
-1952-01-01    0.10588
-1952-04-01    0.10049
-1952-07-01    0.09781
-1952-10-01    0.09836
-1953-01-01    0.09906
-1953-04-01    0.09704
-1953-07-01    0.10093
-1953-10-01    0.10038
-1954-01-01    0.10525
-1954-04-01    0.10866
-1954-07-01    0.11021
-1954-10-01    0.10973
-1955-01-01    0.10876
-1955-04-01    0.10915
-1955-07-01    0.10964
-1955-10-01    0.11469
-1956-01-01    0.11548
-1956-04-01    0.11556
-1956-07-01    0.12019
-1956-10-01    0.12382
-1957-01-01    0.11816
-1957-04-01    0.12008
-1957-07-01    0.12253
-1957-10-01    0.12229
-1958-01-01    0.11815
-1958-04-01    0.11117
-1958-07-01    0.11256
-1958-10-01    0.11433
-1959-01-01    0.12711
-1959-04-01    0.12164
-1959-07-01    0.12678
-1959-10-01    0.13002
-1960-01-01    0.15427
-1960-04-01    0.15080
-1960-07-01    0.14754
-1960-10-01    0.14217
-1961-01-01    0.14187
-1961-04-01    0.13727
-1961-07-01    0.13906
-1961-10-01    0.13899
-1962-01-01    0.13704
-1962-04-01    0.13889
-1962-07-01    0.14014
-1962-10-01    0.14048
-1963-01-01    0.14093
-1963-04-01    0.14333
-1963-07-01    0.14418
-1963-10-01    0.14435
-1964-01-01    0.14506
-1964-04-01    0.14591
-1964-07-01    0.14961
-1964-10-01    0.15129
-1965-01-01    0.15136
-1965-04-01    0.15036
-1965-07-01    0.14512
-1965-10-01    0.14413
-1966-01-01    0.14288
-1966-04-01    0.14051
-1966-07-01    0.13941
-1966-10-01    0.13886
-1967-01-01    0.13308
-1967-04-01    0.13172
-1967-07-01    0.13193
-1967-10-01    0.13243
-1968-01-01    0.13258
-1968-04-01    0.13270
-1968-07-01    0.13407
-1968-10-01    0.13335
-1969-01-01    0.13642
-1969-04-01    0.13676
-1969-07-01    0.13928
-1969-10-01    0.14485
-1970-01-01    0.15105
-1970-04-01    0.14938
-1970-07-01    0.15343
-1970-10-01    0.15221
-1971-01-01    0.14904
-1971-04-01    0.14309
-1971-07-01    0.14595
-1971-10-01    0.14542
-1972-01-01    0.14112
-1972-04-01    0.13897
-1972-07-01    0.14559
-1972-10-01    0.13635
-1973-01-01    0.14466
-1973-04-01    0.14840
-1973-07-01    0.15404
-1973-10-01    0.15493
-1974-01-01    0.15289
-1974-04-01    0.15065
-1974-07-01    0.15059
-1974-10-01    0.14633
-1975-01-01    0.14206
-1975-04-01    0.13628
-1975-07-01    0.13990
-1975-10-01    0.14185
-1976-01-01    0.14435
-1976-04-01    0.14680
-1976-07-01    0.14587
-1976-10-01    0.14681
-1977-01-01    0.14743
-1977-04-01    0.14872
-1977-07-01    0.14849
-1977-10-01    0.15208
-1978-01-01    0.15792
-1978-04-01    0.16161
-1978-07-01    0.16451
-1978-10-01    0.16689
-1979-01-01    0.17109
-1979-04-01    0.17194
-1979-07-01    0.16985
-1979-10-01    0.17171
-1980-01-01    0.17513
-1980-04-01    0.17622
-1980-07-01    0.16886
-1980-10-01    0.17120
-1981-01-01    0.18527
-1981-04-01    0.18620
-1981-07-01    0.18798
-1981-10-01    0.19283
-1982-01-01    0.19480
-1982-04-01    0.19661
-1982-07-01    0.19626
-1982-10-01    0.18962
-1983-01-01    0.19109
-1983-04-01    0.19136
-1983-07-01    0.19675
-1983-10-01    0.20456
-1984-01-01    0.20893
-1984-04-01    0.20985
-1984-07-01    0.21742
-1984-10-01    0.21757
-1985-01-01    0.21874
-1985-04-01    0.22049
-1985-07-01    0.21786
-1985-10-01    0.21983
-1986-01-01    0.22092
-1986-04-01    0.21709
-1986-07-01    0.21353
-1986-10-01    0.21608
-1987-01-01    0.21718
-1987-04-01    0.21594
-1987-07-01    0.21897
-1987-10-01    0.22019
-1988-01-01    0.22034
-1988-04-01    0.22060
-1988-07-01    0.22202
-1988-10-01    0.22057
-1989-01-01    0.22477
-1989-04-01    0.22547
-1989-07-01    0.22383
-1989-10-01    0.22346
-1990-01-01    0.22225
-1990-04-01    0.22137
-1990-07-01    0.22606
-1990-10-01    0.22586
-1991-01-01    0.23482
-1991-04-01    0.22601
-1991-07-01    0.21983
-1991-10-01    0.21795
-1992-01-01    0.21012
-1992-04-01    0.20855
-1992-07-01    0.20529
-1992-10-01    0.20076
-1993-01-01    0.20413
-1993-04-01    0.20347
-1993-07-01    0.20150
-1993-10-01    0.19756
-1994-01-01    0.19913
-1994-04-01    0.20195
-1994-07-01    0.20291
-1994-10-01    0.20557
-1995-01-01    0.20965
-1995-04-01    0.21215
-1995-07-01    0.21285
-1995-10-01    0.21453
-1996-01-01    0.21110
-1996-04-01    0.20872
-1996-07-01    0.21059
-1996-10-01    0.20888
-1997-01-01    0.20854
-1997-04-01    0.20775
-1997-07-01    0.20881
-1997-10-01    0.20616
-1998-01-01    0.20824
-1998-04-01    0.20632
-1998-07-01    0.20475
-1998-10-01    0.19845
-1999-01-01    0.19459
-1999-04-01    0.19381
-1999-07-01    0.19047
-1999-10-01    0.18821
-2000-01-01    0.19012
-2000-04-01    0.18553
-2000-07-01    0.18392
-2000-10-01    0.18213
-2001-01-01    0.17425
-2001-04-01    0.16709
-2001-07-01    0.16039
-2001-10-01    0.15538
-2002-01-01    0.14580
-2002-04-01    0.14175
-2002-07-01    0.13972
-2002-10-01    0.13641
-2003-01-01    0.13097
-2003-04-01    0.12623
-2003-07-01    0.12628
-2003-10-01    0.12546
-2004-01-01    0.12511
-2004-04-01    0.12484
-2004-07-01    0.12688
-2004-10-01    0.12859
-2005-01-01    0.12928
-2005-04-01    0.13324
-2005-07-01    0.13343
-2005-10-01    0.13408
-2006-01-01    0.13130
-2006-04-01    0.13365
-2006-07-01    0.13557
-2006-10-01    0.13869
-2007-01-01    0.13801
-2007-04-01    0.14041
-2007-07-01    0.14060
-2007-10-01    0.13832
-2008-01-01    0.13257
-2008-04-01    0.11431
-2008-07-01    0.11964
-2008-10-01    0.11889
-2009-01-01    0.10891
-2009-04-01    0.09991
-2009-07-01    0.09916
-2009-10-01    0.09937
-2010-01-01    0.09709
-2010-04-01    0.10063
-2010-07-01    0.10264
-2010-10-01    0.10486
-2011-01-01    0.10779
-2011-04-01    0.11040
-2011-07-01    0.11434
-2011-10-01    0.11445
-2012-01-01    0.11349
-2012-04-01    0.11247
-2012-07-01    0.11145
-2012-10-01    0.11058
-2013-01-01    0.10936
-2013-04-01    0.10924
-2013-07-01    0.11043
-2013-10-01    0.11266
-2014-01-01    0.11309
-2014-04-01    0.11352
-2014-07-01    0.11245
-2014-10-01    0.11264
-2015-01-01    0.10798
-2015-04-01    0.10672
-2015-07-01    0.10665
-2015-10-01    0.10732
-2016-01-01    0.10925
-2016-04-01    0.11051
-2016-07-01    0.11023
-2016-10-01    0.11021
-2017-01-01    0.10989
-2017-04-01    0.11231
-2017-07-01    0.11318
-2017-10-01    0.11421
-2018-01-01    0.11541
-2018-04-01    0.11940
-2018-07-01    0.12231
-2018-10-01    0.12436
-2019-01-01    0.12366
-2019-04-01    0.12385
-2019-07-01    0.12114
-2019-10-01    0.11764
-2020-01-01    0.11188
-2020-04-01    0.05794
-2020-07-01    0.07095
-2020-10-01    0.08730
-2021-01-01    0.06425
-2021-04-01    0.07262
-2021-07-01    0.08674
-2021-10-01    0.09841
-2022-01-01    0.10623
-2022-04-01    0.11287
-2022-07-01    0.12177
-2022-10-01    0.13053
-2023-01-01    0.13476
-2023-04-01    0.13913
-2023-07-01    0.14836
-2023-10-01    0.15571
-2024-01-01    0.15759
-2024-04-01    0.15978
-2024-07-01    0.15839
-2024-10-01    0.15815
-            `;
-
-            function parseInterestExpenseData(rawData) {
-                const lines = rawData.trim().split('\n');
-                const yearlyData = {};
-
-                lines.forEach(line => {
-                    const parts = line.trim().split(/\s+/);
-                    const date = parts[0];
-                    const value = parseFloat(parts[1]) * 100; // Convert to percentage
-                    const year = new Date(date).getFullYear();
-
-                    // Keep only the last entry for each year
-                    yearlyData[year] = value;
-                });
-
-                const labels = Object.keys(yearlyData).sort();
-                const data = labels.map(year => yearlyData[year]);
-                return { labels, data };
-            }
-
-            const { labels: interestLabels, data: interestValues } = parseInterestExpenseData(interestExpenseDataRaw);
-
-            new Chart(document.getElementById('interestExpenseChart'), {
-                type: 'line',
-                data: {
-                    labels: interestLabels,
-                    datasets: [{
-                        label: 'Interest Expense as % of Federal Spending',
-                        data: interestValues,
-                        borderColor: chartColors.accentRed,
-                        backgroundColor: 'rgba(214, 40, 40, 0.1)',
-                        fill: true,
-                        tension: 0.1
-                    }]
-                },
-                options: {
-                    ...defaultChartOptions,
-                    scales: {
-                        y: {
-                            ...defaultChartOptions.scales.y,
-                            title: { display: true, text: 'Percentage (%)' },
-                            ticks: {
-                                callback: function(value) {
-                                    return value.toFixed(1) + '%';
-                                }
-                            },
-                            beginAtZero: false
-                        },
-                        x: {
-                            ...defaultChartOptions.scales.x,
-                            title: { display: true, text: 'Year' }
-                        }
-                    }
-                }
-            });
-
             updateCalculatorDisplay();
+            
+            // Initialize the Bitcoin chart
+            setupBitcoinChart();
         };
 
     </script>
